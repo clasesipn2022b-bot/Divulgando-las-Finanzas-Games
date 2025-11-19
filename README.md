@@ -133,10 +133,12 @@
             width: 100%; border-top-left-radius: 25px; border-top-right-radius: 25px;
             display: flex; justify-content: center;
             box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
-        }
-        .d-pad {
-            display: grid; grid-template-columns: 70px 70px 70px; gap: 10px;
-        }
+        <div class="d-pad">
+    <button class="c-btn up" ontouchstart="movePlayer(0, -1, event)" onmousedown="movePlayer(0, -1, event)"><i class="fas fa-arrow-up"></i></button>
+    <button class="c-btn left" ontouchstart="movePlayer(-1, 0, event)" onmousedown="movePlayer(-1, 0, event)"><i class="fas fa-arrow-left"></i></button>
+    <button class="c-btn down" ontouchstart="movePlayer(0, 1, event)" onmousedown="movePlayer(0, 1, event)"><i class="fas fa-arrow-down"></i></button>
+    <button class="c-btn right" ontouchstart="movePlayer(1, 0, event)" onmousedown="movePlayer(1, 0, event)"><i class="fas fa-arrow-right"></i></button>
+</div>
         .c-btn {
             width: 70px; height: 70px; background: white; border-radius: 50%;
             border: none; box-shadow: 0 6px 0 #bdc3c7; font-size: 2rem;
@@ -178,7 +180,7 @@
         /* Mensajes flotantes */
         .float-txt {
             position: absolute; font-weight: bold; font-size: 1.2rem; z-index: 10;
-            animation: floatUp 0.8s forwards; text-shadow: 1px 1px 0 #fff;
+            animation: floatUp 0.8s forwards; text-shadow: 10px 10px 0 #fff;
         }
         @keyframes floatUp { to { transform: translateY(-40px); opacity: 0; } }
 
@@ -518,6 +520,94 @@
             el.innerText=txt; el.className='float-txt'; el.style.color=col;
             el.style.left='50%'; el.style.top='40%';
             document.body.appendChild(el); setTimeout(()=>el.remove(), 800);
+        }
+        /* --- VARIABLES EXISTENTES --- */
+        // ... (deja tus variables anteriores de levels, items, etc.) ...
+        
+        let currentLvl = 1;
+        let lives = 3;
+        let timeLeft = 60;
+        let timerInterval;
+        let maze = [], gridItems = [], player = {x:0, y:0};
+        let rows, cols;
+
+        // NUEVA VARIABLE: Para controlar la velocidad
+        let canMove = true; 
+
+        /* --- FUNCIÓN STARTGAME CORREGIDA --- */
+        function startGame() {
+            document.getElementById('inst-modal').style.display = 'none';
+            document.getElementById('main-container').style.display = 'none';
+            document.getElementById('game-ui').style.display = 'flex';
+            if(musicEnabled) audio.bgm.play();
+
+            // IMPORTANTE: Limpiamos cualquier "oído" anterior del teclado para que no se duplique
+            window.removeEventListener('keydown', handleKey);
+
+            lives = 3; 
+            timeLeft = 60;
+            canMove = true; // Habilitar movimiento
+            updateLives();
+            updateTimerUI();
+            
+            rows = levels[currentLvl].size;
+            cols = levels[currentLvl].size;
+            
+            generateMaze();
+            renderMaze();
+            
+            startTimer();
+            
+            // Agregamos el evento del teclado UNA SOLA VEZ
+            window.addEventListener('keydown', handleKey);
+        }
+
+        /* --- FUNCIÓN MOVEPLAYER CORREGIDA --- */
+        // Ahora recibe el evento (e) opcionalmente
+        function movePlayer(dx, dy, e) {
+            // 1. Si es un toque de pantalla, evitamos que dispare el mouse después (doble salto)
+            if(e) e.preventDefault();
+
+            // 2. FRENADO: Si ya se está moviendo o perdió, no hacemos nada
+            if(!canMove || lives<=0 || timeLeft<=0) return;
+
+            let nx = player.x + dx;
+            let ny = player.y + dy;
+
+            // Verificamos colisiones
+            if(nx >= 0 && nx < cols && ny >= 0 && ny < rows && maze[ny][nx] !== 1) {
+                
+                // BLOQUEAMOS EL MOVIMIENTO BREVEMENTE (150ms)
+                // Esto obliga a que sea "cuadro por cuadro"
+                canMove = false;
+                setTimeout(() => { canMove = true; }, 150);
+
+                player = {x: nx, y: ny};
+                
+                // Lógica de Items
+                const it = gridItems[ny][nx];
+                if(it) {
+                    showFloat(it.t, it.type==='good'?'#48dbfb':'#ff6b6b');
+                    if(it.type==='good') playSfx('coin');
+                    else {
+                        playSfx('hurt'); 
+                        lives--; 
+                        updateLives();
+                        if(lives<=0) gameOver("lives");
+                    }
+                    gridItems[ny][nx] = null;
+                }
+
+                renderMaze();
+
+                // Lógica de Victoria
+                if(nx === cols-1 && ny === rows-1) {
+                    stopTimer();
+                    playSfx('win');
+                    document.getElementById('win-msg').innerText = "¡Conseguiste: " + levels[currentLvl].name + "!";
+                    document.getElementById('win-modal').style.display = 'flex';
+                }
+            }
         }
     </script>
 </body>
