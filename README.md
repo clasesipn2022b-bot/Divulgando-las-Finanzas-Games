@@ -162,7 +162,7 @@
     <nav class="navbar navbar-expand navbar-dark navbar-custom sticky-top">
         <div class="container-fluid px-2">
             <span class="navbar-brand lucha-font text-warning m-0" style="font-size: 1.2rem;">
-                👺 LUCHA KIDS
+                🕹️🪅 LUCHA KIDS
             </span>
             
             <div class="d-flex gap-2 align-items-center">
@@ -184,7 +184,7 @@
         <div id="screen-menu" class="row justify-content-center">
             <div class="col-12 col-md-8 col-lg-6">
                 <div class="card card-lucha bg-white p-3 text-center">
-                    <div class="display-1 mb-0">👺</div>
+                    <div class="display-1 mb-0">🕹️🪅</div>
                     <h1 class="text-danger mb-2 display-5">LUCHA FINANCIERA</h1>
                     <p class="lead fw-bold small text-muted text-uppercase">¡Vence a los Rudos y Gana el Campeonato!</p>
                     
@@ -300,8 +300,8 @@
         };
         
         const items = {
-            good: [{t:"¡DINERO!", i:"💵"}, {t:"¡AHORRO!", i:"💰"}, {t:"¡LLAVE!", i:"🗝️"}],
-            bad: [{t:"¡SILLAZO!", i:"🪑"}, {t:"¡RUDO!", i:"👹"}, {t:"¡GASTO!", i:"💸"}]
+            good: [{t:"¡DINERO!", i:"💵"}, {t:"¡AHORRO!", i:"🐖"}, {t:"¡LLAVE!", i:"🤼‍♂️"},{t:"¡INVERSIÓN!", i:"📈"}, {t:"¡BONO!", i:"💰"}, {t:"¡CRÉDITO!", i:"🏦"}, , {t:"¡PRESTAMO SIN INTERESES!", i:""}],
+            bad: [{t:"¡SILLAZO!", i:"🪑"}, {t:"¡RUDO!", i:"👹"}, {t:"¡GASTO HORMIGA!", i:"🐜"}, {t:"¡PAGO DE INTERESES!", i:"💸"]
         };
 
         let state = {
