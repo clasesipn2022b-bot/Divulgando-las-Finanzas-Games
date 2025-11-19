@@ -1,4 +1,6 @@
 # Divulgando-las-Finanzas-Games
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -33,9 +35,10 @@
             text-align: center;
             color: white;
             text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+            margin-top: 0;
         }
 
-        /* --- BARRA DE NAVEGACIÓN --- */
+        /* --- NAVEGACIÓN --- */
         .top-nav {
             display: flex; justify-content: space-between; align-items: center;
             padding: 15px;
@@ -67,6 +70,10 @@
             margin-bottom: 40px;
             border-bottom: 8px solid #e0e0e0;
         }
+        
+        /* Forzar color oscuro en textos dentro de la tarjeta blanca */
+        .hero-section h1 { color: var(--primary-color); text-shadow: none; }
+        .hero-section h3 { color: #666; text-shadow: none; }
 
         .level-grid {
             display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;
@@ -99,7 +106,6 @@
             color: white; font-weight: bold;
         }
 
-        /* Estilos del Reloj */
         .timer-box {
             background: rgba(0,0,0,0.2);
             padding: 5px 15px; border-radius: 20px;
@@ -127,18 +133,15 @@
         }
         .wall { background: #6d4c41; border-radius: 4px; }
 
-        /* CONTROLES TÁCTILES */
         .controls-area {
             padding: 20px; background: rgba(255,255,255,0.9);
             width: 100%; border-top-left-radius: 25px; border-top-right-radius: 25px;
             display: flex; justify-content: center;
             box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
-        <div class="d-pad">
-    <button class="c-btn up" ontouchstart="movePlayer(0, -1, event)" onmousedown="movePlayer(0, -1, event)"><i class="fas fa-arrow-up"></i></button>
-    <button class="c-btn left" ontouchstart="movePlayer(-1, 0, event)" onmousedown="movePlayer(-1, 0, event)"><i class="fas fa-arrow-left"></i></button>
-    <button class="c-btn down" ontouchstart="movePlayer(0, 1, event)" onmousedown="movePlayer(0, 1, event)"><i class="fas fa-arrow-down"></i></button>
-    <button class="c-btn right" ontouchstart="movePlayer(1, 0, event)" onmousedown="movePlayer(1, 0, event)"><i class="fas fa-arrow-right"></i></button>
-</div>
+        }
+        .d-pad {
+            display: grid; grid-template-columns: 70px 70px 70px; gap: 10px;
+        }
         .c-btn {
             width: 70px; height: 70px; background: white; border-radius: 50%;
             border: none; box-shadow: 0 6px 0 #bdc3c7; font-size: 2rem;
@@ -148,7 +151,7 @@
         .up { grid-column: 2; } .left { grid-column: 1; grid-row: 2; }
         .down { grid-column: 2; grid-row: 2; } .right { grid-column: 3; grid-row: 2; }
 
-        /* MODALES */
+        /* --- MODALES --- */
         .modal-overlay {
             display: none; position: fixed; top:0; left:0; width:100%; height:100%;
             background: rgba(0,0,0,0.85); z-index: 200;
@@ -159,13 +162,24 @@
             text-align: center; max-width: 400px; width: 100%;
             border: 8px solid var(--secondary-color);
             animation: popIn 0.4s;
+            color: #333; 
         }
+        
+        /* Títulos oscuros dentro de modales */
+        .modal-box h2 {
+            color: var(--primary-color); 
+            text-shadow: none;
+            margin-bottom: 20px;
+        }
+        .modal-box p { color: #555; font-size: 1.1rem; }
+
         @keyframes popIn { 0% {transform: scale(0);} 80% {transform: scale(1.1);} 100% {transform: scale(1);} }
 
         .inst-step {
             display: flex; align-items: center; gap: 15px;
             text-align: left; margin-bottom: 15px;
-            font-size: 1.1rem; color: #555;
+            font-size: 1.1rem; color: #444;
+            background: #f9f9f9; padding: 10px; border-radius: 10px;
         }
         .inst-icon { font-size: 2rem; width: 50px; text-align: center; }
 
@@ -177,14 +191,12 @@
         }
         .big-btn:active { transform: translateY(6px); box-shadow: none; }
 
-        /* Mensajes flotantes */
         .float-txt {
             position: absolute; font-weight: bold; font-size: 1.2rem; z-index: 10;
-            animation: floatUp 0.8s forwards; text-shadow: 10px 10px 0 #fff;
+            animation: floatUp 0.8s forwards; text-shadow: 1px 1px 0 #fff;
         }
         @keyframes floatUp { to { transform: translateY(-40px); opacity: 0; } }
 
-        /* Sección Más Juegos */
         .more-games-section { margin-top: 50px; padding-bottom: 50px; }
         .games-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 20px; }
         .game-placeholder {
@@ -208,10 +220,10 @@
     <div id="main-container">
         <section class="hero-section">
             <div style="font-size: 4rem; margin-bottom: 10px;">🐷</div>
-            <h1 style="color: var(--primary-color);">Laberinto del Ahorro</h1>
-            <p>Ayuda al cerdito a llegar a la meta antes de que se acabe el tiempo.</p>
+            <h1>Laberinto del Ahorro</h1>
+            <p style="color:#666">Ayuda al cerdito a llegar a la meta antes de que se acabe el tiempo.</p>
             
-            <h3 style="color: #666; margin-top: 20px;">Elige tu meta:</h3>
+            <h3>Elige tu meta:</h3>
             <div class="level-grid">
                 <div class="level-card lvl-1" onclick="initGame(1)">
                     <div style="font-size: 2.5rem;">🧸</div>
@@ -239,22 +251,22 @@
 
     <div id="inst-modal" class="modal-overlay">
         <div class="modal-box">
-            <h2 style="color: var(--secondary-color);">¡Misión del Ahorro!</h2>
+            <h2>¡Misión del Ahorro!</h2>
             
             <div class="inst-step">
                 <div class="inst-icon">🐷</div>
-                <div>Usa las flechas para mover al cerdito.</div>
+                <div>Usa las flechas para moverte.</div>
             </div>
             <div class="inst-step">
                 <div class="inst-icon">💰</div>
-                <div>Come monedas para ganar. ¡Evita las hormigas!</div>
+                <div>Come monedas. ¡Evita las hormigas!</div>
             </div>
             <div class="inst-step">
                 <div class="inst-icon">⏱️</div>
-                <div><strong>¡CORRE!</strong> Tienes solo 60 segundos.</div>
+                <div><strong>¡CORRE!</strong> Tienes solo 60 seg.</div>
             </div>
 
-            <button class="big-btn" onclick="startGame()">¡ESTOY LISTO!</button>
+            <button class="big-btn" onclick="startGame()">¡JUGAR!</button>
         </div>
     </div>
 
@@ -278,10 +290,10 @@
 
         <div class="controls-area">
             <div class="d-pad">
-                <button class="c-btn up" ontouchstart="movePlayer(0,-1)" onmousedown="movePlayer(0,-1)"><i class="fas fa-arrow-up"></i></button>
-                <button class="c-btn left" ontouchstart="movePlayer(-1,0)" onmousedown="movePlayer(-1,0)"><i class="fas fa-arrow-left"></i></button>
-                <button class="c-btn down" ontouchstart="movePlayer(0,1)" onmousedown="movePlayer(0,1)"><i class="fas fa-arrow-down"></i></button>
-                <button class="c-btn right" ontouchstart="movePlayer(1,0)" onmousedown="movePlayer(1,0)"><i class="fas fa-arrow-right"></i></button>
+                <button class="c-btn up" ontouchstart="movePlayer(0, -1, event)" onmousedown="movePlayer(0, -1, event)"><i class="fas fa-arrow-up"></i></button>
+                <button class="c-btn left" ontouchstart="movePlayer(-1, 0, event)" onmousedown="movePlayer(-1, 0, event)"><i class="fas fa-arrow-left"></i></button>
+                <button class="c-btn down" ontouchstart="movePlayer(0, 1, event)" onmousedown="movePlayer(0, 1, event)"><i class="fas fa-arrow-down"></i></button>
+                <button class="c-btn right" ontouchstart="movePlayer(1, 0, event)" onmousedown="movePlayer(1, 0, event)"><i class="fas fa-arrow-right"></i></button>
             </div>
         </div>
     </div>
@@ -289,9 +301,9 @@
     <div id="lose-modal" class="modal-overlay">
         <div class="modal-box">
             <div style="font-size: 4rem;">😢</div>
-            <h2 style="color: var(--primary-color);" id="lose-title">¡Oh no!</h2>
+            <h2 id="lose-title" style="color: #ff6b6b;">¡Oh no!</h2>
             <p id="lose-msg">Se acabó el juego.</p>
-            <button class="big-btn" style="background: var(--primary-color);" onclick="quitGame()">Intentar de nuevo</button>
+            <button class="big-btn" style="background: var(--primary-color);" onclick="quitGame()">Reintentar</button>
         </div>
     </div>
 
@@ -322,7 +334,10 @@
                 musicEnabled = true;
                 btn.innerHTML = '<i class="fas fa-volume-up"></i> Música';
                 btn.style.color = "#48dbfb";
-                audio.bgm.play().catch(e => {});
+                // Si estamos en el juego, iniciar audio
+                if(document.getElementById('game-ui').style.display === 'flex') {
+                    audio.bgm.play().catch(e => {});
+                }
             } else {
                 musicEnabled = false;
                 btn.innerHTML = '<i class="fas fa-volume-mute"></i> Música';
@@ -330,7 +345,14 @@
                 audio.bgm.pause();
             }
         }
-        function playSfx(name) { if(musicEnabled) { const s = audio[name].cloneNode(); s.volume=0.5; s.play(); } }
+        
+        function playSfx(name) { 
+            if(musicEnabled) { 
+                const s = audio[name].cloneNode(); 
+                s.volume=0.5; 
+                s.play(); 
+            } 
+        }
 
         /* --- VARIABLES --- */
         const levels = {
@@ -349,6 +371,7 @@
         let timerInterval;
         let maze = [], gridItems = [], player = {x:0, y:0};
         let rows, cols;
+        let canMove = true; // Variable para evitar movimientos ultra rápidos
 
         /* --- FLUJO DEL JUEGO --- */
         function initGame(lvl) {
@@ -360,11 +383,15 @@
             document.getElementById('inst-modal').style.display = 'none';
             document.getElementById('main-container').style.display = 'none';
             document.getElementById('game-ui').style.display = 'flex';
+            
+            // Limpieza de eventos anteriores
+            window.removeEventListener('keydown', handleKey);
+
             if(musicEnabled) audio.bgm.play();
 
-            // Reset
             lives = 3; 
             timeLeft = 60;
+            canMove = true;
             updateLives();
             updateTimerUI();
             
@@ -374,14 +401,16 @@
             generateMaze();
             renderMaze();
             
-            // Iniciar Timer
             startTimer();
             
             window.addEventListener('keydown', handleKey);
         }
 
         function quitGame() {
-            stopTimer(); // Detener reloj
+            stopTimer();
+            audio.bgm.pause();
+            audio.bgm.currentTime = 0; // Reset canción para la próxima
+            
             document.getElementById('game-ui').style.display = 'none';
             document.getElementById('win-modal').style.display = 'none';
             document.getElementById('lose-modal').style.display = 'none';
@@ -389,28 +418,23 @@
             window.removeEventListener('keydown', handleKey);
         }
 
-        /* --- LÓGICA DEL RELOJ --- */
+        /* --- RELOJ --- */
         function startTimer() {
             clearInterval(timerInterval);
             timerInterval = setInterval(() => {
                 timeLeft--;
                 updateTimerUI();
-                
                 if(timeLeft <= 0) {
                     clearInterval(timerInterval);
                     gameOver("time");
                 }
             }, 1000);
         }
-
-        function stopTimer() {
-            clearInterval(timerInterval);
-        }
-
+        function stopTimer() { clearInterval(timerInterval); }
         function updateTimerUI() {
             const el = document.getElementById('timer-txt');
             el.innerText = timeLeft + "s";
-            if(timeLeft <= 10) el.style.color = "#ff6b6b"; // Rojo si queda poco
+            if(timeLeft <= 10) el.style.color = "#ff6b6b";
             else el.style.color = "white";
         }
 
@@ -430,7 +454,7 @@
             document.getElementById('lose-modal').style.display = 'flex';
         }
 
-        /* --- LABERINTO Y MOVIMIENTO --- */
+        /* --- LABERINTO --- */
         function updateLives() {
             let h = ""; for(let i=0; i<lives; i++) h+="❤️";
             document.getElementById('lives-display').innerText = h;
@@ -490,12 +514,25 @@
             if(e.key==='ArrowRight') movePlayer(1,0);
         }
 
-        function movePlayer(dx, dy) {
-            if(lives<=0 || timeLeft<=0) return;
+        /* --- MOVIMIENTO MEJORADO --- */
+        function movePlayer(dx, dy, e) {
+            // Prevenir doble disparo en touch
+            if(e) e.preventDefault();
+
+            // Freno de velocidad y estado de juego
+            if(!canMove || lives<=0 || timeLeft<=0) return;
+
             let nx=player.x+dx, ny=player.y+dy;
+
             if(nx>=0 && nx<cols && ny>=0 && ny<rows && maze[ny][nx]!==1) {
+                
+                // Bloquear movimiento temporalmente (Cooldown)
+                canMove = false;
+                setTimeout(() => { canMove = true; }, 150);
+
                 player={x:nx, y:ny};
                 const it = gridItems[ny][nx];
+                
                 if(it) {
                     showFloat(it.t, it.type==='good'?'#48dbfb':'#ff6b6b');
                     if(it.type==='good') playSfx('coin');
@@ -506,6 +543,7 @@
                     gridItems[ny][nx]=null;
                 }
                 renderMaze();
+                
                 if(nx===cols-1 && ny===rows-1) {
                     stopTimer();
                     playSfx('win');
@@ -521,93 +559,6 @@
             el.style.left='50%'; el.style.top='40%';
             document.body.appendChild(el); setTimeout(()=>el.remove(), 800);
         }
-        /* --- VARIABLES EXISTENTES --- */
-        // ... (deja tus variables anteriores de levels, items, etc.) ...
-        
-        let currentLvl = 1;
-        let lives = 3;
-        let timeLeft = 60;
-        let timerInterval;
-        let maze = [], gridItems = [], player = {x:0, y:0};
-        let rows, cols;
-
-        // NUEVA VARIABLE: Para controlar la velocidad
-        let canMove = true; 
-
-        /* --- FUNCIÓN STARTGAME CORREGIDA --- */
-        function startGame() {
-            document.getElementById('inst-modal').style.display = 'none';
-            document.getElementById('main-container').style.display = 'none';
-            document.getElementById('game-ui').style.display = 'flex';
-            if(musicEnabled) audio.bgm.play();
-
-            // IMPORTANTE: Limpiamos cualquier "oído" anterior del teclado para que no se duplique
-            window.removeEventListener('keydown', handleKey);
-
-            lives = 3; 
-            timeLeft = 60;
-            canMove = true; // Habilitar movimiento
-            updateLives();
-            updateTimerUI();
-            
-            rows = levels[currentLvl].size;
-            cols = levels[currentLvl].size;
-            
-            generateMaze();
-            renderMaze();
-            
-            startTimer();
-            
-            // Agregamos el evento del teclado UNA SOLA VEZ
-            window.addEventListener('keydown', handleKey);
-        }
-
-        /* --- FUNCIÓN MOVEPLAYER CORREGIDA --- */
-        // Ahora recibe el evento (e) opcionalmente
-        function movePlayer(dx, dy, e) {
-            // 1. Si es un toque de pantalla, evitamos que dispare el mouse después (doble salto)
-            if(e) e.preventDefault();
-
-            // 2. FRENADO: Si ya se está moviendo o perdió, no hacemos nada
-            if(!canMove || lives<=0 || timeLeft<=0) return;
-
-            let nx = player.x + dx;
-            let ny = player.y + dy;
-
-            // Verificamos colisiones
-            if(nx >= 0 && nx < cols && ny >= 0 && ny < rows && maze[ny][nx] !== 1) {
-                
-                // BLOQUEAMOS EL MOVIMIENTO BREVEMENTE (150ms)
-                // Esto obliga a que sea "cuadro por cuadro"
-                canMove = false;
-                setTimeout(() => { canMove = true; }, 150);
-
-                player = {x: nx, y: ny};
-                
-                // Lógica de Items
-                const it = gridItems[ny][nx];
-                if(it) {
-                    showFloat(it.t, it.type==='good'?'#48dbfb':'#ff6b6b');
-                    if(it.type==='good') playSfx('coin');
-                    else {
-                        playSfx('hurt'); 
-                        lives--; 
-                        updateLives();
-                        if(lives<=0) gameOver("lives");
-                    }
-                    gridItems[ny][nx] = null;
-                }
-
-                renderMaze();
-
-                // Lógica de Victoria
-                if(nx === cols-1 && ny === rows-1) {
-                    stopTimer();
-                    playSfx('win');
-                    document.getElementById('win-msg').innerText = "¡Conseguiste: " + levels[currentLvl].name + "!";
-                    document.getElementById('win-modal').style.display = 'flex';
-                }
-            }
-        }
     </script>
 </body>
+</html>
