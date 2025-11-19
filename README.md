@@ -1,208 +1,184 @@
 # Divulgando-las-Finanzas-Games
-<!DOCTYPE html>
-<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Aventura Financiera Kids | Dr. Ambrosio</title>
+    <title>Aventura Financiera Kids</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Varela+Round&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- ESTILOS GENERALES --- */
+        /* --- ESTILOS BASE --- */
         :root {
             --bg-gradient: linear-gradient(180deg, #a18cd1 0%, #fbc2eb 100%);
-            --primary-color: #ff6b6b;
-            --secondary-color: #48dbfb;
-            --accent-color: #feca57;
-            --text-color: #2d3436;
+            --primary: #ff6b6b;
+            --secondary: #48dbfb;
+            --accent: #feca57;
+            --text: #2d3436;
         }
+
+        * { box-sizing: border-box; }
 
         body {
             margin: 0; padding: 0;
             background-image: var(--bg-gradient);
-            color: var(--text-color);
+            color: var(--text);
             font-family: 'Varela Round', sans-serif;
-            overflow-x: hidden;
-            min-height: 100vh;
+            overflow: hidden; /* Evitar scroll durante el juego */
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            user-select: none;
             -webkit-tap-highlight-color: transparent;
         }
 
         h1, h2, h3 {
             font-family: 'Fredoka One', cursive;
             text-transform: uppercase;
-            text-align: center;
             color: white;
             text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
-            margin-top: 0;
+            margin: 10px 0;
         }
 
         /* --- NAVEGACIÓN --- */
         .top-nav {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 15px;
-            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.3);
             backdrop-filter: blur(5px);
-            position: sticky; top: 0; z-index: 50;
+            z-index: 1000;
+            height: 60px;
+            flex-shrink: 0;
         }
 
         .nav-btn {
-            background: white; color: var(--primary-color);
-            padding: 8px 15px; border-radius: 30px; text-decoration: none;
+            background: white; color: var(--primary);
+            padding: 8px 16px; border-radius: 30px; text-decoration: none;
             font-weight: bold; box-shadow: 0 4px 0 rgba(0,0,0,0.1);
             font-size: 0.9rem; border: none; cursor: pointer;
-            display: flex; align-items: center; gap: 5px;
+            display: flex; align-items: center; gap: 8px;
         }
-        .nav-btn:active { transform: translateY(4px); box-shadow: none; }
+        .nav-btn:active { transform: translateY(2px); box-shadow: none; }
+
+        /* --- PANTALLAS (Menú y Juego) --- */
+        .screen {
+            flex: 1;
+            width: 100%;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            transition: opacity 0.3s;
+        }
+
+        /* Ocultar pantallas inactivas */
+        .hidden { display: none !important; }
 
         /* --- MENÚ PRINCIPAL --- */
-        #main-container {
-            padding: 20px;
-            max-width: 800px; margin: 0 auto;
-            text-align: center;
-        }
-
-        .hero-section {
+        .hero-card {
             background: rgba(255,255,255,0.9);
-            padding: 30px 20px; border-radius: 25px;
+            padding: 30px; border-radius: 25px;
+            text-align: center;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            margin-bottom: 40px;
-            border-bottom: 8px solid #e0e0e0;
-        }
-        
-        /* Forzar color oscuro en textos dentro de la tarjeta blanca */
-        .hero-section h1 { color: var(--primary-color); text-shadow: none; }
-        .hero-section h3 { color: #666; text-shadow: none; }
-
-        .level-grid {
-            display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;
+            max-width: 600px;
+            width: 100%;
             margin-top: 20px;
         }
 
-        .level-card {
-            background: #fff; border: 2px solid #eee;
-            border-radius: 20px; padding: 15px; width: 130px;
-            cursor: pointer; transition: transform 0.2s;
-            box-shadow: 0 5px 0 #ddd;
+        .level-grid {
+            display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;
+            margin-top: 30px;
         }
-        .level-card:active { transform: translateY(5px); box-shadow: none; }
+
+        .level-btn {
+            background: white; border: 2px solid #eee;
+            border-radius: 20px; padding: 15px; width: 140px;
+            cursor: pointer; transition: transform 0.1s;
+            box-shadow: 0 6px 0 #ddd;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .level-btn:active { transform: translateY(6px); box-shadow: none; }
         
-        .lvl-1 { border-top: 10px solid var(--secondary-color); }
-        .lvl-2 { border-top: 10px solid var(--accent-color); }
-        .lvl-3 { border-top: 10px solid var(--primary-color); }
+        .lvl-1 { border-top: 8px solid var(--secondary); }
+        .lvl-2 { border-top: 8px solid var(--accent); }
+        .lvl-3 { border-top: 8px solid var(--primary); }
 
-        /* --- JUEGO UI --- */
-        #game-ui {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #fff3cd; z-index: 100;
-            flex-direction: column; align-items: center;
-        }
-
+        /* --- JUEGO --- */
         .game-header {
-            width: 100%; padding: 10px 15px; background: var(--accent-color);
+            width: 100%; max-width: 600px;
+            background: var(--accent);
+            padding: 10px 20px; border-radius: 15px;
             display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             color: white; font-weight: bold;
+            box-shadow: 0 5px 0 rgba(0,0,0,0.1);
+            margin-bottom: 20px;
         }
 
-        .timer-box {
-            background: rgba(0,0,0,0.2);
-            padding: 5px 15px; border-radius: 20px;
-            display: flex; align-items: center; gap: 5px;
-            font-size: 1.1rem;
-            animation: pulse-clock 1s infinite;
-        }
-        @keyframes pulse-clock { 0%{transform:scale(1);} 50%{transform:scale(1.05);} 100%{transform:scale(1);} }
-
-        #maze-area {
-            flex: 1; display: flex; align-items: center; justify-content: center;
-            width: 100%; overflow: hidden; position: relative;
-        }
-
-        #maze-container {
-            display: grid; gap: 1px; 
-            background: #8d6e63; padding: 5px; border-radius: 10px;
+        #maze-wrapper {
+            background: #8d6e63;
+            padding: 10px; border-radius: 10px;
             border: 4px solid #5d4037;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        #maze-grid {
+            display: grid; gap: 1px;
         }
 
         .cell {
-            width: 32px; height: 32px;
+            width: 35px; height: 35px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 20px; background: #ffe0b2;
+            background: #ffe0b2; font-size: 20px;
         }
-        .wall { background: #6d4c41; border-radius: 4px; }
+        .wall { background: #5d4037; border-radius: 4px; }
 
-        .controls-area {
-            padding: 20px; background: rgba(255,255,255,0.9);
-            width: 100%; border-top-left-radius: 25px; border-top-right-radius: 25px;
-            display: flex; justify-content: center;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
-        }
-        .d-pad {
+        /* Controles */
+        .controls {
+            margin-top: 20px;
             display: grid; grid-template-columns: 70px 70px 70px; gap: 10px;
         }
         .c-btn {
             width: 70px; height: 70px; background: white; border-radius: 50%;
             border: none; box-shadow: 0 6px 0 #bdc3c7; font-size: 2rem;
-            color: var(--text-color); cursor: pointer; touch-action: manipulation;
+            color: var(--text); cursor: pointer;
         }
         .c-btn:active { transform: translateY(6px); box-shadow: none; background: #f0f0f0; }
         .up { grid-column: 2; } .left { grid-column: 1; grid-row: 2; }
         .down { grid-column: 2; grid-row: 2; } .right { grid-column: 3; grid-row: 2; }
 
         /* --- MODALES --- */
-        .modal-overlay {
-            display: none; position: fixed; top:0; left:0; width:100%; height:100%;
-            background: rgba(0,0,0,0.85); z-index: 200;
-            align-items: center; justify-content: center; padding: 20px;
+        .modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); z-index: 2000;
+            display: none; align-items: center; justify-content: center;
+            padding: 20px;
         }
-        .modal-box {
-            background: white; padding: 25px; border-radius: 25px;
+        .modal-content {
+            background: white; padding: 30px; border-radius: 25px;
             text-align: center; max-width: 400px; width: 100%;
-            border: 8px solid var(--secondary-color);
+            border: 6px solid var(--secondary);
             animation: popIn 0.4s;
-            color: #333; 
         }
-        
-        /* Títulos oscuros dentro de modales */
-        .modal-box h2 {
-            color: var(--primary-color); 
-            text-shadow: none;
-            margin-bottom: 20px;
-        }
-        .modal-box p { color: #555; font-size: 1.1rem; }
-
-        @keyframes popIn { 0% {transform: scale(0);} 80% {transform: scale(1.1);} 100% {transform: scale(1);} }
-
-        .inst-step {
-            display: flex; align-items: center; gap: 15px;
-            text-align: left; margin-bottom: 15px;
-            font-size: 1.1rem; color: #444;
-            background: #f9f9f9; padding: 10px; border-radius: 10px;
-        }
-        .inst-icon { font-size: 2rem; width: 50px; text-align: center; }
+        .modal-content h2 { color: var(--primary); text-shadow: none; }
+        .modal-content p { color: #555; font-size: 1.1rem; margin-bottom: 20px; }
 
         .big-btn {
-            background: var(--secondary-color); color: white; border: none;
+            background: var(--secondary); color: white; border: none;
             padding: 15px 40px; font-size: 1.2rem; border-radius: 40px;
-            font-family: 'Fredoka One'; margin-top: 20px; cursor: pointer;
-            box-shadow: 0 6px 0 rgba(0,0,0,0.2); width: 100%;
+            font-family: 'Fredoka One'; width: 100%; cursor: pointer;
+            box-shadow: 0 6px 0 rgba(0,0,0,0.2);
         }
-        .big-btn:active { transform: translateY(6px); box-shadow: none; }
+        .big-btn:active { transform: translateY(4px); box-shadow: none; }
 
-        .float-txt {
-            position: absolute; font-weight: bold; font-size: 1.2rem; z-index: 10;
-            animation: floatUp 0.8s forwards; text-shadow: 1px 1px 0 #fff;
+        @keyframes popIn { 0% {transform: scale(0);} 90% {transform: scale(1.05);} 100% {transform: scale(1);} }
+        
+        /* Flotantes */
+        .float-msg {
+            position: absolute; font-weight: bold; font-size: 1.5rem; z-index: 3000;
+            pointer-events: none; animation: floatUp 1s forwards; text-shadow: 1px 1px 0 white;
         }
-        @keyframes floatUp { to { transform: translateY(-40px); opacity: 0; } }
-
-        .more-games-section { margin-top: 50px; padding-bottom: 50px; }
-        .games-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 20px; }
-        .game-placeholder {
-            background: rgba(255,255,255,0.6); border-radius: 15px; padding: 20px;
-            color: #666; font-size: 0.9rem; display: flex; flex-direction: column; align-items: center; gap: 10px;
-        }
+        @keyframes floatUp { to { transform: translateY(-50px); opacity: 0; } }
 
     </style>
 </head>
@@ -217,348 +193,354 @@
         </button>
     </div>
 
-    <div id="main-container">
-        <section class="hero-section">
-            <div style="font-size: 4rem; margin-bottom: 10px;">🐷</div>
-            <h1>Laberinto del Ahorro</h1>
-            <p style="color:#666">Ayuda al cerdito a llegar a la meta antes de que se acabe el tiempo.</p>
-            
-            <h3>Elige tu meta:</h3>
+    <div id="screen-menu" class="screen">
+        <div class="hero-card">
+            <div style="font-size: 4rem;">🐷</div>
+            <h1 style="color: var(--primary); text-shadow: none;">Laberinto Financiero</h1>
+            <p style="color: #666;">¡Ahorra para comprar tus sueños!</p>
+
             <div class="level-grid">
-                <div class="level-card lvl-1" onclick="initGame(1)">
-                    <div style="font-size: 2.5rem;">🧸</div>
+                <button class="level-btn lvl-1" onclick="initLevel(1)">
+                    <span style="font-size: 2.5rem;">🧸</span>
                     <strong>Corto Plazo</strong>
-                </div>
-                <div class="level-card lvl-2" onclick="initGame(2)">
-                    <div style="font-size: 2.5rem;">🚲</div>
+                </button>
+                <button class="level-btn lvl-2" onclick="initLevel(2)">
+                    <span style="font-size: 2.5rem;">🚲</span>
                     <strong>Mediano</strong>
-                </div>
-                <div class="level-card lvl-3" onclick="initGame(3)">
-                    <div style="font-size: 2.5rem;">✈️</div>
+                </button>
+                <button class="level-btn lvl-3" onclick="initLevel(3)">
+                    <span style="font-size: 2.5rem;">✈️</span>
                     <strong>Largo Plazo</strong>
-                </div>
+                </button>
             </div>
-        </section>
-
-        <section class="more-games-section">
-            <h3 style="color: white;">Más Juegos (Próximamente)</h3>
-            <div class="games-grid">
-                <div class="game-placeholder"><i class="fas fa-brain"></i><strong>Memorama</strong></div>
-                <div class="game-placeholder"><i class="fas fa-calculator"></i><strong>Calculadora</strong></div>
-            </div>
-        </section>
-    </div>
-
-    <div id="inst-modal" class="modal-overlay">
-        <div class="modal-box">
-            <h2>¡Misión del Ahorro!</h2>
-            
-            <div class="inst-step">
-                <div class="inst-icon">🐷</div>
-                <div>Usa las flechas para moverte.</div>
-            </div>
-            <div class="inst-step">
-                <div class="inst-icon">💰</div>
-                <div>Come monedas. ¡Evita las hormigas!</div>
-            </div>
-            <div class="inst-step">
-                <div class="inst-icon">⏱️</div>
-                <div><strong>¡CORRE!</strong> Tienes solo 60 seg.</div>
-            </div>
-
-            <button class="big-btn" onclick="startGame()">¡JUGAR!</button>
+        </div>
+        
+        <div style="margin-top: 40px; opacity: 0.7; color: white;">
+            <i class="fas fa-gamepad"></i> Más juegos próximamente...
         </div>
     </div>
 
-    <div id="game-ui">
+    <div id="screen-game" class="screen hidden">
         <div class="game-header">
-            <div style="font-size: 1.2rem;" id="lives-display">❤️❤️❤️</div>
-            
-            <div class="timer-box">
-                <i class="fas fa-stopwatch"></i>
-                <span id="timer-txt">60s</span>
-            </div>
-
-            <button onclick="quitGame()" style="background:none; border:none; color:white; font-size:1.5rem;">
+            <div id="ui-lives">❤️❤️❤️</div>
+            <div id="ui-timer"><i class="fas fa-stopwatch"></i> 60s</div>
+            <button onclick="exitToMenu()" style="background:none; border:none; color:white; font-size:1.5rem; cursor:pointer;">
                 <i class="fas fa-times-circle"></i>
             </button>
         </div>
 
-        <div id="maze-area">
-            <div id="maze-container"></div>
+        <div id="maze-wrapper">
+            <div id="maze-grid"></div>
         </div>
 
-        <div class="controls-area">
-            <div class="d-pad">
-                <button class="c-btn up" ontouchstart="movePlayer(0, -1, event)" onmousedown="movePlayer(0, -1, event)"><i class="fas fa-arrow-up"></i></button>
-                <button class="c-btn left" ontouchstart="movePlayer(-1, 0, event)" onmousedown="movePlayer(-1, 0, event)"><i class="fas fa-arrow-left"></i></button>
-                <button class="c-btn down" ontouchstart="movePlayer(0, 1, event)" onmousedown="movePlayer(0, 1, event)"><i class="fas fa-arrow-down"></i></button>
-                <button class="c-btn right" ontouchstart="movePlayer(1, 0, event)" onmousedown="movePlayer(1, 0, event)"><i class="fas fa-arrow-right"></i></button>
+        <div class="controls">
+            <button class="c-btn up" onmousedown="move(0,-1)" ontouchstart="move(0,-1, event)"><i class="fas fa-arrow-up"></i></button>
+            <button class="c-btn left" onmousedown="move(-1,0)" ontouchstart="move(-1,0, event)"><i class="fas fa-arrow-left"></i></button>
+            <button class="c-btn down" onmousedown="move(0,1)" ontouchstart="move(0,1, event)"><i class="fas fa-arrow-down"></i></button>
+            <button class="c-btn right" onmousedown="move(1,0)" ontouchstart="move(1,0, event)"><i class="fas fa-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <div id="modal-inst" class="modal">
+        <div class="modal-content">
+            <h2>¡Tu Misión!</h2>
+            <div style="text-align: left; margin: 20px; font-size: 1.1rem; line-height: 1.8;">
+                🎯 <strong>Meta:</strong> <span id="inst-goal">...</span><br>
+                🐷 <strong>Muévete:</strong> Usa las flechas.<br>
+                💰 <strong>Recoge:</strong> Dinero y Ahorro.<br>
+                ❌ <strong>Evita:</strong> Gastos Hormiga.<br>
+                ⏱️ <strong>Tiempo:</strong> 60 Segundos.
             </div>
+            <button class="big-btn" onclick="startGame()">¡JUGAR AHORA!</button>
         </div>
     </div>
 
-    <div id="lose-modal" class="modal-overlay">
-        <div class="modal-box">
-            <div style="font-size: 4rem;">😢</div>
-            <h2 id="lose-title" style="color: #ff6b6b;">¡Oh no!</h2>
-            <p id="lose-msg">Se acabó el juego.</p>
-            <button class="big-btn" style="background: var(--primary-color);" onclick="quitGame()">Reintentar</button>
+    <div id="modal-lose" class="modal">
+        <div class="modal-content" style="border-color: var(--primary);">
+            <div style="font-size: 4rem;">💸</div>
+            <h2 style="color: var(--primary);">¡Oh no!</h2>
+            <p id="lose-msg">Se acabó el dinero.</p>
+            <button class="big-btn" style="background: var(--primary);" onclick="exitToMenu()">Intentar de Nuevo</button>
         </div>
     </div>
 
-    <div id="win-modal" class="modal-overlay">
-        <div class="modal-box" style="border-color: var(--accent-color);">
+    <div id="modal-win" class="modal">
+        <div class="modal-content" style="border-color: var(--accent);">
             <div style="font-size: 4rem;">🏆</div>
-            <h2 style="color: var(--accent-color);">¡GANASTE!</h2>
-            <p id="win-msg">¡Compraste tu juguete!</p>
-            <button class="big-btn" style="background: var(--accent-color);" onclick="quitGame()">¡Genial!</button>
+            <h2 style="color: var(--accent);">¡LO LOGRASTE!</h2>
+            <p id="win-msg">Meta Cumplida</p>
+            <button class="big-btn" style="background: var(--accent);" onclick="exitToMenu()">¡Genial!</button>
         </div>
     </div>
 
     <script>
+        /* --- CONFIGURACIÓN --- */
+        const levels = {
+            1: { name: "Juguete Nuevo", size: 8, badRate: 0.2 },
+            2: { name: "Bicicleta Roja", size: 10, badRate: 0.25 },
+            3: { name: "Viaje a la Playa", size: 12, badRate: 0.3 }
+        };
+        
+        const items = {
+            good: [{t:"¡Ahorro!", i:"💰"}, {t:"¡Sueldo!", i:"💵"}],
+            bad: [{t:"¡Gasto!", i:"🐜"}, {t:"¡Dulces!", i:"🍭"}]
+        };
+
+        /* --- ESTADO --- */
+        let state = {
+            lvl: 1,
+            lives: 3,
+            time: 60,
+            active: false,
+            canMove: true
+        };
+        let player = {x:0, y:0};
+        let grid = [];
+        let timerInt;
+        let musicOn = false;
+
         /* --- AUDIO --- */
-        const audio = {
+        // Definición segura de audios
+        const sounds = {
             bgm: new Audio('https://cdn.pixabay.com/audio/2022/01/18/audio_d0a13f69d2.mp3'),
             coin: new Audio('https://cdn.pixabay.com/audio/2021/08/09/audio_9704e4b8d2.mp3'),
             hurt: new Audio('https://cdn.pixabay.com/audio/2022/03/10/audio_c628727358.mp3'),
             win: new Audio('https://cdn.pixabay.com/audio/2021/08/04/audio_0625c153e1.mp3'),
             lose: new Audio('https://cdn.pixabay.com/audio/2021/08/09/audio_88447e769f.mp3')
         };
-        audio.bgm.loop = true; audio.bgm.volume = 0.3;
-        let musicEnabled = false;
+        sounds.bgm.loop = true;
+        sounds.bgm.volume = 0.3;
 
         function toggleMusic() {
             const btn = document.getElementById('music-btn');
-            if(!musicEnabled) {
-                musicEnabled = true;
+            musicOn = !musicOn;
+            
+            if(musicOn) {
                 btn.innerHTML = '<i class="fas fa-volume-up"></i> Música';
                 btn.style.color = "#48dbfb";
-                // Si estamos en el juego, iniciar audio
-                if(document.getElementById('game-ui').style.display === 'flex') {
-                    audio.bgm.play().catch(e => {});
-                }
+                // Solo reproducir si estamos en juego, para no molestar en menú
+                if(state.active) sounds.bgm.play().catch(()=>{});
             } else {
-                musicEnabled = false;
                 btn.innerHTML = '<i class="fas fa-volume-mute"></i> Música';
                 btn.style.color = "#ff6b6b";
-                audio.bgm.pause();
+                sounds.bgm.pause();
             }
+        }
+
+        function playSfx(key) {
+            if(musicOn) {
+                // Clonar para permitir sonidos rápidos superpuestos
+                try {
+                    const s = sounds[key].cloneNode();
+                    s.volume = 0.5;
+                    s.play().catch(()=>{});
+                } catch(e) {}
+            }
+        }
+
+        /* --- NAVEGACIÓN --- */
+        function showScreen(id) {
+            document.querySelectorAll('.screen').forEach(el => el.classList.add('hidden'));
+            document.getElementById(id).classList.remove('hidden');
         }
         
-        function playSfx(name) { 
-            if(musicEnabled) { 
-                const s = audio[name].cloneNode(); 
-                s.volume=0.5; 
-                s.play(); 
-            } 
+        function showModal(id) {
+            document.querySelectorAll('.modal').forEach(el => el.style.display = 'none');
+            if(id) document.getElementById(id).style.display = 'flex';
         }
 
-        /* --- VARIABLES --- */
-        const levels = {
-            1: { name: "Juguete", size: 8, badRate: 0.15 },
-            2: { name: "Bici", size: 10, badRate: 0.25 },
-            3: { name: "Viaje", size: 12, badRate: 0.35 }
-        };
-        const items = {
-            good: [{t:"Ahorro", i:"💰"}, {t:"Sueldo", i:"💵"}],
-            bad:  [{t:"Gasto", i:"🐜"}, {t:"Dulces", i:"🍭"}]
-        };
-
-        let currentLvl = 1;
-        let lives = 3;
-        let timeLeft = 60;
-        let timerInterval;
-        let maze = [], gridItems = [], player = {x:0, y:0};
-        let rows, cols;
-        let canMove = true; // Variable para evitar movimientos ultra rápidos
-
-        /* --- FLUJO DEL JUEGO --- */
-        function initGame(lvl) {
-            currentLvl = lvl;
-            document.getElementById('inst-modal').style.display = 'flex';
+        function initLevel(lvl) {
+            state.lvl = lvl;
+            document.getElementById('inst-goal').innerText = levels[lvl].name;
+            showModal('modal-inst');
         }
 
+        function exitToMenu() {
+            state.active = false;
+            clearInterval(timerInt);
+            sounds.bgm.pause();
+            sounds.bgm.currentTime = 0;
+            showModal(null);
+            showScreen('screen-menu');
+        }
+
+        /* --- MOTOR DEL JUEGO --- */
         function startGame() {
-            document.getElementById('inst-modal').style.display = 'none';
-            document.getElementById('main-container').style.display = 'none';
-            document.getElementById('game-ui').style.display = 'flex';
+            showModal(null);
+            showScreen('screen-game');
             
-            // Limpieza de eventos anteriores
-            window.removeEventListener('keydown', handleKey);
-
-            if(musicEnabled) audio.bgm.play();
-
-            lives = 3; 
-            timeLeft = 60;
-            canMove = true;
-            updateLives();
-            updateTimerUI();
+            // Reset Estado
+            state.lives = 3;
+            state.time = 60;
+            state.active = true;
+            state.canMove = true;
             
-            rows = levels[currentLvl].size;
-            cols = levels[currentLvl].size;
+            updateUI();
             
-            generateMaze();
-            renderMaze();
+            // Generar Laberinto
+            const size = levels[state.lvl].size;
+            generateGrid(size);
+            renderGrid();
             
-            startTimer();
-            
-            window.addEventListener('keydown', handleKey);
-        }
-
-        function quitGame() {
-            stopTimer();
-            audio.bgm.pause();
-            audio.bgm.currentTime = 0; // Reset canción para la próxima
-            
-            document.getElementById('game-ui').style.display = 'none';
-            document.getElementById('win-modal').style.display = 'none';
-            document.getElementById('lose-modal').style.display = 'none';
-            document.getElementById('main-container').style.display = 'block';
-            window.removeEventListener('keydown', handleKey);
-        }
-
-        /* --- RELOJ --- */
-        function startTimer() {
-            clearInterval(timerInterval);
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                updateTimerUI();
-                if(timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    gameOver("time");
-                }
+            // Iniciar Timer
+            clearInterval(timerInt);
+            timerInt = setInterval(() => {
+                state.time--;
+                updateUI();
+                if(state.time <= 0) gameOver("time");
             }, 1000);
-        }
-        function stopTimer() { clearInterval(timerInterval); }
-        function updateTimerUI() {
-            const el = document.getElementById('timer-txt');
-            el.innerText = timeLeft + "s";
-            if(timeLeft <= 10) el.style.color = "#ff6b6b";
-            else el.style.color = "white";
-        }
 
-        function gameOver(reason) {
-            stopTimer();
-            playSfx('lose');
-            const title = document.getElementById('lose-title');
-            const msg = document.getElementById('lose-msg');
+            // Música de fondo (si está activada)
+            if(musicOn) sounds.bgm.play().catch(()=>{});
 
-            if(reason === "time") {
-                title.innerText = "¡Tiempo Agotado!";
-                msg.innerText = "No llegaste a la meta en 60 segundos.";
-            } else {
-                title.innerText = "¡Sin Dinero!";
-                msg.innerText = "Los gastos hormiga acabaron con tus ahorros.";
-            }
-            document.getElementById('lose-modal').style.display = 'flex';
+            // Teclado
+            window.onkeydown = (e) => {
+                if(e.key === 'ArrowUp') move(0,-1);
+                if(e.key === 'ArrowDown') move(0,1);
+                if(e.key === 'ArrowLeft') move(-1,0);
+                if(e.key === 'ArrowRight') move(1,0);
+            };
         }
 
-        /* --- LABERINTO --- */
-        function updateLives() {
-            let h = ""; for(let i=0; i<lives; i++) h+="❤️";
-            document.getElementById('lives-display').innerText = h;
-        }
+        function generateGrid(size) {
+            grid = [];
+            const badRate = levels[state.lvl].badRate;
 
-        function generateMaze() {
-            maze = []; gridItems = [];
-            const badChance = levels[currentLvl].badRate;
-            for(let y=0; y<rows; y++) {
-                let row=[], iRow=[];
-                for(let x=0; x<cols; x++) {
-                    let isWall = Math.random()<0.3 ? 1:0;
-                    if((x<2 && y<2)||(x>cols-3 && y>rows-3)) isWall=0;
-                    row.push(isWall);
-                    let it=null;
-                    if(isWall===0 && Math.random()<0.3 && !(x===0 && y===0)) {
-                        it = Math.random()<badChance 
-                            ? {...items.bad[Math.floor(Math.random()*2)], type:'bad'}
-                            : {...items.good[Math.floor(Math.random()*2)], type:'good'};
+            for(let y=0; y<size; y++) {
+                let row = [];
+                for(let x=0; x<size; x++) {
+                    // Paredes aleatorias (30% prob)
+                    let isWall = Math.random() < 0.3;
+                    // Asegurar esquinas libres
+                    if((x<2 && y<2) || (x>size-3 && y>size-3)) isWall = false;
+                    
+                    let item = null;
+                    if(!isWall && Math.random() < 0.3 && !(x===0 && y===0)) {
+                        const list = Math.random() < badRate ? items.bad : items.good;
+                        const type = list === items.bad ? 'bad' : 'good';
+                        const randItem = list[Math.floor(Math.random()*list.length)];
+                        item = { ...randItem, type: type };
                     }
-                    iRow.push(it);
+
+                    row.push({ wall: isWall, item: item });
                 }
-                maze.push(row); gridItems.push(iRow);
+                grid.push(row);
             }
-            // Camino seguro
+
+            // Garantizar camino (Algoritmo simple de excavadora)
             let cx=0, cy=0;
-            while(cx<cols-1 || cy<rows-1) {
-                maze[cy][cx]=0;
-                if(gridItems[cy][cx]?.type==='bad') gridItems[cy][cx]=null;
-                if(cx<cols-1 && (Math.random()>0.5 || cy===rows-1)) cx++; else cy++;
+            while(cx < size-1 || cy < size-1) {
+                grid[cy][cx].wall = false;
+                // Quitar items malos del camino principal para que sea posible pasar
+                if(grid[cy][cx].item?.type === 'bad') grid[cy][cx].item = null;
+
+                if(cx < size-1 && (Math.random()>0.5 || cy === size-1)) cx++;
+                else cy++;
             }
-            maze[rows-1][cols-1]=0;
+            grid[size-1][size-1].wall = false; // Meta
             player = {x:0, y:0};
         }
 
-        function renderMaze() {
-            const c = document.getElementById('maze-container');
-            c.innerHTML = ''; c.style.gridTemplateColumns=`repeat(${cols}, 32px)`;
-            for(let y=0; y<rows; y++) {
-                for(let x=0; x<cols; x++) {
-                    const d = document.createElement('div');
-                    d.className='cell';
-                    if(maze[y][x]===1) d.classList.add('wall');
-                    else if(gridItems[y][x]) d.innerText = gridItems[y][x].i;
+        function renderGrid() {
+            const div = document.getElementById('maze-grid');
+            div.innerHTML = '';
+            const size = levels[state.lvl].size;
+            div.style.gridTemplateColumns = `repeat(${size}, 35px)`;
+
+            for(let y=0; y<size; y++) {
+                for(let x=0; x<size; x++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
                     
-                    if(x===player.x && y===player.y) { d.innerHTML='🐷'; d.style.zIndex=5; }
-                    if(x===cols-1 && y===rows-1) d.innerHTML='🏆';
-                    c.appendChild(d);
-                }
-            }
-        }
+                    const data = grid[y][x];
+                    if(data.wall) cell.classList.add('wall');
+                    else if(data.item) cell.innerText = data.item.i;
 
-        function handleKey(e) {
-            if(e.key==='ArrowUp') movePlayer(0,-1);
-            if(e.key==='ArrowDown') movePlayer(0,1);
-            if(e.key==='ArrowLeft') movePlayer(-1,0);
-            if(e.key==='ArrowRight') movePlayer(1,0);
-        }
-
-        /* --- MOVIMIENTO MEJORADO --- */
-        function movePlayer(dx, dy, e) {
-            // Prevenir doble disparo en touch
-            if(e) e.preventDefault();
-
-            // Freno de velocidad y estado de juego
-            if(!canMove || lives<=0 || timeLeft<=0) return;
-
-            let nx=player.x+dx, ny=player.y+dy;
-
-            if(nx>=0 && nx<cols && ny>=0 && ny<rows && maze[ny][nx]!==1) {
-                
-                // Bloquear movimiento temporalmente (Cooldown)
-                canMove = false;
-                setTimeout(() => { canMove = true; }, 150);
-
-                player={x:nx, y:ny};
-                const it = gridItems[ny][nx];
-                
-                if(it) {
-                    showFloat(it.t, it.type==='good'?'#48dbfb':'#ff6b6b');
-                    if(it.type==='good') playSfx('coin');
-                    else {
-                        playSfx('hurt'); lives--; updateLives();
-                        if(lives<=0) gameOver("lives");
+                    if(x===player.x && y===player.y) {
+                        cell.innerHTML = '🐷';
+                        cell.style.zIndex = 10;
                     }
-                    gridItems[ny][nx]=null;
-                }
-                renderMaze();
-                
-                if(nx===cols-1 && ny===rows-1) {
-                    stopTimer();
-                    playSfx('win');
-                    document.getElementById('win-msg').innerText="¡Conseguiste: "+levels[currentLvl].name+"!";
-                    document.getElementById('win-modal').style.display='flex';
+                    if(x===size-1 && y===size-1) cell.innerHTML = '🏆';
+
+                    div.appendChild(cell);
                 }
             }
         }
 
-        function showFloat(txt, col) {
-            const el=document.createElement('div');
-            el.innerText=txt; el.className='float-txt'; el.style.color=col;
-            el.style.left='50%'; el.style.top='40%';
-            document.body.appendChild(el); setTimeout(()=>el.remove(), 800);
+        function move(dx, dy, e) {
+            if(e) e.preventDefault(); // Prevenir doble toque en móvil
+            if(!state.active || !state.canMove) return;
+
+            // Cooldown de movimiento (freno)
+            state.canMove = false;
+            setTimeout(() => state.canMove = true, 150);
+
+            const size = levels[state.lvl].size;
+            let nx = player.x + dx;
+            let ny = player.y + dy;
+
+            if(nx>=0 && nx<size && ny>=0 && ny<size && !grid[ny][nx].wall) {
+                player = {x:nx, y:ny};
+                
+                // Lógica Items
+                const cell = grid[ny][nx];
+                if(cell.item) {
+                    floatText(cell.item.t, cell.item.type==='good'?'#48dbfb':'#ff6b6b');
+                    if(cell.item.type === 'good') {
+                        playSfx('coin');
+                    } else {
+                        playSfx('hurt');
+                        state.lives--;
+                        updateUI();
+                        document.body.style.backgroundColor = "#ff7675";
+                        setTimeout(()=>document.body.style.backgroundImage = "var(--bg-gradient)", 150);
+                        if(state.lives <= 0) gameOver('lives');
+                    }
+                    cell.item = null; // Consumir item
+                }
+
+                renderGrid();
+
+                // Meta
+                if(nx === size-1 && ny === size-1) {
+                    gameWin();
+                }
+            }
         }
+
+        function updateUI() {
+            document.getElementById('ui-timer').innerText = state.time + "s";
+            let h = ""; for(let i=0;i<state.lives;i++) h+="❤️";
+            document.getElementById('ui-lives').innerText = h;
+        }
+
+        function gameOver(reason) {
+            state.active = false;
+            playSfx('lose');
+            const msg = reason === 'time' ? "¡Se acabó el tiempo!" : "¡Gastaste todos tus ahorros!";
+            document.getElementById('lose-msg').innerText = msg;
+            showModal('modal-lose');
+        }
+
+        function gameWin() {
+            state.active = false;
+            playSfx('win');
+            document.getElementById('win-msg').innerText = "¡Conseguiste: " + levels[state.lvl].name + "!";
+            showModal('modal-win');
+        }
+
+        function floatText(txt, col) {
+            const el = document.createElement('div');
+            el.innerText = txt;
+            el.className = 'float-msg';
+            el.style.color = col;
+            // Centrar en pantalla
+            el.style.left = '50%'; 
+            el.style.top = '40%';
+            el.style.transform = 'translate(-50%, -50%)';
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 1000);
+        }
+
     </script>
 </body>
-</html>
