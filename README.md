@@ -1,5 +1,4 @@
 # Divulgando-las-Finanzas-Games
-<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -25,6 +24,7 @@
             min-height: 100vh;
             overflow-x: hidden;
             user-select: none; /* Evitar selección de texto al jugar */
+            padding-bottom: 40px; /* Espacio para la marca de agua */
         }
 
         h1, h2, h3, .lucha-font {
@@ -155,9 +155,37 @@
             text-shadow: 1px 1px 0 white;
         }
         @keyframes floatUp { to { transform: translate(-50%, -60px); opacity: 0; } }
+
+        /* NUEVO: Marca de Agua Divulgando las Finanzas */
+        .brand-watermark {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3000; /* Muy alto para estar al frente */
+            pointer-events: none; /* Permite hacer click a través de él si fuera necesario */
+            width: 100%;
+            text-align: center;
+        }
+        .brand-badge {
+            background-color: #000;
+            color: #f1c40f;
+            font-family: 'Bangers', cursive;
+            padding: 5px 15px;
+            border: 2px solid #fff;
+            border-radius: 20px;
+            font-size: 1.1rem;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
     </style>
 </head>
 <body>
+
+    <div class="brand-watermark">
+        <span class="brand-badge">DIVULGANDO LAS FINANZAS GAMES</span>
+    </div>
 
     <nav class="navbar navbar-expand navbar-dark navbar-custom sticky-top">
         <div class="container-fluid px-2">
@@ -299,9 +327,23 @@
             3: { name: "ARENA MUNDIAL", size: 12, badRate: 0.3 }
         };
         
+        // CORRECCIÓN APLICADA AQUÍ: Se arreglaron los corchetes y llaves faltantes
         const items = {
-            good: [{t:"¡DINERO!", i:"💵"}, {t:"¡AHORRO!", i:"🐖"}, {t:"¡LLAVE!", i:"🤼‍♂️"},{t:"¡INVERSIÓN!", i:"📈"}, {t:"¡BONO!", i:"💰"}, {t:"¡CRÉDITO!", i:"🏦"}, , {t:"¡PRESTAMO SIN INTERESES!", i:""}],
-            bad: [{t:"¡SILLAZO!", i:"🪑"}, {t:"¡RUDO!", i:"👹"}, {t:"¡GASTO HORMIGA!", i:"🐜"}, {t:"¡PAGO DE INTERESES!", i:"💸"]
+            good: [
+                {t:"¡DINERO!", i:"💵"}, 
+                {t:"¡AHORRO!", i:"🐖"}, 
+                {t:"¡LLAVE!", i:"🤼‍♂️"},
+                {t:"¡INVERSIÓN!", i:"📈"}, 
+                {t:"¡BONO!", i:"💰"}, 
+                {t:"¡CRÉDITO!", i:"🏦"}, 
+                {t:"¡PRESTAMO SIN INTERESES!", i:"🤝"}
+            ],
+            bad: [
+                {t:"¡SILLAZO!", i:"🪑"}, 
+                {t:"¡RUDO!", i:"👹"}, 
+                {t:"¡GASTO HORMIGA!", i:"🐜"}, 
+                {t:"¡PAGO DE INTERESES!", i:"💸"}
+            ]
         };
 
         let state = {
@@ -382,7 +424,6 @@
         }
 
         function goToPinatas() {
-            // Reemplaza esto con tu URL real
             if(confirm("¿Quieres ir a 'Piñatas de la Economía'?")) {
                 window.location.href = "https://ejemplo.com/pinatas"; 
             }
