@@ -1,4 +1,5 @@
 # Divulgando-las-Finanzas-Games
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -9,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- PERSONALIZACIÓN TEMÁTICA SOBRE BOOTSTRAP --- */
+        /* --- ESTILOS TEMÁTICOS --- */
         :root {
             --primary-lucha: #e74c3c; /* Rojo */
             --secondary-lucha: #f1c40f; /* Amarillo */
@@ -22,7 +23,8 @@
             background: radial-gradient(circle, #2c3e50 20%, #000000 100%);
             color: #333;
             min-height: 100vh;
-            overflow-x: hidden; /* Evitar scroll horizontal en móvil */
+            overflow-x: hidden;
+            user-select: none; /* Evitar selección de texto al jugar */
         }
 
         h1, h2, h3, .lucha-font {
@@ -30,21 +32,22 @@
             letter-spacing: 1px;
         }
 
-        /* Navbar personalizada */
+        /* Navbar */
         .navbar-custom {
             background-color: var(--dark-lucha);
             border-bottom: 4px solid var(--secondary-lucha);
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            z-index: 1000;
         }
 
-        /* Tarjetas estilo Lucha */
+        /* Tarjetas */
         .card-lucha {
             border: 4px solid #000;
             box-shadow: 8px 8px 0px var(--primary-lucha);
-            transition: transform 0.2s;
+            position: relative;
         }
         
-        /* Botones personalizados */
+        /* Botones */
         .btn-lucha {
             font-family: 'Bangers', cursive;
             font-size: 1.2rem;
@@ -57,22 +60,29 @@
             transform: translate(2px, 2px);
             box-shadow: 1px 1px 0 black;
         }
-        .btn-piñata {
-            background-color: #9b59b6; /* Morado */
+        .btn-pinata {
+            background-color: #9b59b6; 
             color: white;
         }
-        .btn-piñata:hover { background-color: #8e44ad; color: white;}
+        .btn-pinata:hover { background-color: #8e44ad; color: white; }
 
-        /* EL RING (Grid del juego) */
+        /* EL RING (Grid) */
         #maze-wrapper {
             background: #eee;
             padding: 5px;
-            border: 5px solid #c0392b; /* Cuerdas */
+            border: 5px solid #c0392b;
             border-radius: 5px;
             box-shadow: 0 0 15px rgba(0,0,0,0.5);
             display: inline-block;
-            max-width: 100%; /* Responsivo */
+            max-width: 100%;
             overflow: hidden;
+            position: relative;
+        }
+        /* Esquinas del ring decorativas */
+        #maze-wrapper::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
         }
 
         #maze-grid {
@@ -81,20 +91,16 @@
         }
 
         .cell {
-            /* Tamaño dinámico para móviles */
-            width: 35px; 
-            height: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 35px; height: 35px; /* Desktop base */
+            display: flex; align-items: center; justify-content: center;
             background: rgba(255,255,255,0.8);
             font-size: 1.3rem;
-            border: 1px solid rgba(0,0,0,0.1);
+            border: 1px solid rgba(0,0,0,0.05);
         }
         
-        /* Ajuste para pantallas muy pequeñas (celulares) */
-        @media (max-width: 400px) {
-            .cell { width: 28px; height: 28px; font-size: 1rem; }
+        /* Ajuste responsive para celulares */
+        @media (max-width: 450px) {
+            .cell { width: 29px; height: 29px; font-size: 1.1rem; }
         }
 
         .wall {
@@ -103,13 +109,13 @@
             background-size: 4px 4px;
         }
 
-        /* Controles Móviles */
+        /* Controles Táctiles */
         .control-pad {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 5px;
-            max-width: 200px;
-            margin: 20px auto;
+            gap: 10px;
+            max-width: 180px;
+            margin: 15px auto;
         }
         .c-btn {
             height: 60px;
@@ -119,14 +125,14 @@
             border: 3px solid black;
             font-size: 1.5rem;
             display: flex; align-items: center; justify-content: center;
-            touch-action: manipulation; /* Mejora respuesta táctil */
+            touch-action: manipulation;
         }
         .c-btn:active { background: #c0392b; transform: scale(0.95); }
 
-        /* Modales superpuestos */
+        /* Modales */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85);
+            background: rgba(0,0,0,0.9);
             z-index: 2000;
             display: none;
             align-items: center; justify-content: center;
@@ -134,86 +140,84 @@
         .modal-box {
             background: var(--secondary-lucha);
             border: 5px solid black;
-            padding: 2rem;
+            padding: 20px;
             text-align: center;
-            max-width: 90%;
-            width: 400px;
-            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 90%; max-width: 400px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+            animation: popIn 0.3s;
         }
         @keyframes popIn { from {transform: scale(0.5);} to {transform: scale(1);} }
 
-        /* Animación flotante de puntos */
         .float-msg {
             position: absolute; font-family: 'Bangers'; font-size: 1.5rem; 
             font-weight: bold; pointer-events: none; 
             animation: floatUp 0.8s forwards; z-index: 100;
             text-shadow: 1px 1px 0 white;
         }
-        @keyframes floatUp { to { transform: translate(-50%, -50px); opacity: 0; } }
-
+        @keyframes floatUp { to { transform: translate(-50%, -60px); opacity: 0; } }
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
-        <div class="container-fluid">
-            <span class="navbar-brand lucha-font text-warning" style="font-size: 1.5rem;">
-                👺 LUCHA FINANCIERA
+    <nav class="navbar navbar-expand navbar-dark navbar-custom sticky-top">
+        <div class="container-fluid px-2">
+            <span class="navbar-brand lucha-font text-warning m-0" style="font-size: 1.2rem;">
+                👺 LUCHA KIDS
             </span>
             
-            <div class="d-flex gap-2">
+            <div class="d-flex gap-2 align-items-center">
                 <button class="btn btn-sm btn-warning btn-lucha" onclick="toggleMusic()" id="music-btn">
                     <i class="fas fa-volume-up"></i>
                 </button>
-                <button class="btn btn-sm btn-lucha btn-piñata" onclick="goToPinatas()">
-                    <i class="fas fa-star"></i> Piñatas
+                <button class="btn btn-sm btn-lucha btn-pinata" onclick="goToPinatas()" title="Ir a Piñatas">
+                    <i class="fas fa-star"></i>
                 </button>
                 <a href="https://ambrosioortizramirez.link" class="btn btn-sm btn-danger btn-lucha">
-                    <i class="fas fa-sign-out-alt"></i> Salir
+                    <i class="fas fa-door-open"></i>
                 </a>
             </div>
         </div>
     </nav>
 
-    <div class="container py-4">
+    <div class="container py-3">
         
         <div id="screen-menu" class="row justify-content-center">
             <div class="col-12 col-md-8 col-lg-6">
-                <div class="card card-lucha bg-white p-4 text-center">
-                    <div class="display-1 mb-2">👺</div>
-                    <h1 class="text-danger mb-3 display-4">LUCHA FINANCIERA</h1>
-                    <p class="lead fw-bold">¡Vence a los Rudos y Gana el Campeonato!</p>
+                <div class="card card-lucha bg-white p-3 text-center">
+                    <div class="display-1 mb-0">👺</div>
+                    <h1 class="text-danger mb-2 display-5">LUCHA FINANCIERA</h1>
+                    <p class="lead fw-bold small text-muted text-uppercase">¡Vence a los Rudos y Gana el Campeonato!</p>
                     
-                    <div class="alert alert-dark text-uppercase fw-bold lucha-font">Elige tu Arena</div>
+                    <div class="alert alert-dark p-2 fw-bold lucha-font mb-3">Elige tu Arena</div>
 
-                    <div class="d-grid gap-3">
-                        <button class="btn btn-light border border-3 border-dark py-3 d-flex align-items-center justify-content-between shadow-sm" onclick="initLevel(1)">
-                            <span class="h1 m-0">🧸</span>
-                            <div class="text-end">
-                                <div class="h4 m-0 lucha-font">Arena Juguete</div>
-                                <small class="text-muted">Corto Plazo (Fácil)</small>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-light border border-2 border-dark py-2 d-flex align-items-center justify-content-between shadow-sm" onclick="initLevel(1)">
+                            <span class="h2 m-0">🧸</span>
+                            <div class="text-end lh-1">
+                                <div class="h5 m-0 lucha-font">Arena Juguete</div>
+                                <small class="text-muted" style="font-size:0.7rem">Corto Plazo</small>
                             </div>
                         </button>
                         
-                        <button class="btn btn-light border border-3 border-dark py-3 d-flex align-items-center justify-content-between shadow-sm" onclick="initLevel(2)">
-                            <span class="h1 m-0">🚲</span>
-                            <div class="text-end">
-                                <div class="h4 m-0 lucha-font">Coliseo Bici</div>
-                                <small class="text-muted">Mediano Plazo (Normal)</small>
+                        <button class="btn btn-light border border-2 border-dark py-2 d-flex align-items-center justify-content-between shadow-sm" onclick="initLevel(2)">
+                            <span class="h2 m-0">🚲</span>
+                            <div class="text-end lh-1">
+                                <div class="h5 m-0 lucha-font">Coliseo Bici</div>
+                                <small class="text-muted" style="font-size:0.7rem">Mediano Plazo</small>
                             </div>
                         </button>
 
-                        <button class="btn btn-light border border-3 border-dark py-3 d-flex align-items-center justify-content-between shadow-sm" onclick="initLevel(3)">
-                            <span class="h1 m-0">✈️</span>
-                            <div class="text-end">
-                                <div class="h4 m-0 lucha-font">Arena Mundial</div>
-                                <small class="text-muted">Largo Plazo (Difícil)</small>
+                        <button class="btn btn-light border border-2 border-dark py-2 d-flex align-items-center justify-content-between shadow-sm" onclick="initLevel(3)">
+                            <span class="h2 m-0">✈️</span>
+                            <div class="text-end lh-1">
+                                <div class="h5 m-0 lucha-font">Arena Mundial</div>
+                                <small class="text-muted" style="font-size:0.7rem">Largo Plazo</small>
                             </div>
                         </button>
                     </div>
 
                     <hr>
-                    <button class="btn btn-lucha btn-piñata w-100 py-2" onclick="goToPinatas()">
+                    <button class="btn btn-lucha btn-pinata w-100 py-2" onclick="goToPinatas()">
                         <i class="fas fa-gamepad"></i> Jugar Piñatas de la Economía
                     </button>
                 </div>
@@ -222,10 +226,10 @@
 
         <div id="screen-game" class="d-none flex-column align-items-center">
             
-            <div class="bg-dark text-white p-2 rounded border border-warning mb-3 d-flex justify-content-between align-items-center w-100" style="max-width: 500px;">
-                <div id="ui-lives" class="h4 m-0 text-danger">❤️❤️❤️</div>
-                <div class="h2 m-0 lucha-font text-warning">VS</div>
-                <div id="ui-timer" class="h4 m-0"><i class="fas fa-clock"></i> 60</div>
+            <div class="bg-dark text-white p-2 rounded border border-warning mb-3 d-flex justify-content-between align-items-center w-100" style="max-width: 400px;">
+                <div id="ui-lives" class="h5 m-0 text-danger">❤️❤️❤️</div>
+                <div class="h4 m-0 lucha-font text-warning">VS</div>
+                <div id="ui-timer" class="h5 m-0"><i class="fas fa-clock"></i> 60</div>
             </div>
 
             <div id="maze-wrapper">
@@ -233,27 +237,31 @@
             </div>
 
             <div class="control-pad">
-                <div></div> <button class="c-btn" onmousedown="move(0,-1)" ontouchstart="move(0,-1, event)"><i class="fas fa-chevron-up"></i></button>
-                <div></div> <button class="c-btn" onmousedown="move(-1,0)" ontouchstart="move(-1,0, event)"><i class="fas fa-chevron-left"></i></button>
+                <div></div> 
+                <button class="c-btn" onmousedown="move(0,-1)" ontouchstart="move(0,-1, event)"><i class="fas fa-chevron-up"></i></button>
+                <div></div> 
+                
+                <button class="c-btn" onmousedown="move(-1,0)" ontouchstart="move(-1,0, event)"><i class="fas fa-chevron-left"></i></button>
                 <button class="c-btn" onmousedown="move(0,1)" ontouchstart="move(0,1, event)"><i class="fas fa-chevron-down"></i></button>
                 <button class="c-btn" onmousedown="move(1,0)" ontouchstart="move(1,0, event)"><i class="fas fa-chevron-right"></i></button>
             </div>
 
-            <button class="btn btn-outline-light mt-3" onclick="exitToMenu()">
-                <i class="fas fa-flag"></i> Rendirse (Volver al Menú)
+            <button class="btn btn-outline-light btn-sm mt-2" onclick="exitToMenu()">
+                <i class="fas fa-flag"></i> Rendirse
             </button>
         </div>
+    </div>
 
-    </div> <div id="modal-inst" class="modal-overlay">
+    <div id="modal-inst" class="modal-overlay">
         <div class="modal-box">
-            <h2 class="text-uppercase display-5 fw-bold">¡El Reto!</h2>
-            <div class="bg-white border border-dark p-3 text-start mb-3">
+            <h2 class="text-uppercase display-6 fw-bold">¡El Reto!</h2>
+            <div class="bg-white border border-dark p-2 text-start mb-3 small">
                 <p class="mb-1">📍 <strong>Sede:</strong> <span id="inst-goal" class="text-danger fw-bold">...</span></p>
-                <p class="mb-1">🤼 <strong>Técnico:</strong> Recoge <span class="text-success">Dinero</span>.</p>
-                <p class="mb-1">👹 <strong>Rudos:</strong> Evita <span class="text-danger">Gastos</span>.</p>
-                <p class="mb-0">🏆 <strong>Meta:</strong> Llega al Cinturón.</p>
+                <p class="mb-1">✅ <strong>Recoge:</strong> <span class="text-success">Dinero/Ahorro</span>.</p>
+                <p class="mb-1">❌ <strong>Evita:</strong> <span class="text-danger">Gastos/Rudos</span>.</p>
+                <p class="mb-0">🏆 <strong>Meta:</strong> Llega al final.</p>
             </div>
-            <button class="btn btn-lucha btn-success w-100 py-3" onclick="startGame()">¡A LUCHAR!</button>
+            <button class="btn btn-lucha btn-success w-100 py-2" onclick="startGame()">¡A LUCHAR!</button>
         </div>
     </div>
 
@@ -261,10 +269,10 @@
         <div class="modal-box bg-danger text-white">
             <div class="display-1">🔔</div>
             <h2 class="lucha-font">¡TE RINDIERON!</h2>
-            <p id="lose-msg" class="fw-bold">Perdiste la máscara.</p>
-            <div class="row bg-white text-dark mx-0 mb-3 p-2 border border-dark">
-                <div class="col-6 border-end">Ganado: <br><span id="lose-good" class="h3 text-success fw-bold">0</span></div>
-                <div class="col-6">Perdido: <br><span id="lose-bad" class="h3 text-danger fw-bold">0</span></div>
+            <p id="lose-msg" class="fw-bold small">Perdiste la máscara.</p>
+            <div class="row bg-white text-dark mx-0 mb-3 p-1 border border-dark small">
+                <div class="col-6 border-end">Ganado: <br><span id="lose-good" class="h4 text-success fw-bold">0</span></div>
+                <div class="col-6">Perdido: <br><span id="lose-bad" class="h4 text-danger fw-bold">0</span></div>
             </div>
             <button class="btn btn-lucha btn-dark w-100" onclick="exitToMenu()">REVANCHA</button>
         </div>
@@ -274,10 +282,10 @@
         <div class="modal-box bg-warning">
             <div class="display-1">🏆</div>
             <h2 class="lucha-font text-danger">¡CAMPEÓN!</h2>
-            <p id="win-msg" class="text-dark fw-bold">¡El público enloquece!</p>
-            <div class="row bg-white text-dark mx-0 mb-3 p-2 border border-dark">
-                <div class="col-6 border-end">Ganado: <br><span id="win-good" class="h3 text-success fw-bold">0</span></div>
-                <div class="col-6">Perdido: <br><span id="win-bad" class="h3 text-danger fw-bold">0</span></div>
+            <p id="win-msg" class="text-dark fw-bold small">¡El público enloquece!</p>
+            <div class="row bg-white text-dark mx-0 mb-3 p-1 border border-dark small">
+                <div class="col-6 border-end">Ganado: <br><span id="win-good" class="h4 text-success fw-bold">0</span></div>
+                <div class="col-6">Perdido: <br><span id="win-bad" class="h4 text-danger fw-bold">0</span></div>
             </div>
             <button class="btn btn-lucha btn-primary w-100" onclick="exitToMenu()">¡VICTORIA!</button>
         </div>
@@ -285,7 +293,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        /* --- CONFIGURACIÓN --- */
         const levels = {
             1: { name: "ARENA JUGUETE", size: 8, badRate: 0.2 },
             2: { name: "COLISEO BICI", size: 10, badRate: 0.25 },
@@ -297,7 +304,6 @@
             bad: [{t:"¡SILLAZO!", i:"🪑"}, {t:"¡RUDO!", i:"👹"}, {t:"¡GASTO!", i:"💸"}]
         };
 
-        /* --- ESTADO --- */
         let state = {
             lvl: 1, lives: 3, time: 60, active: false, canMove: true,
             collectedGood: 0, collectedBad: 0
@@ -306,19 +312,47 @@
         let grid = [];
         let timerInt;
         
-        // MÚSICA: Por defecto prendida
+        // MÚSICA Y AUDIO
         let musicOn = true; 
+        let audioContextUnlocked = false;
 
-        /* --- AUDIO --- */
         const sounds = {
-            bgm: new Audio('https://cdn.pixabay.com/audio/2022/03/15/audio_7764920df3.mp3'), 
-            coin: new Audio('https://cdn.pixabay.com/audio/2021/08/09/audio_9704e4b8d2.mp3'),
-            hurt: new Audio('https://cdn.pixabay.com/audio/2021/08/04/audio_c642338665.mp3'),
-            win: new Audio('https://cdn.pixabay.com/audio/2021/08/04/audio_0625c153e1.mp3'),
-            lose: new Audio('https://cdn.pixabay.com/audio/2021/08/09/audio_88447e769f.mp3')
+            // Enlaces de audio más fiables (CodeSkulptor/Google CDN)
+            bgm: new Audio('https://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/theme_01.mp3'), 
+            coin: new Audio('https://codeskulptor-demos.commondatastorage.googleapis.com/assets/sound/pickup.ogg'),
+            hurt: new Audio('https://codeskulptor-demos.commondatastorage.googleapis.com/assets/sound/explosion_01.ogg'),
+            win: new Audio('https://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/bonus.wav'),
+            lose: new Audio('https://codeskulptor-demos.commondatastorage.googleapis.com/assets/sound/explosion_02.ogg')
         };
         sounds.bgm.loop = true;
         sounds.bgm.volume = 0.3;
+
+        // Lógica de desbloqueo de audio (Critico para móviles)
+        function unlockAudio() {
+            if(audioContextUnlocked) return;
+            
+            Object.values(sounds).forEach(s => {
+                s.play().then(() => {
+                    s.pause();
+                    if(s !== sounds.bgm) s.currentTime = 0;
+                }).catch(e => console.log("Esperando interacción..."));
+            });
+            
+            audioContextUnlocked = true;
+            
+            // Actualizar botón si estaba en "muted" visualmente pero quería sonar
+            if(musicOn && state.active) sounds.bgm.play();
+
+            // Quitar listeners
+            document.removeEventListener('click', unlockAudio);
+            document.removeEventListener('touchstart', unlockAudio);
+            document.removeEventListener('keydown', unlockAudio);
+        }
+
+        // Detectores de primera interacción
+        document.addEventListener('click', unlockAudio);
+        document.addEventListener('touchstart', unlockAudio);
+        document.addEventListener('keydown', unlockAudio);
 
         function toggleMusic() {
             const btn = document.getElementById('music-btn');
@@ -328,8 +362,7 @@
                 btn.innerHTML = '<i class="fas fa-volume-up"></i>';
                 btn.classList.remove('btn-danger');
                 btn.classList.add('btn-warning');
-                // Intentar reproducir si el juego está activo
-                if(state.active) sounds.bgm.play().catch(e => console.log("Esperando interacción user"));
+                if(state.active && audioContextUnlocked) sounds.bgm.play().catch(()=>{});
             } else {
                 btn.innerHTML = '<i class="fas fa-volume-mute"></i>';
                 btn.classList.remove('btn-warning');
@@ -339,28 +372,26 @@
         }
 
         function playSfx(key) {
-            if(musicOn) {
+            if(musicOn && audioContextUnlocked) {
                 try { 
                     const s = sounds[key].cloneNode(); 
-                    s.volume = 0.5; 
+                    s.volume = 0.6; 
                     s.play().catch(()=>{}); 
                 } catch(e) {}
             }
         }
 
-        /* --- REDIRECCIÓN --- */
         function goToPinatas() {
+            // Reemplaza esto con tu URL real
             if(confirm("¿Quieres ir a 'Piñatas de la Economía'?")) {
-                // Aquí pones tu URL real
-                window.location.href = "https://tu-sitio-web.com/pinatas"; 
+                window.location.href = "https://ejemplo.com/pinatas"; 
             }
         }
 
-        /* --- NAVEGACIÓN Y PANTALLAS --- */
         function showScreen(id) {
             document.getElementById('screen-menu').classList.add('d-none');
             document.getElementById('screen-game').classList.add('d-none');
-            document.getElementById('screen-game').classList.remove('d-flex'); // Quitar flex
+            document.getElementById('screen-game').classList.remove('d-flex');
             
             const el = document.getElementById(id);
             el.classList.remove('d-none');
@@ -373,12 +404,7 @@
         }
 
         function initLevel(lvl) {
-            // Hack de Audio: Los navegadores bloquean audio hasta que el usuario interactúa.
-            // Al hacer click en seleccionar nivel, desbloqueamos el contexto de audio.
-            if(musicOn && sounds.bgm.paused) {
-                sounds.bgm.play().then(() => sounds.bgm.pause()).catch(()=>{});
-            }
-
+            unlockAudio(); // Asegurar desbloqueo
             state.lvl = lvl;
             document.getElementById('inst-goal').innerText = levels[lvl].name;
             showModal('modal-inst');
@@ -393,12 +419,10 @@
             showScreen('screen-menu');
         }
 
-        /* --- MOTOR DEL JUEGO --- */
         function startGame() {
             showModal(null);
             showScreen('screen-game');
             
-            // Reinicio variables
             state.lives = 3;
             state.time = 60;
             state.collectedGood = 0;
@@ -419,9 +443,9 @@
                 if(state.time <= 0) gameOver("time");
             }, 1000);
 
-            if(musicOn) sounds.bgm.play().catch(()=>{});
+            if(musicOn && audioContextUnlocked) sounds.bgm.play().catch(()=>{});
 
-            // Teclado PC
+            // Teclado
             window.onkeydown = (e) => {
                 if(e.key === 'ArrowUp') move(0,-1);
                 if(e.key === 'ArrowDown') move(0,1);
@@ -451,7 +475,7 @@
                 }
                 grid.push(row);
             }
-            // Asegurar camino viable (simple walk)
+            // Camino garantizado
             let cx=0, cy=0;
             while(cx < size-1 || cy < size-1) {
                 grid[cy][cx].wall = false;
@@ -467,7 +491,6 @@
             div.innerHTML = '';
             const size = levels[state.lvl].size;
             
-            // CSS Grid dinámico
             div.style.gridTemplateColumns = `repeat(${size}, auto)`;
 
             for(let y=0; y<size; y++) {
@@ -479,12 +502,10 @@
                     if(data.wall) cell.classList.add('wall');
                     else if(data.item) cell.innerText = data.item.i;
 
-                    // Jugador
                     if(x===player.x && y===player.y) {
                         cell.innerHTML = '🤼‍♂️'; 
                         cell.style.zIndex = 10;
                     }
-                    // Meta
                     if(x===size-1 && y===size-1) cell.innerHTML = '🏆';
                     
                     div.appendChild(cell);
@@ -493,11 +514,14 @@
         }
 
         function move(dx, dy, e) {
-            if(e) e.preventDefault(); 
+            if(e && e.cancelable) e.preventDefault();
             if(!state.active || !state.canMove) return;
 
+            // Asegurar audio si estaba en pausa
+            if(musicOn && sounds.bgm.paused && audioContextUnlocked) sounds.bgm.play();
+
             state.canMove = false;
-            setTimeout(() => state.canMove = true, 100); // Freno leve
+            setTimeout(() => state.canMove = true, 120); 
 
             const size = levels[state.lvl].size;
             let nx = player.x + dx;
@@ -535,15 +559,10 @@
 
         function updateUI() {
             document.getElementById('ui-timer').innerHTML = `<i class="fas fa-clock"></i> ${state.time}`;
-            document.getElementById('ui-timer').className = state.time < 10 ? "h4 m-0 text-danger fw-bold" : "h4 m-0 text-white";
+            document.getElementById('ui-timer').className = state.time < 10 ? "h5 m-0 text-danger fw-bold" : "h5 m-0 text-white";
             
             let h = ""; for(let i=0;i<state.lives;i++) h+="❤️";
             document.getElementById('ui-lives').innerText = h;
-        }
-
-        function updateSummaryUI(prefix) {
-            document.getElementById(prefix + '-good').innerText = state.collectedGood;
-            document.getElementById(prefix + '-bad').innerText = state.collectedBad;
         }
 
         function gameOver(reason) {
@@ -551,7 +570,8 @@
             playSfx('lose');
             const msg = reason === 'time' ? "¡SE ACABÓ EL TIEMPO!" : "¡TE QUEDASTE SIN VIDA!";
             document.getElementById('lose-msg').innerText = msg;
-            updateSummaryUI('lose');
+            document.getElementById('lose-good').innerText = state.collectedGood;
+            document.getElementById('lose-bad').innerText = state.collectedBad;
             showModal('modal-lose');
         }
 
@@ -559,7 +579,8 @@
             state.active = false;
             playSfx('win');
             document.getElementById('win-msg').innerText = "¡CONQUISTASTE LA " + levels[state.lvl].name + "!";
-            updateSummaryUI('win');
+            document.getElementById('win-good').innerText = state.collectedGood;
+            document.getElementById('win-bad').innerText = state.collectedBad;
             showModal('modal-win');
         }
 
