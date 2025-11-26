@@ -3,51 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Lucha Financiera Kids</title>
+    <title>Lucha Financiera</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- ESTILOS TEMÁTICOS --- */
+        /* --- ESTILOS GENERALES --- */
         :root {
             --primary-lucha: #ff4757; 
             --secondary-lucha: #ffa502; 
-            --accent-lucha: #3742fa;
             --dark-lucha: #2f3542;
         }
 
         body {
             font-family: 'Roboto Condensed', sans-serif;
-            background: #2c3e50;
-            background-image: radial-gradient(#ffffff 1px, transparent 1px), radial-gradient(#ffffff 1px, transparent 1px);
+            background: #1e272e;
+            background-image: radial-gradient(#ffffff 1px, transparent 1px);
             background-size: 20px 20px;
-            background-position: 0 0, 10px 10px;
-            background-color: #1e272e;
             color: #333;
-            min-height: 100vh;
-            overflow-x: hidden;
+            height: 100vh;
+            overflow: hidden; 
             user-select: none;
-            padding-bottom: 50px;
-            touch-action: manipulation; /* Mejora respuesta táctil */
+            touch-action: none;
         }
 
-        h1, h2, h3, .lucha-font {
+        h1, h2, .lucha-font {
             font-family: 'Bangers', cursive;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             text-shadow: 2px 2px 0px #000;
         }
 
-        /* Navbar */
-        .navbar-custom {
-            background: linear-gradient(90deg, #000 0%, #2f3542 100%);
-            border-bottom: 5px solid var(--secondary-lucha);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            z-index: 1000;
+        /* --- PANTALLA DE MENÚ --- */
+        #screen-menu {
+            height: 100vh;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(30, 39, 46, 0.9);
         }
 
-        /* Botones Generales */
+        .card-lucha {
+            background: #fff;
+            border: 4px solid #000;
+            border-radius: 15px;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.5);
+            max-width: 500px;
+            width: 100%;
+        }
+
         .btn-lucha {
             font-family: 'Bangers', cursive;
             font-size: 1.2rem;
@@ -55,323 +62,246 @@
             border: 3px solid #000;
             border-radius: 10px;
             box-shadow: 4px 4px 0px #000;
-            transition: all 0.1s;
-            margin-bottom: 5px;
+            transition: transform 0.1s;
         }
-        .btn-lucha:active {
-            transform: translate(2px, 2px);
-            box-shadow: 1px 1px 0px #000;
-        }
+        .btn-lucha:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px #000; }
 
-        /* Botón Académico */
         .btn-mega-academic {
-            background: linear-gradient(45deg, #ffa502, #ffda79, #ffa502);
-            background-size: 200% 200%;
+            background: linear-gradient(45deg, #ffa502, #ffda79);
             color: #000 !important;
             border: 3px solid #fff;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             padding: 12px;
             white-space: normal;
             box-shadow: 0 0 15px var(--secondary-lucha), 4px 4px 0 #000;
-            animation: glowing 2s ease-in-out infinite, gradientMove 3s ease infinite;
-            text-shadow: none;
+            animation: glowing 2s infinite;
         }
-        @keyframes glowing {
-            0% { box-shadow: 0 0 5px #ffa502, 4px 4px 0 #000; }
-            50% { box-shadow: 0 0 20px #ff6b81, 4px 4px 0 #000; }
-            100% { box-shadow: 0 0 5px #ffa502, 4px 4px 0 #000; }
+        @keyframes glowing { 50% { box-shadow: 0 0 25px #ff6b81, 4px 4px 0 #000; } }
+
+        /* --- PANTALLA DE JUEGO --- */
+        #screen-game {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #2f3542;
+            display: none; 
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            gap: 10px;
         }
-        @keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-        /* Botón EconMaster */
-        .btn-econmaster { background-color: #7bed9f; color: #000; }
-        .btn-econmaster:hover { background-color: #2ed573; }
-
-        /* --- LAYOUT DEL JUEGO OPTIMIZADO --- */
-        
-        /* Contenedor Flex para manejar posición Pantalla vs Controles */
-        .game-layout {
+        .game-header {
+            width: 100%;
+            max-width: 600px;
             display: flex;
-            flex-direction: column; /* Móvil por defecto */
+            justify-content: space-between;
+            align-items: center;
+            background: #000;
+            color: #f1c40f;
+            padding: 5px 15px;
+            border-radius: 20px;
+            border: 2px solid #fff;
+            height: 40px;
+            flex-shrink: 0;
+        }
+
+        .game-body {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 15px;
             width: 100%;
-            max-width: 1000px;
-            margin: 0 auto;
+            overflow: hidden;
+            gap: 10px;
         }
 
-        /* EL RING */
         #maze-wrapper {
             background: #dfe6e9;
             padding: 5px;
             border: 4px solid #ff4757;
             border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.6);
-            position: relative;
-            /* Importante para que no se salga */
-            max-width: 95vw; 
-            aspect-ratio: 1 / 1; /* Mantiene cuadrado */
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            aspect-ratio: 1 / 1;
+            height: auto;
+            width: 100%;
+            max-height: 55vh;
+            max-width: 95vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         #maze-grid {
             display: grid;
-            margin: 0 auto;
-            background: #fff;
+            width: 100%;
+            height: 100%;
         }
 
         .cell {
-            /* Tamaño base, se ajusta con JS o CSS */
-            width: 32px; height: 32px; 
             display: flex; align-items: center; justify-content: center;
             background: #fff;
-            font-size: 1.2rem;
-            border: 1px solid #f1f2f6;
+            border: 1px solid #eee;
+            font-size: clamp(10px, 4vw, 30px); 
         }
-        .wall {
-            background-color: #2f3542;
-            background-image: repeating-linear-gradient(45deg, #2f3542 25%, #57606f 25%, #57606f 50%, #2f3542 50%, #2f3542 75%, #57606f 75%, #57606f 100%);
-            background-size: 8px 8px;
-        }
+        .wall { background: #2f3542; background-image: repeating-linear-gradient(45deg, #333 0, #333 1px, #222 1px, #222 4px); }
 
-        /* Panel de Controles (Derecha en PC, Abajo en Móvil) */
-        .game-controls-panel {
+        .controls-area {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            gap: 20px;
             align-items: center;
-            width: 100%;
-            max-width: 300px;
         }
 
-        /* Barra de Estado Compacta */
-        .status-bar {
-            background: #2f3542;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 30px;
-            border: 3px solid #f1c40f;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            margin-bottom: 10px;
-            box-shadow: 0 4px 0 rgba(0,0,0,0.5);
-        }
-
-        /* Pad de Botones Compacto */
         .control-pad {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 5px;
-            margin-bottom: 10px;
         }
+        
         .c-btn {
-            height: 55px; width: 55px; /* Más pequeño para que no estorbe */
-            border-radius: 15px; /* Cuadrado redondeado aprovecha mejor espacio */
-            background: radial-gradient(circle at 30% 30%, #ff6b81, #c0392b);
-            color: white;
+            width: 55px; height: 55px;
+            border-radius: 12px;
+            background: radial-gradient(#e74c3c, #c0392b);
             border: 3px solid #000;
             box-shadow: 0 4px 0 #000;
+            color: white;
             font-size: 1.5rem;
             display: flex; align-items: center; justify-content: center;
             cursor: pointer;
         }
-        .c-btn:active { transform: translateY(4px); box-shadow: 0 0 0 #000; }
+        .c-btn:active { transform: translateY(3px); box-shadow: 0 0 0 #000; }
 
-        /* --- RESPONSIVIDAD (LA MAGIA) --- */
-        
-        /* MÓVIL (Por defecto arriba) */
-        @media (max-width: 767px) {
-            .cell { width: 28px; height: 28px; font-size: 1rem; } /* Celdas más chicas */
-            #maze-wrapper { margin-bottom: 5px; }
-            .game-layout { gap: 5px; } /* Menos espacio entre ring y botones */
-        }
-
-        /* LAPTOP / TABLET (Lado a lado) */
-        @media (min-width: 768px) {
-            .game-layout {
-                flex-direction: row; /* Pone el ring a la izq y controles a la der */
-                align-items: center;
-                gap: 40px;
-                padding-top: 20px;
+        @media (min-width: 768px) and (min-height: 500px) {
+            .game-body {
+                flex-direction: row;
+                gap: 30px;
             }
             #maze-wrapper {
-                /* El ring puede crecer más aquí */
-                transform: scale(1.1); 
+                max-height: 80vh;
+                max-width: 80vh; 
             }
-            .cell { width: 35px; height: 35px; font-size: 1.4rem; }
-            .game-controls-panel {
-                width: 250px; /* Panel fijo a la derecha */
+            .controls-area {
+                flex-direction: column;
             }
-            .c-btn {
-                height: 65px; width: 65px; /* Botones grandes en PC */
-            }
+            .c-btn { width: 65px; height: 65px; }
         }
 
-        /* Marca de Agua */
-        .brand-watermark {
-            position: fixed; bottom: 5px; left: 50%; transform: translateX(-50%); z-index: 3000; 
-            pointer-events: none; width: 100%; text-align: center;
-        }
-        .brand-badge {
-            background-color: #000; color: #f1c40f; font-family: 'Bangers'; padding: 3px 12px;
-            border: 1px solid #fff; border-radius: 15px; font-size: 0.9rem;
-        }
-
-        /* Modales */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); z-index: 2000; display: none;
-            align-items: center; justify-content: center; backdrop-filter: blur(4px);
+            background: rgba(0,0,0,0.95); z-index: 2000; display: none;
+            align-items: center; justify-content: center;
         }
         .modal-box {
-            background: #fff; border: 5px solid #000; border-radius: 15px; padding: 20px;
-            text-align: center; width: 90%; max-width: 350px; animation: bounceIn 0.4s;
+            background: #fff; border: 5px solid #000; padding: 20px;
+            text-align: center; width: 90%; max-width: 350px; border-radius: 15px;
         }
-        @keyframes bounceIn { 0% { transform: scale(0.3); opacity: 0; } 60% { transform: scale(1.05); } 100% { transform: scale(1); opacity: 1; } }
-        
         .float-msg {
-            position: absolute; font-family: 'Bangers'; font-size: 1.8rem; font-weight: bold; pointer-events: none; 
-            animation: floatUp 0.8s forwards; z-index: 100; text-shadow: 2px 2px 0 #000;
+            position: absolute; font-family: 'Bangers'; font-size: 2rem; font-weight: bold; 
+            pointer-events: none; animation: floatUp 0.8s forwards; z-index: 3000; text-shadow: 2px 2px 0 #000;
+            white-space: nowrap; /* Evita que el texto se rompa */
         }
-        @keyframes floatUp { to { transform: translate(-50%, -80px); opacity: 0; } }
+        @keyframes floatUp { to { transform: translate(-50%, -100px); opacity: 0; } }
     </style>
 </head>
 <body>
 
-    <div class="brand-watermark">
-        <span class="brand-badge">DIVULGANDO LAS FINANZAS GAMES</span>
-    </div>
+    <div id="screen-menu">
+        <div class="card-lucha p-4 text-center">
+            
+            <a href="https://www.researchgate.net/profile/A-Ortiz-Ramirez" target="_blank" class="btn btn-lucha btn-mega-academic w-100 mb-4 text-decoration-none">
+                <i class="fas fa-graduation-cap"></i> CONOCE NUESTRO TRABAJO ACADEMICO Y REDES SOCIALES AQUÍ
+            </a>
 
-    <nav class="navbar navbar-expand navbar-dark navbar-custom sticky-top">
-        <div class="container-fluid px-2">
-            <span class="navbar-brand lucha-font text-warning m-0" style="font-size: 1.3rem;">
-                🕹️🪅 LUCHA KIDS
-            </span>
-            <button class="btn btn-sm btn-warning btn-lucha m-0" onclick="toggleMusic()" id="music-btn" style="padding: 2px 8px;">
-                <i class="fas fa-volume-up"></i>
+            <h1 class="text-danger mb-0 display-4 fw-bold" style="-webkit-text-stroke: 1px black;">LUCHA FINANCIERA</h1>
+            <p class="mb-4 text-muted fw-bold">KIDS EDITION</p>
+            
+            <div class="d-grid gap-3">
+                <button class="btn btn-light border-3 border-dark py-2 shadow-sm d-flex justify-content-between px-4 align-items-center" onclick="initLevel(1)">
+                    <span class="h3 m-0">🧸</span> <span class="h5 m-0 lucha-font">Juguete (Fácil)</span>
+                </button>
+                <button class="btn btn-light border-3 border-dark py-2 shadow-sm d-flex justify-content-between px-4 align-items-center" onclick="initLevel(2)">
+                    <span class="h3 m-0">🚲</span> <span class="h5 m-0 lucha-font">Bici (Medio)</span>
+                </button>
+                <button class="btn btn-light border-3 border-dark py-2 shadow-sm d-flex justify-content-between px-4 align-items-center" onclick="initLevel(3)">
+                    <span class="h3 m-0">✈️</span> <span class="h5 m-0 lucha-font">Mundial (Difícil)</span>
+                </button>
+            </div>
+
+            <hr class="border-3 border-dark my-4">
+            
+            <button class="btn btn-lucha w-100 py-3" style="background-color: #7bed9f;" onclick="goToEconMaster()">
+                <i class="fas fa-gamepad"></i> JUGAR ECONMASTER
             </button>
         </div>
-    </nav>
+    </div>
 
-    <div class="container py-3">
+    <div id="screen-game">
         
-        <div id="screen-menu" class="row justify-content-center">
-            <div class="col-12 col-md-8 col-lg-6">
-                <a href="https://www.researchgate.net/profile/A-Ortiz-Ramirez" target="_blank" class="btn btn-lucha btn-mega-academic w-100 mb-3 text-decoration-none">
-                    <i class="fas fa-graduation-cap fa-lg mb-1 d-block"></i>
-                    CONOCE NUESTRO TRABAJO ACADEMICO Y REDES SOCIALES AQUÍ
-                </a>
-
-                <div class="card card-lucha p-3 text-center">
-                    <div class="display-1 mb-0 animate__animated animate__tada">🤼‍♂️</div>
-                    <h1 class="text-danger mb-1 display-5 fw-bold" style="-webkit-text-stroke: 1px black;">LUCHA FINANCIERA</h1>
-                    
-                    <div class="d-grid gap-2 mt-3">
-                        <button class="btn btn-light border-2 border-dark py-2 d-flex align-items-center justify-content-between shadow-sm" onclick="initLevel(1)">
-                            <span class="h2 m-0">🧸</span>
-                            <div class="text-end lh-1">
-                                <div class="h5 m-0 lucha-font text-primary">Juguete</div>
-                                <small class="text-muted" style="font-size: 0.7rem;">Principiante</small>
-                            </div>
-                        </button>
-                        
-                        <button class="btn btn-light border-2 border-dark py-2 d-flex align-items-center justify-content-between shadow-sm" onclick="initLevel(2)">
-                            <span class="h2 m-0">🚲</span>
-                            <div class="text-end lh-1">
-                                <div class="h5 m-0 lucha-font text-warning" style="text-shadow: 1px 1px 0 #000;">Bici</div>
-                                <small class="text-muted" style="font-size: 0.7rem;">Intermedio</small>
-                            </div>
-                        </button>
-
-                        <button class="btn btn-light border-2 border-dark py-2 d-flex align-items-center justify-content-between shadow-sm" onclick="initLevel(3)">
-                            <span class="h2 m-0">✈️</span>
-                            <div class="text-end lh-1">
-                                <div class="h5 m-0 lucha-font text-danger">Mundial</div>
-                                <small class="text-muted" style="font-size: 0.7rem;">Experto</small>
-                            </div>
-                        </button>
-                    </div>
-
-                    <hr class="my-3">
-                    <button class="btn btn-lucha btn-econmaster w-100 py-2" onclick="goToEconMaster()">
-                        <i class="fas fa-gamepad"></i> JUGAR ECONMASTER
-                    </button>
-                </div>
+        <div class="game-header">
+            <div class="d-flex align-items-center gap-2">
+                <span id="ui-lives" class="text-danger">❤️❤️❤️</span>
             </div>
+            <div class="h5 m-0 text-warning lucha-font">VS</div>
+            <div id="ui-timer" class="h5 m-0 fw-bold"><i class="fas fa-clock"></i> 60</div>
         </div>
 
-        <div id="screen-game" class="d-none w-100">
-            <div class="game-layout">
-                
-                <div id="maze-wrapper">
-                    <div id="maze-grid"></div>
+        <div class="game-body">
+            <div id="maze-wrapper">
+                <div id="maze-grid"></div>
+            </div>
+
+            <div class="controls-area">
+                <div class="control-pad">
+                    <div></div> 
+                    <div class="c-btn" onmousedown="move(0,-1)" ontouchstart="move(0,-1, event)"><i class="fas fa-chevron-up"></i></div>
+                    <div></div> 
+                    
+                    <div class="c-btn" onmousedown="move(-1,0)" ontouchstart="move(-1,0, event)"><i class="fas fa-chevron-left"></i></div>
+                    <div class="c-btn" onmousedown="move(0,1)" ontouchstart="move(0,1, event)"><i class="fas fa-chevron-down"></i></div>
+                    <div class="c-btn" onmousedown="move(1,0)" ontouchstart="move(1,0, event)"><i class="fas fa-chevron-right"></i></div>
                 </div>
-
-                <div class="game-controls-panel">
-                    <div class="status-bar">
-                        <div class="d-flex align-items-center gap-1">
-                            <span class="lucha-font text-warning">VS</span>
-                            <span id="ui-lives" class="text-danger small">❤️❤️❤️</span>
-                        </div>
-                        <div id="ui-timer" class="h5 m-0 fw-bold"><i class="fas fa-clock"></i> 60</div>
-                    </div>
-
-                    <div class="control-pad">
-                        <div></div> 
-                        <div class="c-btn" onmousedown="move(0,-1)" ontouchstart="move(0,-1, event)"><i class="fas fa-chevron-up"></i></div>
-                        <div></div> 
-                        
-                        <div class="c-btn" onmousedown="move(-1,0)" ontouchstart="move(-1,0, event)"><i class="fas fa-chevron-left"></i></div>
-                        <div class="c-btn" onmousedown="move(0,1)" ontouchstart="move(0,1, event)"><i class="fas fa-chevron-down"></i></div>
-                        <div class="c-btn" onmousedown="move(1,0)" ontouchstart="move(1,0, event)"><i class="fas fa-chevron-right"></i></div>
-                    </div>
-
-                    <button class="btn btn-outline-light btn-sm w-100 rounded-pill text-uppercase fw-bold" onclick="exitToMenu()" style="border-width: 2px;">
-                        <i class="fas fa-flag"></i> Salir
+                
+                <div class="d-flex flex-column gap-2">
+                     <button class="btn btn-warning border-2 border-dark rounded-circle" style="width:50px; height:50px;" onclick="toggleMusic()" id="music-btn">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    <button class="btn btn-outline-light border-2 rounded-circle" style="width:50px; height:50px;" onclick="exitToMenu()">
+                        <i class="fas fa-times"></i>
                     </button>
                 </div>
-
             </div>
         </div>
     </div>
 
     <div id="modal-inst" class="modal-overlay">
         <div class="modal-box">
-            <h2 class="text-uppercase h2 fw-bold text-danger mb-2" style="text-shadow: 2px 2px 0 #000;">¡El Reto!</h2>
-            <div class="bg-light border border-2 border-dark p-2 text-start mb-3 rounded shadow-sm small">
-                <p class="mb-1">📍 <strong>Arena:</strong> <span id="inst-goal" class="text-primary fw-bold">...</span></p>
-                <hr class="my-1">
-                <p class="mb-1">✅ <strong>Busca:</strong> <span class="text-success fw-bold">Dinero e Inversión</span></p>
-                <p class="mb-0">❌ <strong>Evita:</strong> <span class="text-danger fw-bold">Gastos y Rudos</span></p>
+            <h2 class="lucha-font text-danger">¡EL RETO!</h2>
+            <p class="mb-2">📍 Arena: <strong id="inst-goal"></strong></p>
+            <div class="row text-start small mb-3">
+                <div class="col-6 text-success">✅ DINERO <br>✅ INVERSIÓN</div>
+                <div class="col-6 text-danger">❌ GASTOS <br>❌ RUDOS</div>
             </div>
-            <button class="btn btn-lucha btn-success w-100 py-2" onclick="startGame()">¡A LUCHAR!</button>
+            <button class="btn btn-lucha btn-success w-100" onclick="startGame()">¡A LUCHAR!</button>
         </div>
     </div>
 
     <div id="modal-lose" class="modal-overlay">
         <div class="modal-box bg-danger">
-            <div class="display-3 mb-1">🔔</div>
-            <h2 class="lucha-font text-white display-5">¡TE RINDIERON!</h2>
-            <p id="lose-msg" class="fw-bold text-white mb-2 small">Perdiste la máscara.</p>
-            <div class="row bg-white text-dark mx-0 mb-3 p-1 border-2 border-dark rounded small">
-                <div class="col-6 border-end">Ganado: <br><span id="lose-good" class="h4 text-success fw-bold">0</span></div>
-                <div class="col-6">Perdido: <br><span id="lose-bad" class="h4 text-danger fw-bold">0</span></div>
-            </div>
-            <button class="btn btn-lucha btn-dark text-white w-100" onclick="exitToMenu()">REINTENTAR</button>
+            <h1 class="display-1">🔔</h1>
+            <h2 class="lucha-font text-white">¡RINDIERON!</h2>
+            <p id="lose-msg" class="text-white fw-bold">...</p>
+            <button class="btn btn-lucha btn-dark w-100" onclick="exitToMenu()">SALIR</button>
         </div>
     </div>
 
     <div id="modal-win" class="modal-overlay">
         <div class="modal-box bg-warning">
-            <div class="display-3 mb-1">🏆</div>
-            <h2 class="lucha-font text-danger display-5">¡CAMPEÓN!</h2>
-            <p id="win-msg" class="text-dark fw-bold mb-2 small">¡El público enloquece!</p>
-            <div class="row bg-white text-dark mx-0 mb-3 p-1 border-2 border-dark rounded small">
-                <div class="col-6 border-end">Ganado: <br><span id="win-good" class="h4 text-success fw-bold">0</span></div>
-                <div class="col-6">Perdido: <br><span id="win-bad" class="h4 text-danger fw-bold">0</span></div>
-            </div>
-            <button class="btn btn-lucha btn-primary w-100" onclick="exitToMenu()">¡VAMOS!</button>
+            <h1 class="display-1">🏆</h1>
+            <h2 class="lucha-font text-danger">¡CAMPEÓN!</h2>
+            <p id="win-msg" class="text-dark fw-bold">...</p>
+            <button class="btn btn-lucha btn-primary w-100" onclick="exitToMenu()">GENIAL</button>
         </div>
     </div>
 
@@ -383,16 +313,39 @@
             3: { name: "ARENA MUNDIAL", size: 12, badRate: 0.3 }
         };
         
+        // --- AQUÍ ESTÁN TUS NUEVOS CONCEPTOS FINANCIEROS ---
         const items = {
             good: [
-                {t:"¡DINERO!", i:"💵"}, {t:"¡AHORRO!", i:"🐖"}, {t:"¡LLAVE!", i:"🤼‍♂️"},
-                {t:"¡INVERSIÓN!", i:"📈"}, {t:"¡BONO!", i:"💰"}, {t:"¡CRÉDITO!", i:"🏦"}, 
-                {t:"¡PRESTAMO SIN INTERESES!", i:"🤝"}
+                {t:"¡RECIBIR LA TANDA!", i:"💰🤝"}, 
+                {t:"¡AGUINALDO!", i:"🎄🎁"},
+                {t:"¡MESES SIN INTERESES!", i:"🗓️✨"}, 
+                {t:"¡SIN PAGO COMISIONES!", i:"🚫💸"},
+                {t:"¡NO ANUALIDAD TDC!", i:"💳🆓"}, 
+                {t:"¡DEDUCCIÓN IMPUESTOS!", i:"📝✅"},
+                {t:"¡PAGO ANTICIPADO!", i:"⏱️👍"}, 
+                {t:"¡CARGO AUTOMÁTICO!", i:"🔄"},
+                {t:"¡PAGO CON PUNTOS!", i:"🌟"}, 
+                {t:"¡CUPONES!", i:"🎟️"},
+                {t:"¡PENSIÓN DE VEJEZ!", i:"👴👵"}, 
+                {t:"¡PAGO DE CONTADO!", i:"💵💨"},
+                {t:"¡COMPRA CON DESCUENTO!", i:"🏷️%"}, 
+                {t:"¡VENTAS JUSTAS!", i:"⚖️"},
+                {t:"¡UTILIDADES!", i:"💰🚀"}, 
+                {t:"¡SUPERÁVIT!", i:"➕💵"},
+                {t:"¡FONDO DE EMERGENCIA!", i:"🚨💰"}
             ],
             bad: [
-                {t:"¡SILLAZO!", i:"🪑"}, {t:"¡RUDO!", i:"👹"}, {t:"¡GASTO HORMIGA!", i:"💸🐜"}, 
-                {t:"¡INTERESES MORATORIOS!", i:"💸💸"}, {t:"¡PAGO MINIMO!", i:"⚠️"},
-                {t:"¡FONDOS INSUFICIENTES!", i:"💔"}
+                {t:"¡MULTAS!", i:"👮‍♂️"}, 
+                {t:"¡RECARGOS!", i:"📈😡"},
+                {t:"¡FRAUDE!", i:"👺"}, 
+                {t:"¡BANCARROTA!", i:"🏳️"},
+                {t:"¡DÉFICIT!", i:"📉😫"}, 
+                {t:"¡PAGO DE COMISIONES!", i:"💸🤏"},
+                {t:"¡PAGOS SIN REGISTRO!", i:"❓📝"}, 
+                {t:"¡NO SEGUIR PRESUPUESTO!", i:"🙈"},
+                {t:"¡LESIONES!", i:"🤕"}, 
+                {t:"¡ENFERMEDAD!", i:"🤒"},
+                {t:"¡SOBREENDEUDAMIENTO!", i:"💣💳"}
             ]
         };
 
@@ -419,9 +372,7 @@
             });
             audioContextUnlocked = true;
             if(musicOn && state.active) sounds.bgm.play();
-            document.removeEventListener('click', unlockAudio);
-            document.removeEventListener('touchstart', unlockAudio);
-            document.removeEventListener('keydown', unlockAudio);
+            document.removeEventListener('click', unlockAudio); document.removeEventListener('touchstart', unlockAudio); document.removeEventListener('keydown', unlockAudio);
         }
         document.addEventListener('click', unlockAudio); document.addEventListener('touchstart', unlockAudio); document.addEventListener('keydown', unlockAudio);
 
@@ -437,17 +388,14 @@
             }
         }
 
-        function playSfx(key) {
-            if(musicOn && audioContextUnlocked) { try { const s = sounds[key].cloneNode(); s.volume = 0.6; s.play().catch(()=>{}); } catch(e) {} }
-        }
-
-        function goToEconMaster() { if(confirm("¿Quieres ir a EconMaster?")) window.location.href = "https://econ-master-8w1z.vercel.app/"; }
+        function playSfx(key) { if(musicOn && audioContextUnlocked) { try { const s = sounds[key].cloneNode(); s.volume = 0.6; s.play().catch(()=>{}); } catch(e) {} } }
+        function goToEconMaster() { if(confirm("¿Ir a EconMaster?")) window.location.href = "https://econ-master-8w1z.vercel.app/"; }
 
         function showScreen(id) {
-            document.getElementById('screen-menu').classList.add('d-none');
-            document.getElementById('screen-game').classList.add('d-none');
-            const el = document.getElementById(id);
-            el.classList.remove('d-none');
+            document.getElementById('screen-menu').style.display = 'none';
+            document.getElementById('screen-game').style.display = 'none';
+            if(id === 'screen-menu') document.getElementById('screen-menu').style.display = 'flex';
+            if(id === 'screen-game') document.getElementById('screen-game').style.display = 'flex';
         }
         
         function showModal(id) {
@@ -463,11 +411,9 @@
         }
 
         function exitToMenu() {
-            state.active = false;
-            clearInterval(timerInt);
+            state.active = false; clearInterval(timerInt);
             sounds.bgm.pause(); sounds.bgm.currentTime = 0;
-            showModal(null);
-            showScreen('screen-menu');
+            showModal(null); showScreen('screen-menu');
         }
 
         function startGame() {
@@ -496,8 +442,7 @@
                     let item = null;
                     if(!isWall && Math.random() < 0.3 && !(x===0 && y===0)) {
                         const list = Math.random() < badRate ? items.bad : items.good;
-                        const type = list === items.bad ? 'bad' : 'good';
-                        item = { ...list[Math.floor(Math.random()*list.length)], type };
+                        item = { ...list[Math.floor(Math.random()*list.length)], type: list === items.bad ? 'bad' : 'good' };
                     }
                     row.push({ wall: isWall, item: item });
                 }
@@ -505,18 +450,17 @@
             }
             let cx=0, cy=0;
             while(cx < size-1 || cy < size-1) {
-                grid[cy][cx].wall = false;
-                if(grid[cy][cx].item?.type === 'bad') grid[cy][cx].item = null;
+                grid[cy][cx].wall = false; if(grid[cy][cx].item?.type === 'bad') grid[cy][cx].item = null;
                 if(cx < size-1 && (Math.random()>0.5 || cy === size-1)) cx++; else cy++;
             }
-            grid[size-1][size-1].wall = false; 
-            player = {x:0, y:0};
+            grid[size-1][size-1].wall = false; player = {x:0, y:0};
         }
 
         function renderGrid() {
             const div = document.getElementById('maze-grid');
             div.innerHTML = ''; const size = levels[state.lvl].size;
-            div.style.gridTemplateColumns = `repeat(${size}, auto)`;
+            div.style.gridTemplateColumns = `repeat(${size}, 1fr)`; 
+            div.style.gridTemplateRows = `repeat(${size}, 1fr)`; 
             for(let y=0; y<size; y++) {
                 for(let x=0; x<size; x++) {
                     const cell = document.createElement('div'); cell.className = 'cell';
@@ -562,18 +506,13 @@
 
         function gameOver(reason) {
             state.active = false; playSfx('lose');
-            const msg = reason === 'time' ? "¡TIEMPO AGOTADO!" : "¡SIN VIDA!";
-            document.getElementById('lose-msg').innerText = msg;
-            document.getElementById('lose-good').innerText = state.collectedGood;
-            document.getElementById('lose-bad').innerText = state.collectedBad;
+            document.getElementById('lose-msg').innerText = reason === 'time' ? "¡TIEMPO AGOTADO!" : "¡SIN VIDA!";
             showModal('modal-lose');
         }
 
         function gameWin() {
             state.active = false; playSfx('win');
             document.getElementById('win-msg').innerText = "¡GANASTE EN " + levels[state.lvl].name + "!";
-            document.getElementById('win-good').innerText = state.collectedGood;
-            document.getElementById('win-bad').innerText = state.collectedBad;
             showModal('modal-win');
         }
 
