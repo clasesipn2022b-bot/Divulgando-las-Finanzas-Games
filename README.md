@@ -341,8 +341,10 @@
             bad: [
                 {t:"¡SILLAZO!", i:"🪑"}, 
                 {t:"¡RUDO!", i:"👹"}, 
-                {t:"¡GASTO HORMIGA!", i:"🐜"}, 
-                {t:"¡PAGO DE INTERESES!", i:"💸"}
+                {t:"¡GASTO HORMIGA!", i:"💸🐜"}, 
+                {t:"¡INTERESES MORATORIOS!", i:"💸💸"}
+                {t:"¡PAGO MINIMO!", i:"⚠️"}
+                {t:"¡FONDOS INSUFICIENTES!", i:"💔"}
             ]
         };
 
@@ -424,8 +426,8 @@
         }
 
         function goToPinatas() {
-            if(confirm("¿Quieres ir a 'Piñatas de la Economía'?")) {
-                window.location.href = "https://ejemplo.com/pinatas"; 
+            if(confirm("¿Quieres ir a EconMaster?")) {
+                window.location.href = "https://econ-master-8w1z.vercel.app/"; 
             }
         }
 
