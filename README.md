@@ -158,14 +158,14 @@
         }
         @keyframes floatUp { to { transform: translate(-50%, -60px); opacity: 0; } }
 
-        /* NUEVO: Marca de Agua Divulgando las Finanzas */
+        /* Marca de Agua Divulgando las Finanzas */
         .brand-watermark {
             position: fixed;
             bottom: 10px;
             left: 50%;
             transform: translateX(-50%);
-            z-index: 3000; /* Muy alto para estar al frente */
-            pointer-events: none; /* Permite hacer click a través de él si fuera necesario */
+            z-index: 3000; 
+            pointer-events: none;
             width: 100%;
             text-align: center;
         }
@@ -329,7 +329,7 @@
             3: { name: "ARENA MUNDIAL", size: 12, badRate: 0.3 }
         };
         
-        // CORRECCIÓN APLICADA AQUÍ: Se arreglaron las comas faltantes en el array bad
+        // CORRECCIÓN CRÍTICA: Se han añadido las comas que faltaban.
         const items = {
             good: [
                 {t:"¡DINERO!", i:"💵"}, 
@@ -344,8 +344,8 @@
                 {t:"¡SILLAZO!", i:"🪑"}, 
                 {t:"¡RUDO!", i:"👹"}, 
                 {t:"¡GASTO HORMIGA!", i:"💸🐜"}, 
-                {t:"¡INTERESES MORATORIOS!", i:"💸💸"},
-                {t:"¡PAGO MINIMO!", i:"⚠️"},
+                {t:"¡INTERESES MORATORIOS!", i:"💸💸"}, // COMA AÑADIDA
+                {t:"¡PAGO MINIMO!", i:"⚠️"},           // COMA AÑADIDA
                 {t:"¡FONDOS INSUFICIENTES!", i:"💔"}
             ]
         };
@@ -427,15 +427,11 @@
             }
         }
 
+        // Función actualizada para redirigir a EconMaster
         function goToEconMaster() {
             if(confirm("¿Quieres ir a EconMaster?")) {
                 window.location.href = "https://econ-master-8w1z.vercel.app/"; 
             }
-        }
-        
-        // Agregado para que el botón de la estrella funcione
-        function goToPinatas() {
-             goToEconMaster();
         }
 
         function showScreen(id) {
