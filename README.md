@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Luchas Financieras </title>
+    <title>Lucha Financiera Kids</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
@@ -35,48 +35,58 @@
             text-shadow: 2px 2px 0px #000;
         }
 
-        /* --- PANTALLA DE MENÚ --- */
+        /* --- PANTALLA DE MENÚ (REDIMENSIONADA) --- */
         #screen-menu {
             height: 100vh;
-            overflow-y: auto;
-            padding: 20px;
+            overflow-y: auto; /* Permite scroll si la pantalla es muy bajita */
+            padding: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(30, 39, 46, 0.9);
+            background: rgba(30, 39, 46, 0.95);
         }
 
         .card-lucha {
             background: #fff;
-            border: 4px solid #000;
-            border-radius: 15px;
-            box-shadow: 8px 8px 0px rgba(0,0,0,0.5);
-            max-width: 500px;
+            border: 5px solid #000;
+            border-radius: 20px;
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.5);
+            /* CAMBIO: AHORA ES MÁS ANCHA */
+            max-width: 800px; 
             width: 100%;
+            position: relative;
         }
 
+        /* Botones del Menú - MÁS GRANDES */
         .btn-lucha {
             font-family: 'Bangers', cursive;
-            font-size: 1.2rem;
+            font-size: 1.5rem; /* Texto más grande */
             text-transform: uppercase;
-            border: 3px solid #000;
-            border-radius: 10px;
-            box-shadow: 4px 4px 0px #000;
+            border: 4px solid #000;
+            border-radius: 12px;
+            box-shadow: 5px 5px 0px #000;
             transition: transform 0.1s;
         }
-        .btn-lucha:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px #000; }
+        .btn-lucha:active { transform: translate(3px, 3px); box-shadow: 2px 2px 0px #000; }
 
         .btn-mega-academic {
             background: linear-gradient(45deg, #ffa502, #ffda79);
             color: #000 !important;
-            border: 3px solid #fff;
-            font-size: 1.1rem;
-            padding: 12px;
+            border: 4px solid #fff;
+            font-size: 1.3rem; /* Más grande */
+            padding: 15px;
             white-space: normal;
-            box-shadow: 0 0 15px var(--secondary-lucha), 4px 4px 0 #000;
+            box-shadow: 0 0 20px var(--secondary-lucha), 5px 5px 0 #000;
             animation: glowing 2s infinite;
         }
-        @keyframes glowing { 50% { box-shadow: 0 0 25px #ff6b81, 4px 4px 0 #000; } }
+        @keyframes glowing { 50% { box-shadow: 0 0 30px #ff6b81, 5px 5px 0 #000; } }
+
+        /* Estilo para los botones de nivel */
+        .level-btn {
+            font-size: 1.2rem;
+            padding: 15px 20px; /* Más gorditos */
+        }
+        .level-icon { font-size: 2.5rem; } /* Iconos gigantes */
 
         /* --- PANTALLA DE JUEGO --- */
         #screen-game {
@@ -93,17 +103,18 @@
 
         .game-header {
             width: 100%;
-            max-width: 600px;
+            max-width: 700px; /* Cabecera un poco más ancha */
             display: flex;
             justify-content: space-between;
             align-items: center;
             background: #000;
             color: #f1c40f;
-            padding: 5px 15px;
+            padding: 5px 20px;
             border-radius: 20px;
             border: 2px solid #fff;
-            height: 40px;
+            height: 50px;
             flex-shrink: 0;
+            font-size: 1.2rem;
         }
 
         .game-body {
@@ -114,19 +125,19 @@
             justify-content: center;
             width: 100%;
             overflow: hidden;
-            gap: 10px;
+            gap: 15px;
         }
 
         #maze-wrapper {
             background: #dfe6e9;
-            padding: 5px;
-            border: 4px solid #ff4757;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            padding: 8px;
+            border: 5px solid #ff4757;
+            border-radius: 10px;
+            box-shadow: 0 0 25px rgba(0,0,0,0.6);
             aspect-ratio: 1 / 1;
             height: auto;
             width: 100%;
-            max-height: 55vh;
+            max-height: 60vh; /* Un poco más alto */
             max-width: 95vw;
             display: flex;
             justify-content: center;
@@ -143,7 +154,7 @@
             display: flex; align-items: center; justify-content: center;
             background: #fff;
             border: 1px solid #eee;
-            font-size: clamp(10px, 4vw, 30px); 
+            font-size: clamp(12px, 5vw, 35px); /* Fuente adaptable */
         }
         .wall { background: #2f3542; background-image: repeating-linear-gradient(45deg, #333 0, #333 1px, #222 1px, #222 4px); }
 
@@ -157,35 +168,31 @@
         .control-pad {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 5px;
+            gap: 8px; /* Botones más separados */
         }
         
         .c-btn {
-            width: 55px; height: 55px;
-            border-radius: 12px;
+            width: 65px; height: 65px; /* Botones táctiles más grandes */
+            border-radius: 15px;
             background: radial-gradient(#e74c3c, #c0392b);
             border: 3px solid #000;
             box-shadow: 0 4px 0 #000;
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             display: flex; align-items: center; justify-content: center;
             cursor: pointer;
         }
         .c-btn:active { transform: translateY(3px); box-shadow: 0 0 0 #000; }
 
-        @media (min-width: 768px) and (min-height: 500px) {
-            .game-body {
-                flex-direction: row;
-                gap: 30px;
-            }
-            #maze-wrapper {
-                max-height: 80vh;
-                max-width: 80vh; 
-            }
-            .controls-area {
-                flex-direction: column;
-            }
-            .c-btn { width: 65px; height: 65px; }
+        /* Media Query para Pantallas Grandes (Laptop) */
+        @media (min-width: 992px) {
+            .card-lucha { padding: 40px; } /* Más aire en el menú */
+            .btn-lucha { font-size: 1.8rem; } /* Botones enormes en PC */
+            
+            .game-body { flex-direction: row; gap: 50px; }
+            #maze-wrapper { max-height: 85vh; max-width: 85vh; }
+            .controls-area { flex-direction: column; }
+            .c-btn { width: 80px; height: 80px; font-size: 2rem; } /* Controles gigantes en PC */
         }
 
         .modal-overlay {
@@ -194,45 +201,60 @@
             align-items: center; justify-content: center;
         }
         .modal-box {
-            background: #fff; border: 5px solid #000; padding: 20px;
-            text-align: center; width: 90%; max-width: 350px; border-radius: 15px;
+            background: #fff; border: 5px solid #000; padding: 30px;
+            text-align: center; width: 90%; max-width: 450px; border-radius: 20px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.5);
         }
         .float-msg {
-            position: absolute; font-family: 'Bangers'; font-size: 2rem; font-weight: bold; 
-            pointer-events: none; animation: floatUp 0.8s forwards; z-index: 3000; text-shadow: 2px 2px 0 #000;
+            position: absolute; font-family: 'Bangers'; font-size: 2.5rem; font-weight: bold; 
+            pointer-events: none; animation: floatUp 0.8s forwards; z-index: 3000; text-shadow: 3px 3px 0 #000;
             white-space: nowrap; 
         }
-        @keyframes floatUp { to { transform: translate(-50%, -100px); opacity: 0; } }
+        @keyframes floatUp { to { transform: translate(-50%, -150px); opacity: 0; } }
     </style>
 </head>
 <body>
 
     <div id="screen-menu">
-        <div class="card-lucha p-4 text-center">
+        <div class="card-lucha p-3 p-md-5 text-center">
             
             <a href="https://www.researchgate.net/profile/A-Ortiz-Ramirez" target="_blank" class="btn btn-lucha btn-mega-academic w-100 mb-4 text-decoration-none">
                 <i class="fas fa-graduation-cap"></i> CONOCE NUESTRO TRABAJO ACADEMICO Y REDES SOCIALES AQUÍ
             </a>
 
-            <h1 class="text-danger mb-0 display-4 fw-bold" style="-webkit-text-stroke: 1px black;">LUCHA FINANCIERA</h1>
-            <p class="mb-4 text-muted fw-bold">KIDS EDITION</p>
+            <h1 class="text-danger mb-0 display-3 display-md-1 fw-bold" style="-webkit-text-stroke: 2px black;">LUCHA FINANCIERA</h1>
+            <p class="mb-4 text-muted fw-bold h4">KIDS EDITION</p>
             
             <div class="d-grid gap-3">
-                <button class="btn btn-light border-3 border-dark py-2 shadow-sm d-flex justify-content-between px-4 align-items-center" onclick="initLevel(1)">
-                    <span class="h3 m-0">🧸</span> <span class="h5 m-0 lucha-font">Juguete (Fácil)</span>
+                <button class="btn btn-light border-3 border-dark level-btn shadow-sm d-flex justify-content-between px-4 align-items-center" onclick="initLevel(1)">
+                    <span class="level-icon m-0">🧸</span> 
+                    <div class="text-end">
+                        <span class="h3 m-0 lucha-font d-block text-primary">Juguete</span>
+                        <small class="text-muted fw-bold">FÁCIL</small>
+                    </div>
                 </button>
-                <button class="btn btn-light border-3 border-dark py-2 shadow-sm d-flex justify-content-between px-4 align-items-center" onclick="initLevel(2)">
-                    <span class="h3 m-0">🚲</span> <span class="h5 m-0 lucha-font">Bici (Medio)</span>
+                
+                <button class="btn btn-light border-3 border-dark level-btn shadow-sm d-flex justify-content-between px-4 align-items-center" onclick="initLevel(2)">
+                    <span class="level-icon m-0">🚲</span> 
+                    <div class="text-end">
+                        <span class="h3 m-0 lucha-font d-block text-warning" style="text-shadow: 1px 1px 0 #000;">Bici</span>
+                        <small class="text-muted fw-bold">MEDIO</small>
+                    </div>
                 </button>
-                <button class="btn btn-light border-3 border-dark py-2 shadow-sm d-flex justify-content-between px-4 align-items-center" onclick="initLevel(3)">
-                    <span class="h3 m-0">✈️</span> <span class="h5 m-0 lucha-font">Mundial (Difícil)</span>
+
+                <button class="btn btn-light border-3 border-dark level-btn shadow-sm d-flex justify-content-between px-4 align-items-center" onclick="initLevel(3)">
+                    <span class="level-icon m-0">✈️</span> 
+                    <div class="text-end">
+                        <span class="h3 m-0 lucha-font d-block text-danger">Mundial</span>
+                        <small class="text-muted fw-bold">DIFÍCIL</small>
+                    </div>
                 </button>
             </div>
 
             <hr class="border-3 border-dark my-4">
             
             <button class="btn btn-lucha w-100 py-3" style="background-color: #7bed9f;" onclick="goToEconMaster()">
-                <i class="fas fa-gamepad"></i> JUGAR ECONMASTER
+                <i class="fas fa-gamepad fa-lg"></i> JUGAR ECONMASTER
             </button>
         </div>
     </div>
@@ -243,8 +265,8 @@
             <div class="d-flex align-items-center gap-2">
                 <span id="ui-lives" class="text-danger">❤️❤️❤️</span>
             </div>
-            <div class="h5 m-0 text-warning lucha-font">VS</div>
-            <div id="ui-timer" class="h5 m-0 fw-bold"><i class="fas fa-clock"></i> 60</div>
+            <div class="h3 m-0 text-warning lucha-font">VS</div>
+            <div id="ui-timer" class="h3 m-0 fw-bold"><i class="fas fa-clock"></i> 60</div>
         </div>
 
         <div class="game-body">
@@ -263,11 +285,11 @@
                     <div class="c-btn" onmousedown="move(1,0)" ontouchstart="move(1,0, event)"><i class="fas fa-chevron-right"></i></div>
                 </div>
                 
-                <div class="d-flex flex-column gap-2">
-                     <button class="btn btn-warning border-2 border-dark rounded-circle" style="width:50px; height:50px;" onclick="toggleMusic()" id="music-btn">
+                <div class="d-flex flex-column gap-3">
+                     <button class="btn btn-warning border-2 border-dark rounded-circle shadow" style="width:60px; height:60px; font-size: 1.5rem;" onclick="toggleMusic()" id="music-btn">
                         <i class="fas fa-volume-up"></i>
                     </button>
-                    <button class="btn btn-outline-light border-2 rounded-circle" style="width:50px; height:50px;" onclick="exitToMenu()">
+                    <button class="btn btn-outline-light border-2 rounded-circle shadow" style="width:60px; height:60px; font-size: 1.5rem;" onclick="exitToMenu()">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
@@ -277,37 +299,36 @@
 
     <div id="modal-inst" class="modal-overlay">
         <div class="modal-box">
-            <h2 class="lucha-font text-danger">¡EL RETO!</h2>
-            <p class="mb-2">📍 Arena: <strong id="inst-goal"></strong></p>
-            <div class="row text-start small mb-3">
-                <div class="col-6 text-success">✅ DINERO <br>✅ INVERSIÓN</div>
-                <div class="col-6 text-danger">❌ GASTOS <br>❌ RUDOS</div>
+            <h1 class="lucha-font text-danger display-4">¡EL RETO!</h1>
+            <p class="mb-2 h4">📍 Arena: <strong id="inst-goal"></strong></p>
+            <div class="row text-start mb-4 mt-3">
+                <div class="col-6 text-success h5">✅ DINERO <br>✅ INVERSIÓN</div>
+                <div class="col-6 text-danger h5">❌ GASTOS <br>❌ RUDOS</div>
             </div>
-            <button class="btn btn-lucha btn-success w-100" onclick="startGame()">¡A LUCHAR!</button>
+            <button class="btn btn-lucha btn-success w-100 py-3" onclick="startGame()">¡A LUCHAR!</button>
         </div>
     </div>
 
     <div id="modal-lose" class="modal-overlay">
         <div class="modal-box bg-danger">
             <h1 class="display-1">🔔</h1>
-            <h2 class="lucha-font text-white">¡RINDIERON!</h2>
-            <p id="lose-msg" class="text-white fw-bold">...</p>
-            <button class="btn btn-lucha btn-dark w-100" onclick="exitToMenu()">SALIR</button>
+            <h2 class="lucha-font text-white display-3">¡RINDIERON!</h2>
+            <p id="lose-msg" class="text-white fw-bold h4">...</p>
+            <button class="btn btn-lucha btn-dark w-100 mt-3" onclick="exitToMenu()">SALIR</button>
         </div>
     </div>
 
     <div id="modal-win" class="modal-overlay">
         <div class="modal-box bg-warning">
             <h1 class="display-1">🏆</h1>
-            <h2 class="lucha-font text-danger">¡CAMPEÓN!</h2>
-            <p id="win-msg" class="text-dark fw-bold">...</p>
-            <button class="btn btn-lucha btn-primary w-100" onclick="exitToMenu()">GENIAL</button>
+            <h2 class="lucha-font text-danger display-3">¡CAMPEÓN!</h2>
+            <p id="win-msg" class="text-dark fw-bold h4">...</p>
+            <button class="btn btn-lucha btn-primary w-100 mt-3" onclick="exitToMenu()">GENIAL</button>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Niveles con tasa de aparición de "malos" ligeramente ajustada para el balance
         const levels = {
             1: { name: "ARENA JUGUETE", size: 8, badRate: 0.25 },
             2: { name: "COLISEO BICI", size: 10, badRate: 0.30 },
@@ -316,35 +337,22 @@
         
         const items = {
             good: [
-                {t:"¡RECIBIR LA TANDA!", i:"💰🤝"}, 
-                {t:"¡AGUINALDO!", i:"🎄🎁"},
-                {t:"¡MESES SIN INTERESES!", i:"🗓️✨"}, 
-                {t:"¡SIN PAGO COMISIONES!", i:"🚫💸"},
-                {t:"¡NO ANUALIDAD TDC!", i:"💳🆓"}, 
-                {t:"¡DEDUCCIÓN IMPUESTOS!", i:"📝✅"},
-                {t:"¡PAGO ANTICIPADO!", i:"⏱️👍"}, 
-                {t:"¡CARGO AUTOMÁTICO!", i:"🔄"},
-                {t:"¡PAGO CON PUNTOS!", i:"🌟"}, 
-                {t:"¡CUPONES!", i:"🎟️"},
-                {t:"¡PENSIÓN DE VEJEZ!", i:"👴👵"}, 
-                {t:"¡PAGO DE CONTADO!", i:"💵💨"},
-                {t:"¡COMPRA CON DESCUENTO!", i:"🏷️%"}, 
-                {t:"¡VENTAS JUSTAS!", i:"⚖️"},
-                {t:"¡UTILIDADES!", i:"💰🚀"}, 
-                {t:"¡SUPERÁVIT!", i:"➕💵"},
+                {t:"¡RECIBIR LA TANDA!", i:"💰🤝"}, {t:"¡AGUINALDO!", i:"🎄🎁"},
+                {t:"¡MESES SIN INTERESES!", i:"🗓️✨"}, {t:"¡SIN PAGO COMISIONES!", i:"🚫💸"},
+                {t:"¡NO ANUALIDAD TDC!", i:"💳🆓"}, {t:"¡DEDUCCIÓN IMPUESTOS!", i:"📝✅"},
+                {t:"¡PAGO ANTICIPADO!", i:"⏱️👍"}, {t:"¡CARGO AUTOMÁTICO!", i:"🔄"},
+                {t:"¡PAGO CON PUNTOS!", i:"🌟"}, {t:"¡CUPONES!", i:"🎟️"},
+                {t:"¡PENSIÓN DE VEJEZ!", i:"👴👵"}, {t:"¡PAGO DE CONTADO!", i:"💵💨"},
+                {t:"¡COMPRA CON DESCUENTO!", i:"🏷️%"}, {t:"¡VENTAS JUSTAS!", i:"⚖️"},
+                {t:"¡UTILIDADES!", i:"💰🚀"}, {t:"¡SUPERÁVIT!", i:"➕💵"},
                 {t:"¡FONDO DE EMERGENCIA!", i:"🚨💰"}
             ],
             bad: [
-                {t:"¡MULTAS!", i:"👮‍♂️"}, 
-                {t:"¡RECARGOS!", i:"📈😡"},
-                {t:"¡FRAUDE!", i:"👺"}, 
-                {t:"¡BANCARROTA!", i:"🏳️"},
-                {t:"¡DÉFICIT!", i:"📉😫"}, 
-                {t:"¡PAGO DE COMISIONES!", i:"💸🤏"},
-                {t:"¡PAGOS SIN REGISTRO!", i:"❓📝"}, 
-                {t:"¡NO SEGUIR PRESUPUESTO!", i:"🙈"},
-                {t:"¡LESIONES!", i:"🤕"}, 
-                {t:"¡ENFERMEDAD!", i:"🤒"},
+                {t:"¡MULTAS!", i:"👮‍♂️"}, {t:"¡RECARGOS!", i:"📈😡"},
+                {t:"¡FRAUDE!", i:"👺"}, {t:"¡BANCARROTA!", i:"🏳️"},
+                {t:"¡DÉFICIT!", i:"📉😫"}, {t:"¡PAGO DE COMISIONES!", i:"💸🤏"},
+                {t:"¡PAGOS SIN REGISTRO!", i:"❓📝"}, {t:"¡NO SEGUIR PRESUPUESTO!", i:"🙈"},
+                {t:"¡LESIONES!", i:"🤕"}, {t:"¡ENFERMEDAD!", i:"🤒"},
                 {t:"¡SOBREENDEUDAMIENTO!", i:"💣💳"}
             ]
         };
@@ -365,7 +373,6 @@
         };
         sounds.bgm.loop = true; sounds.bgm.volume = 0.3;
 
-        // Función Helper para mezclar arrays (Fisher-Yates Shuffle)
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -441,12 +448,9 @@
             };
         }
 
-        // --- GENERACIÓN MEJORADA CON BARAJA ---
         function generateGrid(size) {
             grid = []; 
             const badRate = levels[state.lvl].badRate;
-            
-            // 1. Crear copias de los items y barajarlos para garantizar variedad
             let goodPool = shuffleArray([...items.good]);
             let badPool = shuffleArray([...items.bad]);
 
@@ -455,17 +459,14 @@
                 for(let x=0; x<size; x++) {
                     let isWall = Math.random() < 0.3;
                     if((x<2 && y<2) || (x>size-3 && y>size-3)) isWall = false;
-                    
                     let item = null;
                     if(!isWall && Math.random() < 0.3 && !(x===0 && y===0)) {
                         const isBad = Math.random() < badRate;
-                        
-                        // Lógica de "Baraja": Saca items sin repetir hasta que se acaban
                         if(isBad) {
-                            if(badPool.length === 0) badPool = shuffleArray([...items.bad]); // Recargar si se acaban
+                            if(badPool.length === 0) badPool = shuffleArray([...items.bad]);
                             item = { ...badPool.pop(), type: 'bad' };
                         } else {
-                            if(goodPool.length === 0) goodPool = shuffleArray([...items.good]); // Recargar si se acaban
+                            if(goodPool.length === 0) goodPool = shuffleArray([...items.good]);
                             item = { ...goodPool.pop(), type: 'good' };
                         }
                     }
@@ -524,7 +525,7 @@
 
         function updateUI() {
             document.getElementById('ui-timer').innerHTML = `<i class="fas fa-clock"></i> ${state.time}`;
-            document.getElementById('ui-timer').className = state.time < 10 ? "h5 m-0 text-danger fw-bold" : "h5 m-0 text-white";
+            document.getElementById('ui-timer').className = state.time < 10 ? "h3 m-0 text-danger fw-bold" : "h3 m-0 text-white";
             let h = ""; for(let i=0;i<state.lives;i++) h+="❤️";
             document.getElementById('ui-lives').innerText = h;
         }
