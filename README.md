@@ -3,145 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Lucha Financiera Kids</title>
+    <title>Lucha Financiera </title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- ESTILOS GENERALES --- */
+        /* --- ESTILOS TEMÁTICOS --- */
         :root {
             --primary-lucha: #ff4757; 
             --secondary-lucha: #ffa502; 
             --dark-lucha: #2f3542;
+            --bg-color: #1e272e;
         }
 
         body {
             font-family: 'Roboto Condensed', sans-serif;
-            background: #1e272e;
+            background-color: var(--bg-color);
             background-image: radial-gradient(#ffffff 1px, transparent 1px);
             background-size: 20px 20px;
             color: #333;
-            height: 100vh;
+            min-height: 100vh;
             overflow: hidden; 
             user-select: none;
-            touch-action: none;
+            touch-action: manipulation;
         }
 
-        h1, h2, .lucha-font {
+        h1, h2, h3, .lucha-font {
             font-family: 'Bangers', cursive;
             letter-spacing: 1.5px;
             text-shadow: 2px 2px 0px #000;
         }
 
-        /* --- PANTALLA DE MENÚ (REDIMENSIONADA) --- */
-        #screen-menu {
-            height: 100vh;
-            overflow-y: auto; /* Permite scroll si la pantalla es muy bajita */
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(30, 39, 46, 0.95);
-        }
-
-        .card-lucha {
-            background: #fff;
-            border: 5px solid #000;
-            border-radius: 20px;
-            box-shadow: 10px 10px 0px rgba(0,0,0,0.5);
-            /* CAMBIO: AHORA ES MÁS ANCHA */
-            max-width: 800px; 
-            width: 100%;
-            position: relative;
-        }
-
-        /* Botones del Menú - MÁS GRANDES */
+        /* --- BOTONES --- */
         .btn-lucha {
             font-family: 'Bangers', cursive;
-            font-size: 1.5rem; /* Texto más grande */
             text-transform: uppercase;
-            border: 4px solid #000;
-            border-radius: 12px;
-            box-shadow: 5px 5px 0px #000;
-            transition: transform 0.1s;
+            border: 3px solid #000;
+            border-radius: 10px;
+            box-shadow: 4px 4px 0px #000;
+            transition: transform 0.1s, box-shadow 0.1s;
         }
-        .btn-lucha:active { transform: translate(3px, 3px); box-shadow: 2px 2px 0px #000; }
+        .btn-lucha:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px #000; }
 
         .btn-mega-academic {
             background: linear-gradient(45deg, #ffa502, #ffda79);
             color: #000 !important;
-            border: 4px solid #fff;
-            font-size: 1.3rem; /* Más grande */
-            padding: 15px;
+            border: 3px solid #fff;
             white-space: normal;
-            box-shadow: 0 0 20px var(--secondary-lucha), 5px 5px 0 #000;
+            box-shadow: 0 0 15px var(--secondary-lucha), 4px 4px 0 #000;
             animation: glowing 2s infinite;
         }
-        @keyframes glowing { 50% { box-shadow: 0 0 30px #ff6b81, 5px 5px 0 #000; } }
+        @keyframes glowing { 50% { box-shadow: 0 0 25px #ff6b81, 4px 4px 0 #000; } }
 
-        /* Estilo para los botones de nivel */
-        .level-btn {
-            font-size: 1.2rem;
-            padding: 15px 20px; /* Más gorditos */
-        }
-        .level-icon { font-size: 2.5rem; } /* Iconos gigantes */
-
-        /* --- PANTALLA DE JUEGO --- */
-        #screen-game {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #2f3542;
-            display: none; 
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
-            gap: 10px;
-        }
-
-        .game-header {
-            width: 100%;
-            max-width: 700px; /* Cabecera un poco más ancha */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #000;
-            color: #f1c40f;
-            padding: 5px 20px;
-            border-radius: 20px;
-            border: 2px solid #fff;
-            height: 50px;
-            flex-shrink: 0;
-            font-size: 1.2rem;
-        }
-
-        .game-body {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            overflow: hidden;
-            gap: 15px;
-        }
-
+        /* --- EL RING --- */
         #maze-wrapper {
             background: #dfe6e9;
-            padding: 8px;
+            padding: 10px;
             border: 5px solid #ff4757;
-            border-radius: 10px;
-            box-shadow: 0 0 25px rgba(0,0,0,0.6);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             aspect-ratio: 1 / 1;
-            height: auto;
             width: 100%;
-            max-height: 60vh; /* Un poco más alto */
-            max-width: 95vw;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative; /* Referencia para posicionamiento si fuera necesario */
         }
 
         #maze-grid {
@@ -153,129 +80,148 @@
         .cell {
             display: flex; align-items: center; justify-content: center;
             background: #fff;
-            border: 1px solid #eee;
-            font-size: clamp(12px, 5vw, 35px); /* Fuente adaptable */
+            border: 1px solid #ecf0f1;
+            font-size: clamp(1rem, 2.5vw, 2rem); 
         }
-        .wall { background: #2f3542; background-image: repeating-linear-gradient(45deg, #333 0, #333 1px, #222 1px, #222 4px); }
-
-        .controls-area {
-            display: flex;
-            flex-direction: row;
-            gap: 20px;
-            align-items: center;
+        .wall { 
+            background: #2f3542; 
+            background-image: repeating-linear-gradient(45deg, #333 0, #333 2px, #222 2px, #222 5px); 
         }
 
+        /* --- CONTROLES --- */
         .control-pad {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 8px; /* Botones más separados */
+            gap: 10px;
+            width: 180px; 
         }
         
         .c-btn {
-            width: 65px; height: 65px; /* Botones táctiles más grandes */
+            width: 100%; aspect-ratio: 1/1;
             border-radius: 15px;
             background: radial-gradient(#e74c3c, #c0392b);
             border: 3px solid #000;
             box-shadow: 0 4px 0 #000;
             color: white;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             display: flex; align-items: center; justify-content: center;
             cursor: pointer;
+            transition: transform 0.05s;
         }
         .c-btn:active { transform: translateY(3px); box-shadow: 0 0 0 #000; }
 
-        /* Media Query para Pantallas Grandes (Laptop) */
-        @media (min-width: 992px) {
-            .card-lucha { padding: 40px; } /* Más aire en el menú */
-            .btn-lucha { font-size: 1.8rem; } /* Botones enormes en PC */
-            
-            .game-body { flex-direction: row; gap: 50px; }
-            #maze-wrapper { max-height: 85vh; max-width: 85vh; }
-            .controls-area { flex-direction: column; }
-            .c-btn { width: 80px; height: 80px; font-size: 2rem; } /* Controles gigantes en PC */
+        /* --- MENSAJES FLOTANTES MEJORADOS --- */
+        .float-msg {
+            position: absolute; 
+            font-family: 'Bangers'; 
+            font-size: 1.8rem; /* Tamaño base */
+            font-weight: bold; 
+            pointer-events: none; 
+            animation: floatUp 2.5s forwards; /* AUMENTADO A 2.5 SEGUNDOS */
+            z-index: 5000; 
+            text-shadow: 2px 2px 0 #000, -1px -1px 0 #fff; /* Borde doble para lectura */
+            white-space: nowrap;
+            /* El left y top se definen en JS */
         }
 
+        /* Animación más lenta y visible */
+        @keyframes floatUp { 
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+            10% { transform: translate(-50%, -80%) scale(1.2); opacity: 1; } /* Pop in rápido */
+            20% { transform: translate(-50%, -90%) scale(1); opacity: 1; }
+            80% { transform: translate(-50%, -120px) scale(1); opacity: 1; } /* Se queda quieto un rato */
+            100% { transform: translate(-50%, -150px) scale(0.8); opacity: 0; } /* Se va */
+        }
+
+        /* --- MODALES --- */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95); z-index: 2000; display: none;
-            align-items: center; justify-content: center;
+            background: rgba(0,0,0,0.9); z-index: 9999; display: none;
+            align-items: center; justify-content: center; backdrop-filter: blur(5px);
         }
         .modal-box {
-            background: #fff; border: 5px solid #000; padding: 30px;
-            text-align: center; width: 90%; max-width: 450px; border-radius: 20px;
-            box-shadow: 0 0 40px rgba(0,0,0,0.5);
+            background: #fff; border: 5px solid #000; padding: 2rem;
+            text-align: center; max-width: 500px; width: 90%; border-radius: 20px;
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .float-msg {
-            position: absolute; font-family: 'Bangers'; font-size: 2.5rem; font-weight: bold; 
-            pointer-events: none; animation: floatUp 0.8s forwards; z-index: 3000; text-shadow: 3px 3px 0 #000;
-            white-space: nowrap; 
-        }
-        @keyframes floatUp { to { transform: translate(-50%, -150px); opacity: 0; } }
+        @keyframes popIn { from{transform: scale(0.5); opacity:0;} to{transform: scale(1); opacity:1;} }
     </style>
 </head>
 <body>
 
-    <div id="screen-menu">
-        <div class="card-lucha p-3 p-md-5 text-center">
-            
-            <a href="https://www.researchgate.net/profile/A-Ortiz-Ramirez" target="_blank" class="btn btn-lucha btn-mega-academic w-100 mb-4 text-decoration-none">
-                <i class="fas fa-graduation-cap"></i> CONOCE NUESTRO TRABAJO ACADEMICO Y REDES SOCIALES AQUÍ
-            </a>
+    <div id="screen-menu" class="container min-vh-100 d-flex align-items-center justify-content-center">
+        <div class="row w-100 justify-content-center">
+            <div class="col-12 col-md-10 col-lg-6">
+                <div class="card p-4 border-0 shadow-lg rounded-4" style="border: 4px solid black !important;">
+                    
+                    <a href="https://www.researchgate.net/profile/A-Ortiz-Ramirez" target="_blank" class="btn btn-lucha btn-mega-academic w-100 mb-4 text-decoration-none">
+                        <i class="fas fa-graduation-cap fa-lg"></i> CONOCE NUESTRO TRABAJO ACADEMICO Y REDES SOCIALES AQUÍ
+                    </a>
 
-            <h1 class="text-danger mb-0 display-3 display-md-1 fw-bold" style="-webkit-text-stroke: 2px black;">LUCHA FINANCIERA</h1>
-            <p class="mb-4 text-muted fw-bold h4">KIDS EDITION</p>
-            
-            <div class="d-grid gap-3">
-                <button class="btn btn-light border-3 border-dark level-btn shadow-sm d-flex justify-content-between px-4 align-items-center" onclick="initLevel(1)">
-                    <span class="level-icon m-0">🧸</span> 
-                    <div class="text-end">
-                        <span class="h3 m-0 lucha-font d-block text-primary">Juguete</span>
-                        <small class="text-muted fw-bold">FÁCIL</small>
+                    <div class="text-center mb-4">
+                        <h1 class="text-danger display-3 fw-bold lucha-font">LUCHA FINANCIERA</h1>
+                        <span class="badge bg-dark fs-5">KIDS EDITION</span>
                     </div>
-                </button>
-                
-                <button class="btn btn-light border-3 border-dark level-btn shadow-sm d-flex justify-content-between px-4 align-items-center" onclick="initLevel(2)">
-                    <span class="level-icon m-0">🚲</span> 
-                    <div class="text-end">
-                        <span class="h3 m-0 lucha-font d-block text-warning" style="text-shadow: 1px 1px 0 #000;">Bici</span>
-                        <small class="text-muted fw-bold">MEDIO</small>
-                    </div>
-                </button>
 
-                <button class="btn btn-light border-3 border-dark level-btn shadow-sm d-flex justify-content-between px-4 align-items-center" onclick="initLevel(3)">
-                    <span class="level-icon m-0">✈️</span> 
-                    <div class="text-end">
-                        <span class="h3 m-0 lucha-font d-block text-danger">Mundial</span>
-                        <small class="text-muted fw-bold">DIFÍCIL</small>
+                    <div class="d-grid gap-3 mb-4">
+                        <button class="btn btn-light btn-lg border border-3 border-dark d-flex justify-content-between align-items-center p-3 shadow-sm" onclick="initLevel(1)">
+                            <span class="fs-1">🧸</span>
+                            <div class="text-end lh-1">
+                                <span class="h3 d-block lucha-font text-primary m-0">Juguete</span>
+                                <small class="fw-bold text-muted">FÁCIL</small>
+                            </div>
+                        </button>
+                        
+                        <button class="btn btn-light btn-lg border border-3 border-dark d-flex justify-content-between align-items-center p-3 shadow-sm" onclick="initLevel(2)">
+                            <span class="fs-1">🚲</span>
+                            <div class="text-end lh-1">
+                                <span class="h3 d-block lucha-font text-warning m-0" style="text-shadow:1px 1px 0 #000;">Bici</span>
+                                <small class="fw-bold text-muted">MEDIO</small>
+                            </div>
+                        </button>
+
+                        <button class="btn btn-light btn-lg border border-3 border-dark d-flex justify-content-between align-items-center p-3 shadow-sm" onclick="initLevel(3)">
+                            <span class="fs-1">✈️</span>
+                            <div class="text-end lh-1">
+                                <span class="h3 d-block lucha-font text-danger m-0">Mundial</span>
+                                <small class="fw-bold text-muted">DIFÍCIL</small>
+                            </div>
+                        </button>
                     </div>
-                </button>
+
+                    <button class="btn btn-lucha w-100 py-3 btn-success" style="background-color: #7bed9f; color: black; border-color: black;" onclick="goToEconMaster()">
+                        <i class="fas fa-gamepad fa-lg"></i> JUGAR ECONMASTER
+                    </button>
+                </div>
             </div>
-
-            <hr class="border-3 border-dark my-4">
-            
-            <button class="btn btn-lucha w-100 py-3" style="background-color: #7bed9f;" onclick="goToEconMaster()">
-                <i class="fas fa-gamepad fa-lg"></i> JUGAR ECONMASTER
-            </button>
         </div>
     </div>
 
-    <div id="screen-game">
+    <div id="screen-game" class="container-fluid min-vh-100 d-none flex-column p-0">
         
-        <div class="game-header">
-            <div class="d-flex align-items-center gap-2">
-                <span id="ui-lives" class="text-danger">❤️❤️❤️</span>
+        <div class="row bg-dark text-white py-2 px-3 mx-0 border-bottom border-warning border-4 align-items-center shadow">
+            <div class="col-4 d-flex align-items-center">
+                <span id="ui-lives" class="fs-4 text-danger">❤️❤️❤️</span>
             </div>
-            <div class="h3 m-0 text-warning lucha-font">VS</div>
-            <div id="ui-timer" class="h3 m-0 fw-bold"><i class="fas fa-clock"></i> 60</div>
+            <div class="col-4 text-center">
+                <span class="h2 m-0 text-warning lucha-font">VS</span>
+            </div>
+            <div class="col-4 text-end">
+                <span id="ui-timer" class="h3 m-0 fw-bold"><i class="fas fa-clock"></i> 60</span>
+            </div>
         </div>
 
-        <div class="game-body">
-            <div id="maze-wrapper">
-                <div id="maze-grid"></div>
+        <div class="row flex-grow-1 align-items-center justify-content-center m-0 w-100 position-relative">
+            
+            <div class="col-12 col-lg-7 p-3 d-flex justify-content-center">
+                <div id="maze-wrapper">
+                    <div id="maze-grid"></div>
+                </div>
             </div>
 
-            <div class="controls-area">
-                <div class="control-pad">
+            <div class="col-12 col-lg-5 pb-4 pb-lg-0 d-flex flex-column align-items-center justify-content-center">
+                
+                <div class="control-pad mb-4">
                     <div></div> 
                     <div class="c-btn" onmousedown="move(0,-1)" ontouchstart="move(0,-1, event)"><i class="fas fa-chevron-up"></i></div>
                     <div></div> 
@@ -284,13 +230,13 @@
                     <div class="c-btn" onmousedown="move(0,1)" ontouchstart="move(0,1, event)"><i class="fas fa-chevron-down"></i></div>
                     <div class="c-btn" onmousedown="move(1,0)" ontouchstart="move(1,0, event)"><i class="fas fa-chevron-right"></i></div>
                 </div>
-                
-                <div class="d-flex flex-column gap-3">
-                     <button class="btn btn-warning border-2 border-dark rounded-circle shadow" style="width:60px; height:60px; font-size: 1.5rem;" onclick="toggleMusic()" id="music-btn">
-                        <i class="fas fa-volume-up"></i>
+
+                <div class="d-flex gap-3">
+                    <button class="btn btn-warning border-3 border-dark rounded-circle shadow p-3" onclick="toggleMusic()" id="music-btn" style="width: 60px; height: 60px;">
+                        <i class="fas fa-volume-up fa-lg"></i>
                     </button>
-                    <button class="btn btn-outline-light border-2 rounded-circle shadow" style="width:60px; height:60px; font-size: 1.5rem;" onclick="exitToMenu()">
-                        <i class="fas fa-times"></i>
+                    <button class="btn btn-danger border-3 border-dark rounded-pill shadow px-4 fw-bold font-monospace" onclick="exitToMenu()">
+                        SALIR
                     </button>
                 </div>
             </div>
@@ -299,31 +245,38 @@
 
     <div id="modal-inst" class="modal-overlay">
         <div class="modal-box">
-            <h1 class="lucha-font text-danger display-4">¡EL RETO!</h1>
-            <p class="mb-2 h4">📍 Arena: <strong id="inst-goal"></strong></p>
-            <div class="row text-start mb-4 mt-3">
-                <div class="col-6 text-success h5">✅ DINERO <br>✅ INVERSIÓN</div>
-                <div class="col-6 text-danger h5">❌ GASTOS <br>❌ RUDOS</div>
+            <h1 class="lucha-font text-danger display-4 mb-3">¡EL RETO!</h1>
+            <p class="fs-4">Estás en: <strong id="inst-goal" class="text-primary"></strong></p>
+            <hr>
+            <div class="row text-start fs-5 my-3">
+                <div class="col-6 text-success fw-bold">
+                    <i class="fas fa-check-circle"></i> DINERO <br>
+                    <i class="fas fa-check-circle"></i> INVERSIÓN
+                </div>
+                <div class="col-6 text-danger fw-bold">
+                    <i class="fas fa-times-circle"></i> GASTOS <br>
+                    <i class="fas fa-times-circle"></i> RUDOS
+                </div>
             </div>
-            <button class="btn btn-lucha btn-success w-100 py-3" onclick="startGame()">¡A LUCHAR!</button>
+            <button class="btn btn-lucha btn-success w-100 py-3 fs-3" onclick="startGame()">¡A LUCHAR!</button>
         </div>
     </div>
 
     <div id="modal-lose" class="modal-overlay">
-        <div class="modal-box bg-danger">
-            <h1 class="display-1">🔔</h1>
-            <h2 class="lucha-font text-white display-3">¡RINDIERON!</h2>
-            <p id="lose-msg" class="text-white fw-bold h4">...</p>
-            <button class="btn btn-lucha btn-dark w-100 mt-3" onclick="exitToMenu()">SALIR</button>
+        <div class="modal-box bg-danger border-white">
+            <div class="display-1 mb-2">🔔</div>
+            <h2 class="lucha-font text-white display-3">¡TE RINDIERON!</h2>
+            <p id="lose-msg" class="text-white h4 fw-bold mb-4">...</p>
+            <button class="btn btn-lucha btn-dark w-100 fs-4" onclick="exitToMenu()">VOLVER A INTENTAR</button>
         </div>
     </div>
 
     <div id="modal-win" class="modal-overlay">
-        <div class="modal-box bg-warning">
-            <h1 class="display-1">🏆</h1>
+        <div class="modal-box bg-warning border-dark">
+            <div class="display-1 mb-2">🏆</div>
             <h2 class="lucha-font text-danger display-3">¡CAMPEÓN!</h2>
-            <p id="win-msg" class="text-dark fw-bold h4">...</p>
-            <button class="btn btn-lucha btn-primary w-100 mt-3" onclick="exitToMenu()">GENIAL</button>
+            <p id="win-msg" class="text-dark h4 fw-bold mb-4">...</p>
+            <button class="btn btn-lucha btn-primary w-100 fs-4" onclick="exitToMenu()">GENIAL</button>
         </div>
     </div>
 
@@ -396,10 +349,10 @@
             const btn = document.getElementById('music-btn');
             musicOn = !musicOn;
             if(musicOn) {
-                btn.innerHTML = '<i class="fas fa-volume-up"></i>'; btn.classList.remove('btn-danger'); btn.classList.add('btn-warning');
+                btn.innerHTML = '<i class="fas fa-volume-up fa-lg"></i>'; btn.classList.remove('btn-danger'); btn.classList.add('btn-warning');
                 if(state.active && audioContextUnlocked) sounds.bgm.play().catch(()=>{});
             } else {
-                btn.innerHTML = '<i class="fas fa-volume-mute"></i>'; btn.classList.remove('btn-warning'); btn.classList.add('btn-danger');
+                btn.innerHTML = '<i class="fas fa-volume-mute fa-lg"></i>'; btn.classList.remove('btn-warning'); btn.classList.add('btn-danger');
                 sounds.bgm.pause();
             }
         }
@@ -408,10 +361,18 @@
         function goToEconMaster() { if(confirm("¿Ir a EconMaster?")) window.location.href = "https://econ-master-8w1z.vercel.app/"; }
 
         function showScreen(id) {
+            document.getElementById('screen-menu').classList.remove('d-flex');
             document.getElementById('screen-menu').style.display = 'none';
-            document.getElementById('screen-game').style.display = 'none';
-            if(id === 'screen-menu') document.getElementById('screen-menu').style.display = 'flex';
-            if(id === 'screen-game') document.getElementById('screen-game').style.display = 'flex';
+            document.getElementById('screen-game').classList.remove('d-flex');
+            
+            if(id === 'screen-menu') {
+                document.getElementById('screen-menu').style.display = 'flex';
+                document.getElementById('screen-menu').classList.add('d-flex');
+            }
+            if(id === 'screen-game') {
+                document.getElementById('screen-game').classList.remove('d-none');
+                document.getElementById('screen-game').classList.add('d-flex');
+            }
         }
         
         function showModal(id) {
@@ -508,8 +469,13 @@
             if(nx>=0 && nx<size && ny>=0 && ny<size && !grid[ny][nx].wall) {
                 player = {x:nx, y:ny};
                 const cell = grid[ny][nx];
+                
+                // Get the DOM element for the cell to position the float text
+                const cellIndex = ny * size + nx;
+                const targetCell = document.getElementById('maze-grid').children[cellIndex];
+
                 if(cell.item) {
-                    floatText(cell.item.t, cell.item.type==='good'?'#2ed573':'#ff4757');
+                    floatText(cell.item.t, cell.item.type==='good'?'#2ed573':'#ff4757', targetCell);
                     if(cell.item.type === 'good') { playSfx('coin'); state.collectedGood++; } 
                     else { playSfx('hurt'); state.collectedBad++; state.lives--; updateUI(); 
                         const wrap = document.getElementById('maze-wrapper'); wrap.style.borderColor = "white"; 
@@ -542,10 +508,23 @@
             showModal('modal-win');
         }
 
-        function floatText(txt, col) {
-            const el = document.createElement('div'); el.innerText = txt; el.className = 'float-msg'; 
-            el.style.left = '50%'; el.style.top = '50%'; el.style.transform = 'translate(-50%, -50%)'; el.style.color = col;
-            document.body.appendChild(el); setTimeout(() => el.remove(), 1000);
+        function floatText(txt, col, target) {
+            const el = document.createElement('div');
+            el.innerText = txt;
+            el.className = 'float-msg';
+            el.style.color = col;
+
+            // Positioning logic relative to the cell
+            if(target) {
+                const rect = target.getBoundingClientRect();
+                el.style.left = (rect.left + rect.width / 2) + 'px';
+                el.style.top = (rect.top) + 'px';
+            } else {
+                el.style.left = '50%'; el.style.top = '50%';
+            }
+
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 2500); // 2.5 seconds to match animation
         }
     </script>
 </body>
