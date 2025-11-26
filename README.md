@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -9,155 +10,202 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- ESTILOS TEMÁTICOS --- */
+        /* --- ESTILOS TEMÁTICOS MEJORADOS --- */
         :root {
-            --primary-lucha: #e74c3c; /* Rojo */
-            --secondary-lucha: #f1c40f; /* Amarillo */
-            --accent-lucha: #3498db; /* Azul */
-            --dark-lucha: #2c3e50;
+            --primary-lucha: #ff4757; /* Rojo vibrante */
+            --secondary-lucha: #ffa502; /* Dorado intenso */
+            --accent-lucha: #3742fa; /* Azul eléctrico */
+            --dark-lucha: #2f3542;
+            --bg-gradient: radial-gradient(circle at center, #2f3542 0%, #000000 100%);
         }
 
         body {
             font-family: 'Roboto Condensed', sans-serif;
-            background: radial-gradient(circle, #2c3e50 20%, #000000 100%);
+            background: #2c3e50;
+            /* Patrón de puntos estilo cómic sobre el fondo oscuro */
+            background-image: radial-gradient(#ffffff 1px, transparent 1px), radial-gradient(#ffffff 1px, transparent 1px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            background-color: #1e272e;
             color: #333;
             min-height: 100vh;
             overflow-x: hidden;
-            user-select: none; /* Evitar selección de texto al jugar */
-            padding-bottom: 40px; /* Espacio para la marca de agua */
+            user-select: none;
+            padding-bottom: 50px;
             touch-action: manipulation;
         }
 
         h1, h2, h3, .lucha-font {
             font-family: 'Bangers', cursive;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 0px #000; /* Sombra dura al texto */
         }
 
-        /* Navbar */
+        /* Navbar más llamativa */
         .navbar-custom {
-            background-color: var(--dark-lucha);
-            border-bottom: 4px solid var(--secondary-lucha);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            background: linear-gradient(90deg, #000 0%, #2f3542 100%);
+            border-bottom: 5px solid var(--secondary-lucha);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
             z-index: 1000;
         }
 
-        /* Tarjetas */
+        /* Tarjetas con estilo Pop-Art */
         .card-lucha {
+            background: #fff;
             border: 4px solid #000;
-            box-shadow: 8px 8px 0px var(--primary-lucha);
+            border-radius: 15px;
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.5); /* Sombra dura */
             position: relative;
+            overflow: hidden;
         }
         
-        /* Botones */
+        /* Botones Generales Estilo Cómic */
         .btn-lucha {
             font-family: 'Bangers', cursive;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             text-transform: uppercase;
-            border: 2px solid black;
-            box-shadow: 3px 3px 0 black;
-            transition: all 0.1s;
+            border: 3px solid #000;
+            border-radius: 10px;
+            box-shadow: 4px 4px 0px #000; /* Efecto 3D */
+            transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 5px;
         }
         .btn-lucha:active {
-            transform: translate(2px, 2px);
-            box-shadow: 1px 1px 0 black;
+            transform: translate(4px, 4px); /* Efecto de presionar */
+            box-shadow: 0px 0px 0px #000;
         }
-        .btn-pinata {
-            background-color: #9b59b6; 
-            color: white;
+
+        /* Botón Específico EconMaster */
+        .btn-econmaster {
+            background-color: #7bed9f;
+            color: #000;
         }
-        .btn-pinata:hover { background-color: #8e44ad; color: white; }
+        .btn-econmaster:hover {
+            background-color: #2ed573;
+            transform: scale(1.02);
+        }
+
+        /* --- EL BOTÓN MEGA LLAMATIVO (ACADÉMICO) --- */
+        .btn-mega-academic {
+            background: linear-gradient(45deg, #ffa502, #ffda79, #ffa502);
+            background-size: 200% 200%;
+            color: #000 !important;
+            border: 4px solid #fff;
+            font-size: 1.4rem;
+            line-height: 1.2;
+            padding: 15px;
+            white-space: normal; /* Permite varias líneas */
+            box-shadow: 0 0 15px var(--secondary-lucha), 4px 4px 0 #000;
+            animation: glowing 2s ease-in-out infinite, gradientMove 3s ease infinite;
+            text-shadow: none;
+        }
+        
+        @keyframes glowing {
+            0% { box-shadow: 0 0 5px #ffa502, 4px 4px 0 #000; transform: scale(1); }
+            50% { box-shadow: 0 0 25px #ff6b81, 4px 4px 0 #000; transform: scale(1.03); }
+            100% { box-shadow: 0 0 5px #ffa502, 4px 4px 0 #000; transform: scale(1); }
+        }
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
         /* EL RING (Grid) */
         #maze-wrapper {
-            background: #eee;
-            padding: 5px;
-            border: 5px solid #c0392b;
-            border-radius: 5px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            background: #dfe6e9;
+            padding: 8px;
+            border: 6px solid #ff4757;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.6);
             display: inline-block;
             max-width: 100%;
-            overflow: hidden;
             position: relative;
         }
-        /* Esquinas del ring decorativas */
-        #maze-wrapper::before {
+        /* Cuerdas del Ring */
+        #maze-wrapper::after {
             content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            border: 2px dashed rgba(0,0,0,0.1);
             pointer-events: none;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
         }
 
         #maze-grid {
             display: grid;
             margin: 0 auto;
+            background: #fff;
         }
 
         .cell {
-            width: 35px; height: 35px; /* Desktop base */
+            width: 35px; height: 35px; 
             display: flex; align-items: center; justify-content: center;
-            background: rgba(255,255,255,0.8);
-            font-size: 1.3rem;
-            border: 1px solid rgba(0,0,0,0.05);
+            background: #fff;
+            font-size: 1.4rem;
+            border: 1px solid #f1f2f6;
         }
         
-        /* Ajuste responsive para celulares */
         @media (max-width: 450px) {
             .cell { width: 29px; height: 29px; font-size: 1.1rem; }
         }
 
         .wall {
-            background: #222;
-            background-image: radial-gradient(#444 15%, transparent 16%);
-            background-size: 4px 4px;
+            background-color: #2f3542;
+            background-image: repeating-linear-gradient(45deg, #2f3542 25%, #57606f 25%, #57606f 50%, #2f3542 50%, #2f3542 75%, #57606f 75%, #57606f 100%);
+            background-size: 10px 10px;
         }
 
-        /* Controles Táctiles */
-        .control-pad {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            max-width: 180px;
-            margin: 15px auto;
-        }
+        /* Controles */
         .c-btn {
-            height: 60px;
+            height: 65px; width: 65px;
             border-radius: 50%;
-            background: var(--primary-lucha);
+            background: radial-gradient(circle at 30% 30%, #ff6b81, #c0392b);
             color: white;
-            border: 3px solid black;
-            font-size: 1.5rem;
+            border: 4px solid #000;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+            font-size: 1.8rem;
             display: flex; align-items: center; justify-content: center;
             touch-action: manipulation;
         }
-        .c-btn:active { background: #c0392b; transform: scale(0.95); }
+        .c-btn:active { background: #c0392b; transform: scale(0.9); box-shadow: inset 0 0 10px #000; }
 
         /* Modales */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.95);
             z-index: 2000;
             display: none;
             align-items: center; justify-content: center;
+            backdrop-filter: blur(5px);
         }
         .modal-box {
-            background: var(--secondary-lucha);
-            border: 5px solid black;
-            padding: 20px;
+            background: #fff;
+            border: 6px solid #000;
+            border-radius: 20px;
+            padding: 25px;
             text-align: center;
             width: 90%; max-width: 400px;
-            box-shadow: 0 0 20px rgba(255,255,255,0.2);
-            animation: popIn 0.3s;
+            box-shadow: 0 0 50px rgba(255, 165, 2, 0.6);
+            animation: bounceIn 0.5s;
         }
-        @keyframes popIn { from {transform: scale(0.5);} to {transform: scale(1);} }
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); opacity: 1; }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
 
         .float-msg {
-            position: absolute; font-family: 'Bangers'; font-size: 1.5rem; 
+            position: absolute; font-family: 'Bangers'; font-size: 2rem; 
             font-weight: bold; pointer-events: none; 
-            animation: floatUp 0.8s forwards; z-index: 100;
-            text-shadow: 1px 1px 0 white;
+            animation: floatUp 1s forwards; z-index: 100;
+            text-shadow: 2px 2px 0 #000, -1px -1px 0 #fff;
         }
-        @keyframes floatUp { to { transform: translate(-50%, -60px); opacity: 0; } }
+        @keyframes floatUp { 
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+            20% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+            100% { transform: translate(-50%, -100px) scale(1); opacity: 0; } 
+        }
 
-        /* Marca de Agua Divulgando las Finanzas */
+        /* Marca de Agua */
         .brand-watermark {
             position: fixed;
             bottom: 10px;
@@ -172,13 +220,13 @@
             background-color: #000;
             color: #f1c40f;
             font-family: 'Bangers', cursive;
-            padding: 5px 15px;
+            padding: 8px 20px;
             border: 2px solid #fff;
-            border-radius: 20px;
-            font-size: 1.1rem;
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            border-radius: 25px;
+            font-size: 1.2rem;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
     </style>
 </head>
@@ -189,65 +237,65 @@
     </div>
 
     <nav class="navbar navbar-expand navbar-dark navbar-custom sticky-top">
-        <div class="container-fluid px-2">
-            <span class="navbar-brand lucha-font text-warning m-0" style="font-size: 1.2rem;">
+        <div class="container-fluid px-3">
+            <span class="navbar-brand lucha-font text-warning m-0" style="font-size: 1.5rem;">
                 🕹️🪅 LUCHA KIDS
             </span>
             
             <div class="d-flex gap-2 align-items-center">
-                <button class="btn btn-sm btn-warning btn-lucha" onclick="toggleMusic()" id="music-btn">
+                <button class="btn btn-sm btn-warning btn-lucha" onclick="toggleMusic()" id="music-btn" style="font-size: 1rem; padding: 5px 10px;">
                     <i class="fas fa-volume-up"></i>
                 </button>
-                <button class="btn btn-sm btn-lucha btn-pinata" onclick="goToEconMaster()" title="Ir a EconMaster">
-                    <i class="fas fa-star"></i>
-                </button>
-                <a href="https://www.researchgate.net/profile/A-Ortiz-Ramirez" class="btn btn-sm btn-danger btn-lucha" target="_blank">
-                    <i class="fas fa-door-open"></i>
-                </a>
             </div>
         </div>
     </nav>
 
-    <div class="container py-3">
+    <div class="container py-4">
         
         <div id="screen-menu" class="row justify-content-center">
-            <div class="col-12 col-md-8 col-lg-6">
-                <div class="card card-lucha bg-white p-3 text-center">
-                    <div class="display-1 mb-0">🕹️🪅</div>
-                    <h1 class="text-danger mb-2 display-5">LUCHA FINANCIERA</h1>
-                    <p class="lead fw-bold small text-muted text-uppercase">¡Vence a los Rudos y Gana el Campeonato!</p>
-                    
-                    <div class="alert alert-dark p-2 fw-bold lucha-font mb-3">Elige tu Arena</div>
+            <div class="col-12 col-md-10 col-lg-6">
+                <a href="https://www.researchgate.net/profile/A-Ortiz-Ramirez" target="_blank" class="btn btn-lucha btn-mega-academic w-100 mb-4 text-decoration-none">
+                    <i class="fas fa-graduation-cap fa-lg mb-1 d-block"></i>
+                    CONOCE NUESTRO TRABAJO ACADEMICO Y REDES SOCIALES AQUÍ
+                </a>
 
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-light border border-2 border-dark py-2 d-flex align-items-center justify-content-between shadow-sm" onclick="initLevel(1)">
-                            <span class="h2 m-0">🧸</span>
+                <div class="card card-lucha p-4 text-center">
+                    <div class="display-1 mb-0 animate__animated animate__tada">🤼‍♂️</div>
+                    <h1 class="text-danger mb-2 display-4 fw-bold" style="-webkit-text-stroke: 1px black;">LUCHA FINANCIERA</h1>
+                    <p class="lead fw-bold small text-muted text-uppercase mb-4">¡Aprende Finanzas en el Ring!</p>
+                    
+                    <div class="alert alert-dark p-2 fw-bold lucha-font mb-3 text-uppercase border-3 border-dark">👇 Elige tu Nivel 👇</div>
+
+                    <div class="d-grid gap-3">
+                        <button class="btn btn-light border-3 border-dark py-3 d-flex align-items-center justify-content-between shadow bg-white" onclick="initLevel(1)">
+                            <span class="h1 m-0">🧸</span>
                             <div class="text-end lh-1">
-                                <div class="h5 m-0 lucha-font">Arena Juguete</div>
-                                <small class="text-muted" style="font-size:0.7rem">Corto Plazo</small>
+                                <div class="h4 m-0 lucha-font text-primary">Arena Juguete</div>
+                                <small class="text-muted fw-bold">Nivel Principiante</small>
                             </div>
                         </button>
                         
-                        <button class="btn btn-light border border-2 border-dark py-2 d-flex align-items-center justify-content-between shadow-sm" onclick="initLevel(2)">
-                            <span class="h2 m-0">🚲</span>
+                        <button class="btn btn-light border-3 border-dark py-3 d-flex align-items-center justify-content-between shadow bg-white" onclick="initLevel(2)">
+                            <span class="h1 m-0">🚲</span>
                             <div class="text-end lh-1">
-                                <div class="h5 m-0 lucha-font">Coliseo Bici</div>
-                                <small class="text-muted" style="font-size:0.7rem">Mediano Plazo</small>
+                                <div class="h4 m-0 lucha-font text-warning" style="text-shadow: 1px 1px 0 #000;">Coliseo Bici</div>
+                                <small class="text-muted fw-bold">Nivel Intermedio</small>
                             </div>
                         </button>
 
-                        <button class="btn btn-light border border-2 border-dark py-2 d-flex align-items-center justify-content-between shadow-sm" onclick="initLevel(3)">
-                            <span class="h2 m-0">✈️</span>
+                        <button class="btn btn-light border-3 border-dark py-3 d-flex align-items-center justify-content-between shadow bg-white" onclick="initLevel(3)">
+                            <span class="h1 m-0">✈️</span>
                             <div class="text-end lh-1">
-                                <div class="h5 m-0 lucha-font">Arena Mundial</div>
-                                <small class="text-muted" style="font-size:0.7rem">Largo Plazo</small>
+                                <div class="h4 m-0 lucha-font text-danger">Arena Mundial</div>
+                                <small class="text-muted fw-bold">Nivel Experto</small>
                             </div>
                         </button>
                     </div>
 
-                    <hr>
-                    <button class="btn btn-lucha btn-pinata w-100 py-2" onclick="goToEconMaster()">
-                        <i class="fas fa-gamepad"></i> Jugar EconMaster
+                    <hr class="border-3 border-dark my-4">
+                    
+                    <button class="btn btn-lucha btn-econmaster w-100 py-3" onclick="goToEconMaster()">
+                        <i class="fas fa-gamepad fa-lg"></i> JUGAR ECONMASTER
                     </button>
                 </div>
             </div>
@@ -255,17 +303,17 @@
 
         <div id="screen-game" class="d-none flex-column align-items-center">
             
-            <div class="bg-dark text-white p-2 rounded border border-warning mb-3 d-flex justify-content-between align-items-center w-100" style="max-width: 400px;">
-                <div id="ui-lives" class="h5 m-0 text-danger">❤️❤️❤️</div>
-                <div class="h4 m-0 lucha-font text-warning">VS</div>
-                <div id="ui-timer" class="h5 m-0"><i class="fas fa-clock"></i> 60</div>
+            <div class="bg-dark text-white p-3 rounded-pill border-4 border-warning mb-4 d-flex justify-content-between align-items-center w-100 shadow" style="max-width: 400px;">
+                <div id="ui-lives" class="h4 m-0 text-danger" style="letter-spacing: 2px;">❤️❤️❤️</div>
+                <div class="h3 m-0 lucha-font text-warning">VS</div>
+                <div id="ui-timer" class="h4 m-0"><i class="fas fa-clock"></i> 60</div>
             </div>
 
             <div id="maze-wrapper">
                 <div id="maze-grid"></div>
             </div>
 
-            <div class="control-pad">
+            <div class="control-pad mt-4">
                 <div></div> 
                 <button class="c-btn" onmousedown="move(0,-1)" ontouchstart="move(0,-1, event)"><i class="fas fa-chevron-up"></i></button>
                 <div></div> 
@@ -275,48 +323,48 @@
                 <button class="c-btn" onmousedown="move(1,0)" ontouchstart="move(1,0, event)"><i class="fas fa-chevron-right"></i></button>
             </div>
 
-            <button class="btn btn-outline-light btn-sm mt-2" onclick="exitToMenu()">
-                <i class="fas fa-flag"></i> Rendirse
+            <button class="btn btn-outline-light btn-sm mt-4 text-uppercase fw-bold" onclick="exitToMenu()">
+                <i class="fas fa-flag"></i> Rendirse / Salir
             </button>
         </div>
     </div>
 
     <div id="modal-inst" class="modal-overlay">
         <div class="modal-box">
-            <h2 class="text-uppercase display-6 fw-bold">¡El Reto!</h2>
-            <div class="bg-white border border-dark p-2 text-start mb-3 small">
-                <p class="mb-1">📍 <strong>Sede:</strong> <span id="inst-goal" class="text-danger fw-bold">...</span></p>
-                <p class="mb-1">✅ <strong>Recoge:</strong> <span class="text-success">Dinero/Ahorro</span>.</p>
-                <p class="mb-1">❌ <strong>Evita:</strong> <span class="text-danger">Gastos/Rudos</span>.</p>
-                <p class="mb-0">🏆 <strong>Meta:</strong> Llega al final.</p>
+            <h2 class="text-uppercase display-5 fw-bold text-danger mb-3" style="text-shadow: 2px 2px 0 #000;">¡El Reto!</h2>
+            <div class="bg-light border border-2 border-dark p-3 text-start mb-4 rounded shadow-sm">
+                <p class="mb-2 h5">📍 <strong>Arena:</strong> <span id="inst-goal" class="text-primary fw-bold">...</span></p>
+                <hr>
+                <p class="mb-1">✅ <strong>Busca:</strong> <span class="badge bg-success">Dinero</span> <span class="badge bg-success">Inversión</span></p>
+                <p class="mb-1">❌ <strong>Evita:</strong> <span class="badge bg-danger">Gastos</span> <span class="badge bg-danger">Rudos</span></p>
             </div>
-            <button class="btn btn-lucha btn-success w-100 py-2" onclick="startGame()">¡A LUCHAR!</button>
+            <button class="btn btn-lucha btn-success w-100 py-3" onclick="startGame()">¡A LUCHAR!</button>
         </div>
     </div>
 
     <div id="modal-lose" class="modal-overlay">
-        <div class="modal-box bg-danger text-white">
-            <div class="display-1">🔔</div>
-            <h2 class="lucha-font">¡TE RINDIERON!</h2>
-            <p id="lose-msg" class="fw-bold small">Perdiste la máscara.</p>
-            <div class="row bg-white text-dark mx-0 mb-3 p-1 border border-dark small">
-                <div class="col-6 border-end">Ganado: <br><span id="lose-good" class="h4 text-success fw-bold">0</span></div>
-                <div class="col-6">Perdido: <br><span id="lose-bad" class="h4 text-danger fw-bold">0</span></div>
+        <div class="modal-box bg-danger">
+            <div class="display-1 mb-2">🔔</div>
+            <h2 class="lucha-font text-white display-4">¡TE RINDIERON!</h2>
+            <p id="lose-msg" class="fw-bold text-white mb-3">Perdiste la máscara.</p>
+            <div class="row bg-white text-dark mx-0 mb-3 p-2 border-2 border-dark rounded">
+                <div class="col-6 border-end">Ganado: <br><span id="lose-good" class="h3 text-success fw-bold">0</span></div>
+                <div class="col-6">Perdido: <br><span id="lose-bad" class="h3 text-danger fw-bold">0</span></div>
             </div>
-            <button class="btn btn-lucha btn-dark w-100" onclick="exitToMenu()">REVANCHA</button>
+            <button class="btn btn-lucha btn-dark text-white w-100" onclick="exitToMenu()">INTENTAR DE NUEVO</button>
         </div>
     </div>
 
     <div id="modal-win" class="modal-overlay">
         <div class="modal-box bg-warning">
-            <div class="display-1">🏆</div>
-            <h2 class="lucha-font text-danger">¡CAMPEÓN!</h2>
-            <p id="win-msg" class="text-dark fw-bold small">¡El público enloquece!</p>
-            <div class="row bg-white text-dark mx-0 mb-3 p-1 border border-dark small">
-                <div class="col-6 border-end">Ganado: <br><span id="win-good" class="h4 text-success fw-bold">0</span></div>
-                <div class="col-6">Perdido: <br><span id="win-bad" class="h4 text-danger fw-bold">0</span></div>
+            <div class="display-1 mb-2">🏆</div>
+            <h2 class="lucha-font text-danger display-4">¡CAMPEÓN!</h2>
+            <p id="win-msg" class="text-dark fw-bold mb-3">¡El público enloquece!</p>
+            <div class="row bg-white text-dark mx-0 mb-3 p-2 border-2 border-dark rounded">
+                <div class="col-6 border-end">Ganado: <br><span id="win-good" class="h3 text-success fw-bold">0</span></div>
+                <div class="col-6">Perdido: <br><span id="win-bad" class="h3 text-danger fw-bold">0</span></div>
             </div>
-            <button class="btn btn-lucha btn-primary w-100" onclick="exitToMenu()">¡VICTORIA!</button>
+            <button class="btn btn-lucha btn-primary w-100" onclick="exitToMenu()">¡EXCELENTE!</button>
         </div>
     </div>
 
@@ -328,7 +376,6 @@
             3: { name: "ARENA MUNDIAL", size: 12, badRate: 0.3 }
         };
         
-        // CORRECCIÓN CRÍTICA: Se han añadido las comas que faltaban.
         const items = {
             good: [
                 {t:"¡DINERO!", i:"💵"}, 
@@ -343,8 +390,8 @@
                 {t:"¡SILLAZO!", i:"🪑"}, 
                 {t:"¡RUDO!", i:"👹"}, 
                 {t:"¡GASTO HORMIGA!", i:"💸🐜"}, 
-                {t:"¡INTERESES MORATORIOS!", i:"💸💸"}, // COMA AÑADIDA
-                {t:"¡PAGO MINIMO!", i:"⚠️"},           // COMA AÑADIDA
+                {t:"¡INTERESES MORATORIOS!", i:"💸💸"},
+                {t:"¡PAGO MINIMO!", i:"⚠️"},
                 {t:"¡FONDOS INSUFICIENTES!", i:"💔"}
             ]
         };
@@ -362,7 +409,6 @@
         let audioContextUnlocked = false;
 
         const sounds = {
-            // Enlaces de audio más fiables (CodeSkulptor/Google CDN)
             bgm: new Audio('https://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/theme_01.mp3'), 
             coin: new Audio('https://codeskulptor-demos.commondatastorage.googleapis.com/assets/sound/pickup.ogg'),
             hurt: new Audio('https://codeskulptor-demos.commondatastorage.googleapis.com/assets/sound/explosion_01.ogg'),
@@ -372,29 +418,22 @@
         sounds.bgm.loop = true;
         sounds.bgm.volume = 0.3;
 
-        // Lógica de desbloqueo de audio (Critico para móviles)
         function unlockAudio() {
             if(audioContextUnlocked) return;
-            
             Object.values(sounds).forEach(s => {
                 s.play().then(() => {
                     s.pause();
                     if(s !== sounds.bgm) s.currentTime = 0;
                 }).catch(e => console.log("Esperando interacción..."));
             });
-            
             audioContextUnlocked = true;
-            
-            // Actualizar botón si estaba en "muted" visualmente pero quería sonar
             if(musicOn && state.active) sounds.bgm.play();
 
-            // Quitar listeners
             document.removeEventListener('click', unlockAudio);
             document.removeEventListener('touchstart', unlockAudio);
             document.removeEventListener('keydown', unlockAudio);
         }
 
-        // Detectores de primera interacción
         document.addEventListener('click', unlockAudio);
         document.addEventListener('touchstart', unlockAudio);
         document.addEventListener('keydown', unlockAudio);
@@ -426,7 +465,6 @@
             }
         }
 
-        // Función actualizada para redirigir a EconMaster
         function goToEconMaster() {
             if(confirm("¿Quieres ir a EconMaster?")) {
                 window.location.href = "https://econ-master-8w1z.vercel.app/"; 
@@ -449,7 +487,7 @@
         }
 
         function initLevel(lvl) {
-            unlockAudio(); // Asegurar desbloqueo
+            unlockAudio();
             state.lvl = lvl;
             document.getElementById('inst-goal').innerText = levels[lvl].name;
             showModal('modal-inst');
@@ -490,7 +528,6 @@
 
             if(musicOn && audioContextUnlocked) sounds.bgm.play().catch(()=>{});
 
-            // Teclado
             window.onkeydown = (e) => {
                 if(e.key === 'ArrowUp') move(0,-1);
                 if(e.key === 'ArrowDown') move(0,1);
@@ -520,7 +557,6 @@
                 }
                 grid.push(row);
             }
-            // Camino garantizado
             let cx=0, cy=0;
             while(cx < size-1 || cy < size-1) {
                 grid[cy][cx].wall = false;
@@ -562,7 +598,6 @@
             if(e && e.cancelable) e.preventDefault();
             if(!state.active || !state.canMove) return;
 
-            // Asegurar audio si estaba en pausa
             if(musicOn && sounds.bgm.paused && audioContextUnlocked) sounds.bgm.play();
 
             state.canMove = false;
@@ -577,7 +612,7 @@
                 
                 const cell = grid[ny][nx];
                 if(cell.item) {
-                    floatText(cell.item.t, cell.item.type==='good'?'green':'red');
+                    floatText(cell.item.t, cell.item.type==='good'?'#2ed573':'#ff4757');
                     
                     if(cell.item.type === 'good') {
                         playSfx('coin');
@@ -590,7 +625,7 @@
                         
                         const wrap = document.getElementById('maze-wrapper');
                         wrap.style.borderColor = "white";
-                        setTimeout(()=>wrap.style.borderColor = "#c0392b", 100);
+                        setTimeout(()=>wrap.style.borderColor = "#ff4757", 100);
                         
                         if(state.lives <= 0) gameOver('lives');
                     }
@@ -604,7 +639,7 @@
 
         function updateUI() {
             document.getElementById('ui-timer').innerHTML = `<i class="fas fa-clock"></i> ${state.time}`;
-            document.getElementById('ui-timer').className = state.time < 10 ? "h5 m-0 text-danger fw-bold" : "h5 m-0 text-white";
+            document.getElementById('ui-timer').className = state.time < 10 ? "h4 m-0 text-danger fw-bold" : "h4 m-0 text-white";
             
             let h = ""; for(let i=0;i<state.lives;i++) h+="❤️";
             document.getElementById('ui-lives').innerText = h;
@@ -636,9 +671,9 @@
             el.style.left = '50%'; el.style.top = '50%'; 
             el.style.transform = 'translate(-50%, -50%)';
             el.style.color = col;
-            if(col === 'red') el.style.fontSize = "2rem";
             document.body.appendChild(el);
             setTimeout(() => el.remove(), 1000);
         }
     </script>
 </body>
+</html>
