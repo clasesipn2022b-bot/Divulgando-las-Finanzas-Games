@@ -197,10 +197,10 @@
                 <button class="btn btn-sm btn-warning btn-lucha" onclick="toggleMusic()" id="music-btn">
                     <i class="fas fa-volume-up"></i>
                 </button>
-                <button class="btn btn-sm btn-lucha btn-pinata" onclick="goToPinatas()" title="Ir a Piñatas">
+                <button class="btn btn-sm btn-lucha btn-pinata" onclick="goToPinatas()" title="Ir a EconMaster">
                     <i class="fas fa-star"></i>
                 </button>
-                <a href="https://ambrosioortizramirez.link" class="btn btn-sm btn-danger btn-lucha">
+                <a href="https://www.researchgate.net/profile/A-Ortiz-Ramirez" class="btn btn-sm btn-danger btn-lucha">
                     <i class="fas fa-door-open"></i>
                 </a>
             </div>
@@ -245,8 +245,8 @@
                     </div>
 
                     <hr>
-                    <button class="btn btn-lucha btn-pinata w-100 py-2" onclick="goToPinatas()">
-                        <i class="fas fa-gamepad"></i> Jugar Piñatas de la Economía
+                    <button class="btn btn-lucha btn-pinata w-100 py-2" onclick="goToEconMaster()">
+                        <i class="fas fa-gamepad"></i> Jugar EconMaster
                     </button>
                 </div>
             </div>
@@ -425,7 +425,7 @@
             }
         }
 
-        function goToPinatas() {
+        function goToEconMaster() {
             if(confirm("¿Quieres ir a EconMaster?")) {
                 window.location.href = "https://econ-master-8w1z.vercel.app/"; 
             }
