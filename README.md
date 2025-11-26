@@ -239,7 +239,7 @@
     <nav class="navbar navbar-expand navbar-dark navbar-custom sticky-top">
         <div class="container-fluid px-3">
             <span class="navbar-brand lucha-font text-warning m-0" style="font-size: 1.5rem;">
-                🕹️🪅 LUCHA KIDS
+                🕹️ 🤼‍♂️LUCHAS FINANCIERAS
             </span>
             
             <div class="d-flex gap-2 align-items-center">
