@@ -17,13 +17,11 @@
             --verde-mx: #009c3b;
             --morado-mx: #6A1B9A;
             --fondo-oscuro: #121212;
-            --borde-negro: 3px solid #000;
         }
 
         body {
             font-family: 'Roboto Condensed', sans-serif;
             background-color: var(--fondo-oscuro);
-            /* Patrón sutil estilo papel picado */
             background-image: radial-gradient(#333 1px, transparent 1px);
             background-size: 20px 20px;
             color: #333;
@@ -33,32 +31,13 @@
             touch-action: manipulation;
             display: flex;
             flex-direction: column;
+            justify-content: center; /* Centrado vertical */
         }
 
         h1, h2, h3, .lucha-font {
             font-family: 'Bangers', cursive;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            text-shadow: 3px 3px 0px #000;
-        }
-
-        /* --- BARRA DE MARCA (VISIBLE SIEMPRE) --- */
-        .brand-header {
-            background: var(--rosa-mexicano);
-            color: #fff;
-            text-align: center;
-            padding: 5px 0;
-            border-bottom: 4px solid #000;
-            z-index: 5000;
-            flex-shrink: 0;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-        }
-        .brand-text {
-            font-family: 'Bangers', cursive;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
-            margin: 0;
-            text-shadow: 2px 2px 0 #000;
         }
 
         /* --- CONTENEDOR PRINCIPAL FLEXIBLE --- */
@@ -77,16 +56,24 @@
             background: #fff;
             border: 6px solid #000;
             border-radius: 20px;
-            padding: 20px;
+            padding: 25px;
             text-align: center;
-            max-width: 600px;
+            max-width: 650px;
             width: 100%;
             box-shadow: 10px 10px 0 var(--morado-mx);
         }
 
+        /* Título Principal del Menú */
+        .main-title {
+            color: var(--rosa-mexicano);
+            text-shadow: 3px 3px 0 var(--amarillo-mx), 5px 5px 0 #000;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 20px;
+        }
+
         .btn-lucha {
             font-family: 'Bangers', cursive;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             border: 3px solid #000;
             border-radius: 12px;
             box-shadow: 4px 4px 0 #000;
@@ -94,9 +81,11 @@
             background: white;
             color: black;
             margin-bottom: 10px;
+            padding: 12px 20px;
         }
         .btn-lucha:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 #000; }
 
+        /* Colores específicos para los niveles */
         .btn-nivel-1 { background: #81ecec; }
         .btn-nivel-2 { background: var(--amarillo-mx); }
         .btn-nivel-3 { background: var(--rosa-mexicano); color: white; }
@@ -105,9 +94,10 @@
             background: var(--amarillo-mx);
             color: #000;
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             border: 3px solid #000;
             box-shadow: 5px 5px 0 var(--rosa-mexicano);
+            text-transform: uppercase;
         }
 
         /* --- LAYOUT DEL JUEGO (Responsive Equilibrado) --- */
@@ -131,13 +121,12 @@
 
         /* --- EL RING (TABLERO) --- */
         #maze-container {
-            /* Ocupa el espacio disponible pero mantiene proporción */
             flex-shrink: 1;
             display: flex;
             justify-content: center;
             align-items: center;
             width: 100%;
-            max-width: 85vh; /* Evita que sea más ancho que alto en PC */
+            max-width: 85vh; 
             aspect-ratio: 1 / 1;
         }
 
@@ -162,7 +151,7 @@
             display: flex; align-items: center; justify-content: center;
             background: #fff;
             border: 1px solid rgba(0,0,0,0.1);
-            font-size: clamp(14px, 4vw, 32px); /* Emojis escalables */
+            font-size: clamp(14px, 4vw, 32px);
         }
         .wall { 
             background: #2d3436; 
@@ -196,7 +185,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 8px;
-            width: 160px; /* Tamaño fijo equilibrado */
+            width: 160px;
         }
 
         .c-btn {
@@ -245,36 +234,33 @@
 </head>
 <body>
 
-    <div class="brand-header">
-        <h2 class="brand-text">🇲🇽 DIVULGANDO LAS FINANZAS 🇲🇽</h2>
-    </div>
-
     <div class="main-wrapper">
         
         <div id="screen-menu" class="d-flex w-100 justify-content-center">
             <div class="menu-card animate__animated animate__fadeIn">
                 
-                <a href="https://www.researchgate.net/profile/A-Ortiz-Ramirez" target="_blank" class="btn btn-lucha btn-academic w-100 mb-3 text-decoration-none py-3">
-                    <i class="fas fa-graduation-cap"></i> CONOCE NUESTRO TRABAJO ACADÉMICO Y REDES
+                <a href="https://www.researchgate.net/profile/A-Ortiz-Ramirez" target="_blank" class="btn btn-lucha btn-academic w-100 mb-4 text-decoration-none py-3">
+                    <i class="fas fa-graduation-cap me-2"></i> Conoce nuestro trabajo académico
                 </a>
 
-                <h1 class="display-3 mb-0" style="color: var(--rosa-mexicano);">LUCHA</h1>
-                <h1 class="display-3 mb-3" style="color: var(--amarillo-mx); margin-top: -15px;">FINANCIERA</h1>
+                <h1 class="main-title lucha-font">DIVULGANDO LAS FINANZAS GAMES</h1>
 
-                <div class="d-grid gap-2 mb-4 px-md-5">
-                    <button class="btn btn-lucha btn-nivel-1 d-flex justify-content-between px-4 align-items-center" onclick="initLevel(1)">
-                        <span>🧸 JUGUETE</span> <small>FÁCIL</small>
+                <p class="h4 mb-3 lucha-font text-muted">elige tu cuadrilátero:</p>
+
+                <div class="d-grid gap-3 mb-4 px-md-4">
+                    <button class="btn btn-lucha btn-nivel-1 d-flex justify-content-between px-3 align-items-center" onclick="initLevel(1)">
+                        <span class="h4 m-0">🪙 TANDA</span> <small class="fw-bold">Corto Plazo</small>
                     </button>
-                    <button class="btn btn-lucha btn-nivel-2 d-flex justify-content-between px-4 align-items-center" onclick="initLevel(2)">
-                        <span>🚲 BICI</span> <small>MEDIO</small>
+                    <button class="btn btn-lucha btn-nivel-2 d-flex justify-content-between px-3 align-items-center" onclick="initLevel(2)">
+                        <span class="h4 m-0">🚲 BICI</span> <small class="fw-bold">Mediano Plazo</small>
                     </button>
-                    <button class="btn btn-lucha btn-nivel-3 d-flex justify-content-between px-4 align-items-center" onclick="initLevel(3)">
-                        <span>✈️ MUNDIAL</span> <small>DIFÍCIL</small>
+                    <button class="btn btn-lucha btn-nivel-3 d-flex justify-content-between px-3 align-items-center" onclick="initLevel(3)">
+                        <span class="h4 m-0">✈️ VIAJE MUNDIAL</span> <small class="fw-bold text-white">Largo Plazo</small>
                     </button>
                 </div>
 
-                <button class="btn btn-lucha w-100 py-2 btn-success text-white" style="background: var(--verde-mx);" onclick="goToEconMaster()">
-                    <i class="fas fa-gamepad"></i> JUGAR ECONMASTER
+                <button class="btn btn-lucha w-100 py-3 btn-success text-white fw-bold" style="background: var(--verde-mx); font-size: 1.5rem;" onclick="goToEconMaster()">
+                    <i class="fas fa-gamepad me-2"></i> JUGAR ECONMASTER
                 </button>
             </div>
         </div>
@@ -318,13 +304,13 @@
     <div id="modal-inst" class="modal-overlay">
         <div class="modal-box">
             <h1 class="lucha-font text-danger display-4">¡EL RETO!</h1>
-            <p class="fs-4">Arena: <strong id="inst-goal" style="color:var(--morado-mx)"></strong></p>
-            <hr class="border-2 border-dark">
-            <div class="row text-start fs-5 my-3">
-                <div class="col-6 text-success fw-bold">✅ INGRESOS</div>
-                <div class="col-6 text-danger fw-bold">❌ GASTOS</div>
+            <p class="fs-3">Cuadrilátero: <strong id="inst-goal" style="color:var(--morado-mx)"></strong></p>
+            <hr class="border-3 border-dark my-4">
+            <div class="row text-start fs-4 my-4">
+                <div class="col-6 text-success fw-bold ls-1">✅ INGRESOS</div>
+                <div class="col-6 text-danger fw-bold ls-1">❌ GASTOS</div>
             </div>
-            <button class="btn btn-lucha w-100 py-2" style="background:var(--verde-mx); color:white;" onclick="startGame()">¡A LUCHAR!</button>
+            <button class="btn btn-lucha w-100 py-3 fs-3 fw-bold" style="background:var(--verde-mx); color:white;" onclick="startGame()">¡A LUCHAR!</button>
         </div>
     </div>
 
@@ -333,7 +319,7 @@
             <div class="display-1 mb-2">🔔</div>
             <h2 class="lucha-font text-danger display-4">¡RINDIERON!</h2>
             <p id="lose-msg" class="h4 fw-bold mb-4">...</p>
-            <button class="btn btn-lucha btn-dark w-100" onclick="exitToMenu()">INTENTAR DE NUEVO</button>
+            <button class="btn btn-lucha btn-dark w-100 py-3 fs-4" onclick="exitToMenu()">INTENTAR DE NUEVO</button>
         </div>
     </div>
 
@@ -342,19 +328,18 @@
             <div class="display-1 mb-2">🏆</div>
             <h2 class="lucha-font text-success display-4">¡CAMPEÓN!</h2>
             <p id="win-msg" class="h4 fw-bold mb-4">...</p>
-            <button class="btn btn-lucha w-100" style="background:var(--amarillo-mx)" onclick="exitToMenu()">GENIAL</button>
+            <button class="btn btn-lucha w-100 py-3 fs-4" style="background:var(--amarillo-mx)" onclick="exitToMenu()">GENIAL</button>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const levels = {
-            1: { name: "JUGUETE", size: 8, badRate: 0.25 },
-            2: { name: "BICI", size: 10, badRate: 0.30 },
-            3: { name: "MUNDIAL", size: 12, badRate: 0.35 }
+            1: { name: "TANDA (Corto Plazo)", size: 8, badRate: 0.25 },
+            2: { name: "BICI (Mediano Plazo)", size: 10, badRate: 0.30 },
+            3: { name: "VIAJE MUNDIAL (Largo Plazo)", size: 12, badRate: 0.35 }
         };
         
-        // CORRECCIÓN: Un solo emoji por concepto
         const items = {
             good: [
                 {t:"¡TANDA!", i:"💰"}, {t:"¡AGUINALDO!", i:"🎁"},
