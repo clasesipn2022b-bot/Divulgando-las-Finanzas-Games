@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Lucha Financiera Kids</title>
+    <title>Lucha Financiera </title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
@@ -343,11 +343,11 @@
         const items = {
             good: [
                 {t:"¡TANDA!", i:"💰"}, {t:"¡AGUINALDO!", i:"🎁"},
-                {t:"¡MESES SIN INTERESES!", i:"🗓️"}, {t:"¡SIN COMISIONES!", i:"🚫"},
-                {t:"¡NO ANUALIDAD!", i:"💳"}, {t:"¡DEDUCIR!", i:"📝"},
-                {t:"¡ANTICIPADO!", i:"⏱️"}, {t:"¡AUTOMÁTICO!", i:"🔄"},
-                {t:"¡PUNTOS!", i:"🌟"}, {t:"¡CUPÓN!", i:"🎟️"},
-                {t:"¡PENSIÓN!", i:"👴"}, {t:"¡CONTADO!", i:"💵"},
+                {t:"¡MESES SIN INTERESES!", i:"🗓️"}, {t:"¡PAGO SIN COMISIONES!", i:"🚫"},
+                {t:"¡NO PAGO DE ANUALIDAD!", i:"💳"}, {t:"¡DEDUCIR!", i:"📝"},
+                {t:"¡PAGO ANTICIPADO!", i:"⏱️"}, {t:"¡COBRO AUTOMÁTICO!", i:"🔄"},
+                {t:"¡PAGO CON PUNTOS!", i:"🌟"}, {t:"¡USO DE CUPÓN!", i:"🎟️"},
+                {t:"¡FONDO DE PENSIÓN!", i:"👴"}, {t:"¡PAGO DE CONTADO!", i:"💵"},
                 {t:"¡DESCUENTO!", i:"🏷️"}, {t:"¡VENTA JUSTA!", i:"⚖️"},
                 {t:"¡UTILIDADES!", i:"🚀"}, {t:"¡SUPERÁVIT!", i:"➕"},
                 {t:"¡AHORRO!", i:"🐖"}
@@ -356,7 +356,7 @@
                 {t:"¡MULTA!", i:"👮"}, {t:"¡RECARGO!", i:"😡"},
                 {t:"¡FRAUDE!", i:"👺"}, {t:"¡BANCARROTA!", i:"🏳️"},
                 {t:"¡DÉFICIT!", i:"📉"}, {t:"¡COMISIÓN!", i:"🤏"},
-                {t:"¡SIN REGISTRO!", i:"❓"}, {t:"¡SIN PLAN!", i:"🙈"},
+                {t:"¡PÉRDIDAS!", i:"❓"}, {t:"¡PAGO CON INTERESES!", i:"🙈"},
                 {t:"¡LESIÓN!", i:"🤕"}, {t:"¡ENFERMEDAD!", i:"🤒"},
                 {t:"¡DEUDAS!", i:"💣"}
             ]
