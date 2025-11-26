@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Lucha Financiera</title>
+    <title>Luchas Financieras </title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
@@ -200,7 +200,7 @@
         .float-msg {
             position: absolute; font-family: 'Bangers'; font-size: 2rem; font-weight: bold; 
             pointer-events: none; animation: floatUp 0.8s forwards; z-index: 3000; text-shadow: 2px 2px 0 #000;
-            white-space: nowrap; /* Evita que el texto se rompa */
+            white-space: nowrap; 
         }
         @keyframes floatUp { to { transform: translate(-50%, -100px); opacity: 0; } }
     </style>
@@ -307,13 +307,13 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // Niveles con tasa de aparición de "malos" ligeramente ajustada para el balance
         const levels = {
-            1: { name: "ARENA JUGUETE", size: 8, badRate: 0.2 },
-            2: { name: "COLISEO BICI", size: 10, badRate: 0.25 },
-            3: { name: "ARENA MUNDIAL", size: 12, badRate: 0.3 }
+            1: { name: "ARENA JUGUETE", size: 8, badRate: 0.25 },
+            2: { name: "COLISEO BICI", size: 10, badRate: 0.30 },
+            3: { name: "ARENA MUNDIAL", size: 12, badRate: 0.35 }
         };
         
-        // --- AQUÍ ESTÁN TUS NUEVOS CONCEPTOS FINANCIEROS ---
         const items = {
             good: [
                 {t:"¡RECIBIR LA TANDA!", i:"💰🤝"}, 
@@ -364,6 +364,15 @@
             lose: new Audio('https://codeskulptor-demos.commondatastorage.googleapis.com/assets/sound/explosion_02.ogg')
         };
         sounds.bgm.loop = true; sounds.bgm.volume = 0.3;
+
+        // Función Helper para mezclar arrays (Fisher-Yates Shuffle)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
 
         function unlockAudio() {
             if(audioContextUnlocked) return;
@@ -432,17 +441,33 @@
             };
         }
 
+        // --- GENERACIÓN MEJORADA CON BARAJA ---
         function generateGrid(size) {
-            grid = []; const badRate = levels[state.lvl].badRate;
+            grid = []; 
+            const badRate = levels[state.lvl].badRate;
+            
+            // 1. Crear copias de los items y barajarlos para garantizar variedad
+            let goodPool = shuffleArray([...items.good]);
+            let badPool = shuffleArray([...items.bad]);
+
             for(let y=0; y<size; y++) {
                 let row = [];
                 for(let x=0; x<size; x++) {
                     let isWall = Math.random() < 0.3;
                     if((x<2 && y<2) || (x>size-3 && y>size-3)) isWall = false;
+                    
                     let item = null;
                     if(!isWall && Math.random() < 0.3 && !(x===0 && y===0)) {
-                        const list = Math.random() < badRate ? items.bad : items.good;
-                        item = { ...list[Math.floor(Math.random()*list.length)], type: list === items.bad ? 'bad' : 'good' };
+                        const isBad = Math.random() < badRate;
+                        
+                        // Lógica de "Baraja": Saca items sin repetir hasta que se acaban
+                        if(isBad) {
+                            if(badPool.length === 0) badPool = shuffleArray([...items.bad]); // Recargar si se acaban
+                            item = { ...badPool.pop(), type: 'bad' };
+                        } else {
+                            if(goodPool.length === 0) goodPool = shuffleArray([...items.good]); // Recargar si se acaban
+                            item = { ...goodPool.pop(), type: 'good' };
+                        }
                     }
                     row.push({ wall: isWall, item: item });
                 }
