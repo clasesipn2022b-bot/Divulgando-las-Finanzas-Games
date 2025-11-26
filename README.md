@@ -358,7 +358,7 @@
                 {t:"¡DÉFICIT!", i:"📉"}, {t:"¡COMISIÓN!", i:"🤏"},
                 {t:"¡PÉRDIDAS!", i:"❓"}, {t:"¡PAGO CON INTERESES!", i:"🙈"},
                 {t:"¡LESIÓN!", i:"🤕"}, {t:"¡ENFERMEDAD!", i:"🤒"},
-                {t:"¡DEUDAS!", i:"💣"}
+                {t:"¡DEUDAS!", i:"💣"}, {t:"¡GASTO HORMIGA!", i:"🐜"},
             ]
         };
 
