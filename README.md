@@ -1,4 +1,5 @@
-# Divulgando-las-Finanzas-Games
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -25,6 +26,7 @@
             overflow-x: hidden;
             user-select: none; /* Evitar selección de texto al jugar */
             padding-bottom: 40px; /* Espacio para la marca de agua */
+            touch-action: manipulation;
         }
 
         h1, h2, h3, .lucha-font {
@@ -197,10 +199,10 @@
                 <button class="btn btn-sm btn-warning btn-lucha" onclick="toggleMusic()" id="music-btn">
                     <i class="fas fa-volume-up"></i>
                 </button>
-                <button class="btn btn-sm btn-lucha btn-pinata" onclick="goToPinatas()" title="Ir a EconMaster">
+                <button class="btn btn-sm btn-lucha btn-pinata" onclick="goToEconMaster()" title="Ir a EconMaster">
                     <i class="fas fa-star"></i>
                 </button>
-                <a href="https://www.researchgate.net/profile/A-Ortiz-Ramirez" class="btn btn-sm btn-danger btn-lucha">
+                <a href="https://www.researchgate.net/profile/A-Ortiz-Ramirez" class="btn btn-sm btn-danger btn-lucha" target="_blank">
                     <i class="fas fa-door-open"></i>
                 </a>
             </div>
@@ -327,7 +329,7 @@
             3: { name: "ARENA MUNDIAL", size: 12, badRate: 0.3 }
         };
         
-        // CORRECCIÓN APLICADA AQUÍ: Se arreglaron los corchetes y llaves faltantes
+        // CORRECCIÓN APLICADA AQUÍ: Se arreglaron las comas faltantes en el array bad
         const items = {
             good: [
                 {t:"¡DINERO!", i:"💵"}, 
@@ -342,8 +344,8 @@
                 {t:"¡SILLAZO!", i:"🪑"}, 
                 {t:"¡RUDO!", i:"👹"}, 
                 {t:"¡GASTO HORMIGA!", i:"💸🐜"}, 
-                {t:"¡INTERESES MORATORIOS!", i:"💸💸"}
-                {t:"¡PAGO MINIMO!", i:"⚠️"}
+                {t:"¡INTERESES MORATORIOS!", i:"💸💸"},
+                {t:"¡PAGO MINIMO!", i:"⚠️"},
                 {t:"¡FONDOS INSUFICIENTES!", i:"💔"}
             ]
         };
@@ -429,6 +431,11 @@
             if(confirm("¿Quieres ir a EconMaster?")) {
                 window.location.href = "https://econ-master-8w1z.vercel.app/"; 
             }
+        }
+        
+        // Agregado para que el botón de la estrella funcione
+        function goToPinatas() {
+             goToEconMaster();
         }
 
         function showScreen(id) {
@@ -640,3 +647,4 @@
         }
     </script>
 </body>
+</html>
