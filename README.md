@@ -1,9 +1,8 @@
-<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Lucha Financiera </title>
+    <title>Lucha Financiera Kids</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
@@ -25,13 +24,12 @@
             background-image: radial-gradient(#333 1px, transparent 1px);
             background-size: 20px 20px;
             color: #333;
-            height: 100vh; /* Altura fija */
-            overflow: hidden; /* Sin scroll */
+            height: 100vh;
+            overflow: hidden; 
             user-select: none;
             touch-action: manipulation;
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Centrado vertical */
         }
 
         h1, h2, h3, .lucha-font {
@@ -40,52 +38,60 @@
             text-transform: uppercase;
         }
 
-        /* --- CONTENEDOR PRINCIPAL FLEXIBLE --- */
+        /* --- CONTENEDOR PRINCIPAL --- */
         .main-wrapper {
             flex-grow: 1;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
             width: 100%;
+            height: 100%;
             padding: 10px;
         }
 
         /* --- MENÚ --- */
-        .menu-card {
-            background: #fff;
-            border: 6px solid #000;
-            border-radius: 20px;
-            padding: 25px;
-            text-align: center;
-            max-width: 650px;
+        #screen-menu {
             width: 100%;
-            box-shadow: 10px 10px 0 var(--morado-mx);
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto; 
         }
 
-        /* Título Principal del Menú */
+        .menu-card {
+            background: #fff;
+            border: 4px solid #000;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 8px 8px 0 var(--morado-mx);
+            margin: auto;
+        }
+
         .main-title {
             color: var(--rosa-mexicano);
-            text-shadow: 3px 3px 0 var(--amarillo-mx), 5px 5px 0 #000;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            margin-bottom: 20px;
+            text-shadow: 2px 2px 0 var(--amarillo-mx), 3px 3px 0 #000;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            line-height: 1;
         }
 
         .btn-lucha {
             font-family: 'Bangers', cursive;
-            font-size: 1.3rem;
-            border: 3px solid #000;
-            border-radius: 12px;
-            box-shadow: 4px 4px 0 #000;
+            font-size: 1.1rem;
+            border: 2px solid #000;
+            border-radius: 10px;
+            box-shadow: 3px 3px 0 #000;
             transition: transform 0.1s;
             background: white;
             color: black;
-            margin-bottom: 10px;
-            padding: 12px 20px;
+            padding: 8px 15px;
         }
-        .btn-lucha:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 #000; }
+        .btn-lucha:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #000; }
 
-        /* Colores específicos para los niveles */
         .btn-nivel-1 { background: #81ecec; }
         .btn-nivel-2 { background: var(--amarillo-mx); }
         .btn-nivel-3 { background: var(--rosa-mexicano); color: white; }
@@ -94,48 +100,41 @@
             background: var(--amarillo-mx);
             color: #000;
             font-weight: bold;
-            font-size: 1.2rem;
-            border: 3px solid #000;
-            box-shadow: 5px 5px 0 var(--rosa-mexicano);
+            font-size: 0.9rem;
+            border: 2px solid #000;
+            box-shadow: 3px 3px 0 var(--rosa-mexicano);
             text-transform: uppercase;
+            white-space: normal;
+            line-height: 1.2;
         }
 
-        /* --- LAYOUT DEL JUEGO (Responsive Equilibrado) --- */
+        /* --- PANTALLA JUEGO --- */
         .game-layout {
             display: flex;
-            flex-direction: column; /* Móvil: Vertical */
+            flex-direction: column; 
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             width: 100%;
             height: 100%;
-            gap: 15px;
+            padding-bottom: 10px;
         }
 
-        /* En Desktop/Tablet horizontal: Lado a lado */
-        @media (min-width: 768px) and (min-height: 500px) {
-            .game-layout {
-                flex-direction: row; 
-                gap: 40px;
-            }
-        }
-
-        /* --- EL RING (TABLERO) --- */
         #maze-container {
-            flex-shrink: 1;
+            flex-grow: 1;
             display: flex;
             justify-content: center;
             align-items: center;
             width: 100%;
-            max-width: 85vh; 
+            max-height: 50vh; 
             aspect-ratio: 1 / 1;
         }
 
         #maze-wrapper {
             background: #eee;
-            padding: 8px;
-            border: 6px solid var(--rosa-mexicano);
-            border-radius: 10px;
-            box-shadow: 0 0 0 4px #000, 10px 10px 20px rgba(0,0,0,0.7);
+            padding: 5px;
+            border: 4px solid var(--rosa-mexicano);
+            border-radius: 8px;
+            box-shadow: 0 0 0 3px #000, 5px 5px 15px rgba(0,0,0,0.7);
             width: 100%;
             height: 100%;
         }
@@ -151,7 +150,7 @@
             display: flex; align-items: center; justify-content: center;
             background: #fff;
             border: 1px solid rgba(0,0,0,0.1);
-            font-size: clamp(14px, 4vw, 32px);
+            font-size: clamp(12px, 4vw, 28px);
         }
         .wall { 
             background: #2d3436; 
@@ -160,55 +159,68 @@
 
         /* --- CONTROLES --- */
         .controls-panel {
-            flex-shrink: 0;
+            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
+            flex-shrink: 0;
         }
 
         .hud-bar {
             background: #000;
             color: var(--amarillo-mx);
-            padding: 8px 15px;
-            border-radius: 20px;
+            padding: 5px 15px;
+            border-radius: 15px;
             border: 2px solid #fff;
             display: flex;
-            gap: 20px;
-            font-size: 1.2rem;
-            box-shadow: 0 4px 0 rgba(255,255,255,0.2);
+            gap: 15px;
+            font-size: 1rem;
             margin-bottom: 5px;
         }
 
         .control-pad {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            width: 160px;
+            gap: 5px;
+            width: 150px;
         }
 
         .c-btn {
             width: 100%; aspect-ratio: 1/1;
-            border-radius: 12px;
+            border-radius: 10px;
             background: var(--rosa-mexicano);
-            border: 3px solid #000;
-            box-shadow: 0 4px 0 #000;
+            border: 2px solid #000;
+            box-shadow: 0 3px 0 #000;
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             display: flex; align-items: center; justify-content: center;
             cursor: pointer;
         }
-        .c-btn:active { transform: translateY(3px); box-shadow: 0 0 0 #000; background: #c20066; }
+        .c-btn:active { transform: translateY(2px); box-shadow: 0 0 0 #000; background: #c20066; }
 
         .btn-salir {
             background: #d63031; color: white; border: 2px solid #000;
-            padding: 5px 20px; border-radius: 20px; font-weight: bold;
+            padding: 4px 15px; border-radius: 15px; font-weight: bold; font-size: 0.9rem;
         }
 
-        /* --- MENSAJES FLOTANTES --- */
+        /* --- MEDIA QUERIES --- */
+        @media (min-width: 768px) and (min-height: 600px) {
+            .menu-card { padding: 40px; border-width: 6px; }
+            .main-title { font-size: 3.5rem; margin-bottom: 20px; }
+            .btn-lucha { font-size: 1.4rem; padding: 12px 20px; }
+            .btn-academic { font-size: 1.2rem; padding: 15px; }
+            
+            .game-layout { flex-direction: row; justify-content: center; gap: 50px; }
+            #maze-container { max-height: 80vh; max-width: 80vh; }
+            .control-pad { width: 180px; gap: 10px; }
+            .c-btn { border-width: 3px; box-shadow: 0 5px 0 #000; font-size: 1.8rem; }
+        }
+
+        /* --- MODALES & TEXTO --- */
         .float-msg {
-            position: absolute; font-family: 'Bangers'; font-size: 1.8rem; 
+            position: absolute; font-family: 'Bangers'; font-size: 1.5rem; 
             pointer-events: none; animation: floatUp 2.5s forwards; z-index: 5000; 
             text-shadow: 2px 2px 0 #000; white-space: nowrap; font-weight: normal;
         }
@@ -219,14 +231,13 @@
             100% { transform: translate(-50%, -120px) scale(0.8); opacity: 0; }
         }
 
-        /* --- MODALES --- */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.9); z-index: 9000; display: none;
             align-items: center; justify-content: center; backdrop-filter: blur(5px);
         }
         .modal-box {
-            background: #fff; border: 6px solid #000; padding: 25px;
+            background: #fff; border: 5px solid #000; padding: 20px;
             text-align: center; width: 90%; max-width: 400px; border-radius: 20px;
             box-shadow: 0 0 30px var(--amarillo-mx);
         }
@@ -236,30 +247,34 @@
 
     <div class="main-wrapper">
         
-        <div id="screen-menu" class="d-flex w-100 justify-content-center">
+        <div id="screen-menu">
             <div class="menu-card animate__animated animate__fadeIn">
                 
-                <a href="https://www.researchgate.net/profile/A-Ortiz-Ramirez" target="_blank" class="btn btn-lucha btn-academic w-100 mb-4 text-decoration-none py-3">
-                    <i class="fas fa-graduation-cap me-2"></i> Conoce nuestro trabajo académico
+                <a href="https://www.researchgate.net/profile/A-Ortiz-Ramirez" target="_blank" class="btn btn-lucha btn-academic w-100 mb-3 text-decoration-none py-2">
+                    <i class="fas fa-graduation-cap me-1"></i> Conoce nuestro trabajo académico
                 </a>
 
                 <h1 class="main-title lucha-font">DIVULGANDO LAS FINANZAS GAMES</h1>
 
-                <p class="h4 mb-3 lucha-font text-muted">elige tu cuadrilátero:</p>
+                <p class="h6 mb-2 lucha-font text-muted">elige tu cuadrilátero:</p>
 
-                <div class="d-grid gap-3 mb-4 px-md-4">
+                <div class="d-grid gap-2 mb-3 px-md-4">
                     <button class="btn btn-lucha btn-nivel-1 d-flex justify-content-between px-3 align-items-center" onclick="initLevel(1)">
-                        <span class="h4 m-0">🪙 TANDA</span> <small class="fw-bold">Corto Plazo</small>
+                        <span class="fw-bold">🪙 TANDA</span> <small>Corto Plazo</small>
                     </button>
                     <button class="btn btn-lucha btn-nivel-2 d-flex justify-content-between px-3 align-items-center" onclick="initLevel(2)">
-                        <span class="h4 m-0">🚲 BICI</span> <small class="fw-bold">Mediano Plazo</small>
+                        <span class="fw-bold">🚲 BICI</span> <small>Mediano Plazo</small>
                     </button>
                     <button class="btn btn-lucha btn-nivel-3 d-flex justify-content-between px-3 align-items-center" onclick="initLevel(3)">
-                        <span class="h4 m-0">✈️ VIAJE MUNDIAL</span> <small class="fw-bold text-white">Largo Plazo</small>
+                        <span class="fw-bold">✈️ VIAJE MUNDIAL</span> <small>Largo Plazo</small>
                     </button>
                 </div>
 
-                <button class="btn btn-lucha w-100 py-3 btn-success text-white fw-bold" style="background: var(--verde-mx); font-size: 1.5rem;" onclick="goToEconMaster()">
+                <a href="#" target="_blank" class="btn btn-lucha w-100 py-2 text-white fw-bold text-decoration-none d-block mb-2" style="background: var(--morado-mx); border-color: black;">
+                    <span class="me-2">🪅</span> JUGAR PIÑATAS DE LA ECONOMÍA
+                </a>
+
+                <button class="btn btn-lucha w-100 py-2 btn-success text-white fw-bold" style="background: var(--verde-mx); border-color: black;" onclick="goToEconMaster()">
                     <i class="fas fa-gamepad me-2"></i> JUGAR ECONMASTER
                 </button>
             </div>
@@ -274,7 +289,6 @@
             </div>
 
             <div class="controls-panel">
-                
                 <div class="hud-bar">
                     <span id="ui-lives" class="text-danger">❤️❤️❤️</span>
                     <span id="ui-timer" class="fw-bold text-white"><i class="fas fa-clock"></i> 60</span>
@@ -291,35 +305,34 @@
                 </div>
 
                 <div class="d-flex gap-3 mt-2">
-                    <button class="btn btn-warning rounded-circle border-2 border-dark" style="width:45px; height:45px" onclick="toggleMusic()" id="music-btn">
+                    <button class="btn btn-warning rounded-circle border-2 border-dark shadow-sm" style="width:40px; height:40px" onclick="toggleMusic()" id="music-btn">
                         <i class="fas fa-volume-up"></i>
                     </button>
-                    <button class="btn-salir" onclick="exitToMenu()">SALIR</button>
+                    <button class="btn-salir shadow-sm" onclick="exitToMenu()">SALIR</button>
                 </div>
             </div>
-
         </div>
     </div>
 
     <div id="modal-inst" class="modal-overlay">
         <div class="modal-box">
-            <h1 class="lucha-font text-danger display-4">¡EL RETO!</h1>
-            <p class="fs-3">Cuadrilátero: <strong id="inst-goal" style="color:var(--morado-mx)"></strong></p>
-            <hr class="border-3 border-dark my-4">
-            <div class="row text-start fs-4 my-4">
+            <h2 class="lucha-font text-danger display-5">¡EL RETO!</h2>
+            <p class="fs-5 mb-2">Cuadrilátero: <strong id="inst-goal" style="color:var(--morado-mx)"></strong></p>
+            <hr class="border-2 border-dark my-3">
+            <div class="row text-start fs-6 my-3">
                 <div class="col-6 text-success fw-bold ls-1">✅ INGRESOS</div>
                 <div class="col-6 text-danger fw-bold ls-1">❌ GASTOS</div>
             </div>
-            <button class="btn btn-lucha w-100 py-3 fs-3 fw-bold" style="background:var(--verde-mx); color:white;" onclick="startGame()">¡A LUCHAR!</button>
+            <button class="btn btn-lucha w-100 py-2 fs-4 fw-bold" style="background:var(--verde-mx); color:white;" onclick="startGame()">¡A LUCHAR!</button>
         </div>
     </div>
 
     <div id="modal-lose" class="modal-overlay">
         <div class="modal-box" style="border-color: red;">
             <div class="display-1 mb-2">🔔</div>
-            <h2 class="lucha-font text-danger display-4">¡TE RINDIERON CON UNA LLAVE!</h2>
-            <p id="lose-msg" class="h4 fw-bold mb-4">...</p>
-            <button class="btn btn-lucha btn-dark w-100 py-3 fs-4" onclick="exitToMenu()">INTENTAR DE NUEVO</button>
+            <h2 class="lucha-font text-danger display-4">¡RINDIERON!</h2>
+            <p id="lose-msg" class="h5 fw-bold mb-3">...</p>
+            <button class="btn btn-lucha btn-dark w-100 py-2" onclick="exitToMenu()">INTENTAR DE NUEVO</button>
         </div>
     </div>
 
@@ -327,8 +340,8 @@
         <div class="modal-box" style="border-color: gold;">
             <div class="display-1 mb-2">🏆</div>
             <h2 class="lucha-font text-success display-4">¡CAMPEÓN!</h2>
-            <p id="win-msg" class="h4 fw-bold mb-4">...</p>
-            <button class="btn btn-lucha w-100 py-3 fs-4" style="background:var(--amarillo-mx)" onclick="exitToMenu()">GENIAL</button>
+            <p id="win-msg" class="h5 fw-bold mb-3">...</p>
+            <button class="btn btn-lucha w-100 py-2" style="background:var(--amarillo-mx)" onclick="exitToMenu()">GENIAL</button>
         </div>
     </div>
 
@@ -340,31 +353,28 @@
             3: { name: "VIAJE MUNDIAL (Largo Plazo)", size: 12, badRate: 0.35 }
         };
         
-        // ITEMS ACTUALIZADOS Y AMPLIADOS CON UN SOLO EMOJI
         const items = {
             good: [
                 {t:"¡TANDA!", i:"💰"}, {t:"¡AGUINALDO!", i:"🎁"},
                 {t:"¡MESES SIN INTERESES!", i:"🗓️"}, {t:"¡SIN COMISIONES!", i:"🚫"},
-                {t:"¡NO ANUALIDAD!", i:"💳"}, {t:"¡DEDUCIR IMPUESTOS!", i:"📝"},
-                {t:"¡PAGO ANTICIPADO!", i:"⏱️"}, {t:"¡PAGO AUTOMÁTICO!", i:"🔄"},
-                {t:"¡PAGO CON PUNTOS!", i:"🌟"}, {t:"¡CUPÓN!", i:"🎟️"},
-                {t:"¡PENSIÓN!", i:"👴"}, {t:"¡PAGO DE CONTADO!", i:"💵"},
+                {t:"¡NO ANUALIDAD!", i:"💳"}, {t:"¡DEDUCIR!", i:"📝"},
+                {t:"¡ANTICIPADO!", i:"⏱️"}, {t:"¡AUTOMÁTICO!", i:"🔄"},
+                {t:"¡PUNTOS!", i:"🌟"}, {t:"¡CUPÓN!", i:"🎟️"},
+                {t:"¡PENSIÓN!", i:"👴"}, {t:"¡CONTADO!", i:"💵"},
                 {t:"¡DESCUENTO!", i:"🏷️"}, {t:"¡VENTA JUSTA!", i:"⚖️"},
                 {t:"¡UTILIDADES!", i:"🚀"}, {t:"¡SUPERÁVIT!", i:"➕"},
                 {t:"¡AHORRO!", i:"🐖"},
-                // NUEVOS (Estilo un solo emoji)
                 {t:"¡CETES!", i:"📈"}, {t:"¡AFORE!", i:"👵"},
                 {t:"¡CASHBACK!", i:"💸"}, {t:"¡BUEN BURÓ!", i:"📜"},
-                {t:"¡SEGURO DE DESEMPLEO O ROBO!", i:"🛡️"}
+                {t:"¡SEGURO!", i:"🛡️"}
             ],
             bad: [
-                {t:"¡MULTAS!", i:"👮"}, {t:"¡RECARGOS!", i:"😡"},
+                {t:"¡MULTA!", i:"👮"}, {t:"¡RECARGO!", i:"😡"},
                 {t:"¡FRAUDE!", i:"👺"}, {t:"¡BANCARROTA!", i:"🏳️"},
                 {t:"¡DÉFICIT!", i:"📉"}, {t:"¡COMISIÓN!", i:"🤏"},
-                {t:"¡PERDIDAS!", i:"❓"}, {t:"¡SIN PLAN DE AHORRO!", i:"🙈"},
+                {t:"¡SIN REGISTRO!", i:"❓"}, {t:"¡SIN PLAN!", i:"🙈"},
                 {t:"¡LESIÓN!", i:"🤕"}, {t:"¡ENFERMEDAD!", i:"🤒"},
                 {t:"¡DEUDAS!", i:"💣"},
-                // NUEVOS (Estilo un solo emoji)
                 {t:"¡INFLACIÓN!", i:"🎈"}, {t:"¡GASTO VAMPIRO!", i:"🧛"},
                 {t:"¡CLONACIÓN!", i:"💳"}, {t:"¡USURA!", i:"🦈"},
                 {t:"¡DESEMPLEO!", i:"🚪"}
@@ -385,7 +395,6 @@
             win: new Audio('https://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/bonus.wav'),
             lose: new Audio('https://codeskulptor-demos.commondatastorage.googleapis.com/assets/sound/explosion_02.ogg')
         };
-        // VOLUMEN AUMENTADO
         sounds.bgm.loop = true; sounds.bgm.volume = 0.6;
 
         function shuffleArray(array) {
@@ -586,4 +595,3 @@
         }
     </script>
 </body>
-</html>
