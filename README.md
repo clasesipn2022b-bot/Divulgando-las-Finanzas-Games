@@ -2,9 +2,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Lucha Financiera Kids</title>
+    <title>Divulgando las Finanzas Games</title>
     
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">     
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -45,17 +45,24 @@
 
         /* --- WRAPPER GENERAL --- */
         #app-container {
-            width: 100%; height: 100%;
-            display: flex; justify-content: center; align-items: center;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             position: relative;
         }
 
         /* --- PANTALLA MENÚ --- */
         #screen-menu {
-            width: 100%; height: 100%;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            overflow-y: auto; padding: 10px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+            padding: 10px;
         }
 
         .menu-card {
@@ -64,64 +71,228 @@
             border-radius: 20px;
             padding: 20px;
             text-align: center;
-            max-width: 650px; width: 100%;
+            max-width: 650px;
+            width: 100%;
             box-shadow: 10px 10px 0 var(--morado-mx);
-            margin: auto; position: relative;
+            margin: auto;
+            position: relative; 
         }
 
         /* Header con Avatar y Título */
         .title-container {
-            display: flex; align-items: center; justify-content: center;
-            gap: 15px; margin-bottom: 15px; flex-wrap: wrap;
-            position: relative; z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center; 
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
         }
 
+        /* Avatar al lado del título (Interactivo) */
+        .avatar-container {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .avatar-container:hover {
+            transform: scale(1.1);
+        }
         .avatar-img {
-            width: 70px; height: 70px;
-            border: 3px solid #000; border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            border: 3px solid #000;
+            border-radius: 50%;
             box-shadow: 3px 3px 0 var(--amarillo-mx);
-            background: white; object-fit: cover;
+            background: white;
+            object-fit: cover;
+        }
+        .info-badge {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: var(--azul-titulo);
+            color: white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid white;
         }
 
+        /* Máscara Decorativa */
         .wrestling-mask {
-            width: 50px; height: auto;
-            position: absolute; top: 10px; right: 10px;
-            filter: drop-shadow(2px 2px 0 #000); z-index: 1;
+            width: 50px;
+            height: auto;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            filter: drop-shadow(2px 2px 0 #000);
+            z-index: 1;
         }
 
+        /* Título en Azul */
         .main-title {
             color: var(--azul-titulo);
             text-shadow: 2px 2px 0 #fff, 4px 4px 0 #000;
             font-size: clamp(1.8rem, 5vw, 3rem);
-            margin: 0; line-height: 1; text-align: left;
+            margin: 0;
+            line-height: 1;
+            text-align: left;
         }
+
+        /* Enlaces Escolares */
+        .social-links {
+            font-size: 0.9rem;
+            color: #444;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px solid #eee;
+            margin-bottom: 20px;
+        }
+        .social-links p { margin-bottom: 5px; font-weight: bold; font-size: 0.85rem;}
+        .social-links a { color: var(--morado-mx); text-decoration: none; font-weight: bold; margin: 0 8px; font-size: 1rem; }
+        .social-links a:hover { color: var(--rosa-mexicano); text-decoration: underline; }
 
         /* Botones */
         .btn-lucha {
             font-family: 'Bangers', cursive;
             font-size: 1.2rem;
-            border: 2px solid #000; border-radius: 12px;
+            border: 2px solid #000;
+            border-radius: 12px;
             box-shadow: 3px 3px 0 #000;
             transition: transform 0.1s;
-            background: white; color: black;
-            padding: 10px 15px; cursor: pointer;
-            text-decoration: none; display: inline-block;
+            background: white;
+            color: black;
+            padding: 10px 15px;
         }
         .btn-lucha:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #000; }
 
-        .btn-bio { background: #fff; color: var(--azul-titulo); margin-bottom: 10px; width: 100%; }
-        .btn-pinata { background: var(--morado-mx); color: white; margin-bottom: 20px; width: 100%; }
-        .btn-pinata:hover { color: #fff; background: #4a148c; }
-        
-        .level-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 10px; margin-top: 10px;
-        }
         .btn-nivel-1 { background: #81ecec; }
         .btn-nivel-2 { background: var(--amarillo-mx); }
         .btn-nivel-3 { background: var(--rosa-mexicano); color: white; }
 
-        /* --- MODALES --- */
+        /* --- PANTALLA JUEGO --- */
+        #screen-game {
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 10px 20px 10px;
+        }
+
+        /* Layout PC */
+        @media (min-width: 992px) {
+            #screen-game { flex-direction: row; justify-content: center; gap: 50px; }
+            #maze-container { max-height: 80vh !important; max-width: 80vh !important; }
+            .controls-panel { width: auto !important; }
+            .control-pad { width: 180px !important; gap: 10px !important; }
+            .c-btn { height: 70px !important; width: 70px !important; font-size: 2rem !important; }
+        }
+
+        #maze-container {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-height: 45vh;
+            aspect-ratio: 1 / 1;
+            position: relative;
+        }
+
+        #maze-wrapper {
+            background: #eee;
+            padding: 5px;
+            border: 5px solid var(--rosa-mexicano);
+            border-radius: 10px;
+            box-shadow: 0 0 0 4px #000, 5px 5px 20px rgba(0,0,0,0.8);
+            width: 100%;
+            height: 100%;
+        }
+
+        #maze-grid { display: grid; width: 100%; height: 100%; border: 2px solid #000; }
+
+        .cell {
+            display: flex; align-items: center; justify-content: center;
+            background: #fff;
+            border: 1px solid rgba(0,0,0,0.1);
+            font-size: clamp(14px, 4vw, 30px);
+        }
+        .wall { 
+            background: #2d3436; 
+            background-image: repeating-linear-gradient(45deg, #000 0, #000 2px, #2d3436 2px, #2d3436 6px);
+        }
+
+        .controls-panel {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .hud-bar {
+            background: #000;
+            color: var(--amarillo-mx);
+            padding: 5px 20px;
+            border-radius: 20px;
+            border: 2px solid #fff;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            box-shadow: 0 4px 0 rgba(255,255,255,0.2);
+        }
+
+        .control-pad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            width: 160px;
+        }
+
+        .c-btn {
+            width: 100%; aspect-ratio: 1/1;
+            border-radius: 12px;
+            background: var(--rosa-mexicano);
+            border: 2px solid #000;
+            box-shadow: 0 4px 0 #000;
+            color: white;
+            font-size: 1.5rem;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+        }
+        .c-btn:active { transform: translateY(3px); box-shadow: 0 0 0 #000; background: #c20066; }
+
+        .btn-salir {
+            background: #d63031; color: white; border: 2px solid #000;
+            padding: 5px 20px; border-radius: 20px; font-weight: bold; font-size: 1rem;
+            box-shadow: 0 3px 0 #000;
+        }
+
+        .float-msg {
+            position: absolute; font-family: 'Bangers'; font-size: 1.5rem; 
+            pointer-events: none; animation: floatUp 2.5s forwards; z-index: 5000; 
+            text-shadow: 2px 2px 0 #000; white-space: nowrap; font-weight: normal;
+        }
+        @keyframes floatUp { 
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+            10% { transform: translate(-50%, -80%) scale(1.1); opacity: 1; }
+            80% { transform: translate(-50%, -100px) scale(1); opacity: 1; }
+            100% { transform: translate(-50%, -120px) scale(0.8); opacity: 0; }
+        }
+
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.9); z-index: 9000; display: none;
@@ -129,27 +300,10 @@
         }
         .modal-box {
             background: #fff; border: 5px solid #000; padding: 25px;
-            text-align: center; width: 90%; max-width: 500px; border-radius: 20px;
-            box-shadow: 0 0 30px var(--amarillo-mx); position: relative;
+            text-align: center; width: 90%; max-width: 450px; border-radius: 20px;
+            box-shadow: 0 0 30px var(--amarillo-mx);
+            position: relative;
         }
-        .modal-bio-text {
-            font-size: 1rem; line-height: 1.5; text-align: justify;
-            margin: 20px 0; border-left: 4px solid var(--azul-titulo);
-            padding-left: 15px; background: #f8f9fa; padding: 10px;
-        }
-        .btn-salir {
-            background: #d63031; color: white; border: 2px solid #000;
-            padding: 5px 20px; border-radius: 20px; font-weight: bold; font-size: 1rem;
-            box-shadow: 0 3px 0 #000;
-        }
-
-        /* Créditos pequeños */
-        .footer-credits {
-            font-size: 0.75rem; margin-top: 20px; color: #666;
-            border-top: 1px dashed #ccc; padding-top: 10px;
-        }
-        .footer-credits a { color: var(--azul-titulo); text-decoration: none; font-weight: bold; }
-        
     </style>
 </head>
 <body>
@@ -157,66 +311,388 @@
     <div id="app-container">
         
         <div id="screen-menu">
-            <div class="menu-card">
-                <img src="https://cdn-icons-png.flaticon.com/512/2319/2319856.png" class="wrestling-mask" alt="Máscara">
+            <div class="menu-card animate__animated animate__fadeIn position-relative">
+                
+                <img src="wrestling_6769709.png" alt="Lucha" class="wrestling-mask">
 
                 <div class="title-container">
-                    <img src="https://img.freepik.com/foto-gratis/renderizacion-3d-avatar-llamada-zoom_23-2149556776.jpg" class="avatar-img" alt="Avatar">
-                    <div>
-                        <h1 class="main-title">LUCHA<br>FINANCIERA</h1>
-                        <span class="badge bg-danger lucha-font" style="font-size: 0.8rem;">Kids Edition</span>
+                    <div class="avatar-container" onclick="showBio()" title="¡Clic para conocer al Profesor!">
+                        <img src="ambro ortiz avatar.png" alt="Avatar" class="avatar-img">
+                        <div class="info-badge"><i class="fas fa-info"></i></div>
                     </div>
+                    
+                    <h1 class="main-title lucha-font">DIVULGANDO LAS<br>FINANZAS GAMES</h1>
                 </div>
 
-                <button class="btn-lucha btn-bio" onclick="toggleModal('modal-bio', true)">
-                    <i class="fas fa-user-graduate"></i> Conoce al Autor
-                </button>
+                <div class="social-links">
+                    <p>Les dejo mi perfil escolar en la descripción para que validen fuentes, gracias:</p>
+                    <a href="https://www.researchgate.net/profile/A-Ortiz-Ramirez" target="_blank">
+                        <i class="fas fa-graduation-cap"></i> ResearchGate
+                    </a> | 
+                    <a href="https://orcid.org/0000-0002-3698-2873" target="_blank">
+                        <i class="fab fa-orcid"></i> ORCID
+                    </a>
+                </div>
 
-                <a href="https://econ-master-8w1z.vercel.app/" class="btn-lucha btn-pinata">
-                    <i class="fas fa-star"></i> Jugar Piñatas de la Economía
+                <p class="h5 mb-2 lucha-font text-muted">elige tu cuadrilátero:</p>
+
+                <div class="d-grid gap-2 mb-3 px-md-4">
+                    <button class="btn btn-lucha btn-nivel-1 d-flex justify-content-between px-3 align-items-center" onclick="initLevel(1)">
+                        <span class="fw-bold">🪙 TANDA</span> <small>Corto Plazo</small>
+                    </button>
+                    <button class="btn btn-lucha btn-nivel-2 d-flex justify-content-between px-3 align-items-center" onclick="initLevel(2)">
+                        <span class="fw-bold">🚲 BICI</span> <small>Mediano Plazo</small>
+                    </button>
+                    <button class="btn btn-lucha btn-nivel-3 d-flex justify-content-between px-3 align-items-center" onclick="initLevel(3)">
+                        <span class="fw-bold">✈️ VIAJE MUNDIAL</span> <small>Largo Plazo</small>
+                    </button>
+                </div>
+
+                <a href="https://econ-master-8w1z.vercel.app/" target="_blank" class="btn btn-lucha w-100 py-2 text-white fw-bold text-decoration-none d-block mb-2" style="background: var(--morado-mx); border-color: black;">
+                    <span class="me-2">🪅</span> JUGAR PIÑATAS DE LA ECONOMÍA
                 </a>
 
-                <h3 class="lucha-font text-start mt-2">Selecciona Arena:</h3>
-                <div class="level-grid">
-                    <button class="btn-lucha btn-nivel-1">🧸 Juguete</button>
-                    <button class="btn-lucha btn-nivel-2">🚲 Bici</button>
-                    <button class="btn-lucha btn-nivel-3">✈️ Mundial</button>
-                </div>
-
-                <div class="footer-credits">
-                    Ambrosio Ortiz Ramírez &copy; 2025<br>
-                    Recurso gráfico: <a href="https://www.freepik.es/icono/lucha_6769709" target="_blank">Icono de Freepik</a>
-                </div>
+                <button class="btn btn-lucha w-100 py-2 btn-success text-white fw-bold" style="background: var(--verde-mx); border-color: black;" onclick="goToEconMaster()">
+                    <i class="fas fa-gamepad me-2"></i> JUGAR ECONMASTER
+                </button>
             </div>
         </div>
 
-        <div id="modal-bio" class="modal-overlay">
-            <div class="modal-box">
-                <h2 class="lucha-font" style="color: var(--azul-titulo);">👨‍🏫 El Profesor</h2>
-                
-                <div class="modal-bio-text">
-                    Ambrosio Ortiz Ramírez es Profesor Investigador en el IPN y miembro del SNI Nivel 1. Especialista en Econometría Financiera y Riesgos, combina la investigación académica rigurosa con la divulgación accesible a través de su proyecto "Divulgando las Finanzas", enfocándose en modelos estocásticos y derivados.
+        <div id="screen-game">
+            
+            <div id="maze-container">
+                <div id="maze-wrapper">
+                    <div id="maze-grid"></div>
+                </div>
+            </div>
+
+            <div class="controls-panel">
+                <div class="hud-bar">
+                    <span id="ui-lives" class="text-danger">❤️❤️❤️</span>
+                    <span id="ui-timer" class="fw-bold text-white"><i class="fas fa-clock"></i> 60</span>
                 </div>
 
-                <div class="d-flex justify-content-center gap-2">
-                    <a href="https://www.researchgate.net/profile/A-Ortiz-Ramirez" target="_blank" class="btn-lucha" style="background:#00cc88; font-size:0.9rem">
-                        <i class="fas fa-book"></i> ResearchGate
-                    </a>
-                    <button class="btn-lucha btn-salir" onclick="toggleModal('modal-bio', false)">CERRAR</button>
+                <div class="control-pad">
+                    <div></div> 
+                    <div class="c-btn" onmousedown="move(0,-1)" ontouchstart="move(0,-1, event)"><i class="fas fa-chevron-up"></i></div>
+                    <div></div> 
+                    
+                    <div class="c-btn" onmousedown="move(-1,0)" ontouchstart="move(-1,0, event)"><i class="fas fa-chevron-left"></i></div>
+                    <div class="c-btn" onmousedown="move(0,1)" ontouchstart="move(0,1, event)"><i class="fas fa-chevron-down"></i></div>
+                    <div class="c-btn" onmousedown="move(1,0)" ontouchstart="move(1,0, event)"><i class="fas fa-chevron-right"></i></div>
+                </div>
+
+                <div class="d-flex gap-3 mt-3">
+                    <button class="btn btn-warning rounded-circle border-2 border-dark shadow-sm" style="width:45px; height:45px" onclick="toggleMusic()" id="music-btn">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    <button class="btn-salir" onclick="exitToMenu()">SALIR</button>
                 </div>
             </div>
         </div>
-
     </div>
 
-    <script>
-        function toggleModal(modalId, show) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.style.display = show ? 'flex' : 'none';
-            }
-        }
-    </script>
+    <div id="modal-bio" class="modal-overlay">
+        <div class="modal-box text-start">
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-sm btn-danger fw-bold" onclick="showModal(null)">X</button>
+            </div>
+            <div class="text-center mb-3">
+                <img src="ambro ortiz avatar.png" class="avatar-img mb-2" style="width: 100px; height: 100px;">
+                <h3 class="lucha-font" style="color: var(--azul-titulo);">Ambrosio Ortiz Ramírez</h3>
+            </div>
+            <div class="px-2" style="font-size: 1.1rem; line-height: 1.5;">
+                <p><strong>Ambrosio Ortiz Ramírez</strong> es Profesor Investigador en el <strong>IPN</strong> y miembro del <strong>SNI Nivel 1</strong>.</p>
+                <p>Especialista en <strong>Econometría Financiera y Riesgos</strong>, combina la investigación académica rigurosa con la divulgación accesible a través de su proyecto <em>"Divulgando las Finanzas"</em>, enfocándose en modelos estocásticos y derivados.</p>
+            </div>
+            <button class="btn btn-lucha w-100 mt-3 btn-success text-white" onclick="showModal(null)">CERRAR</button>
+        </div>
+    </div>
+
+    <div id="modal-inst" class="modal-overlay">
+        <div class="modal-box">
+            <h2 class="lucha-font text-danger display-5">¡EL RETO!</h2>
+            <p class="fs-5 mb-2">Cuadrilátero: <strong id="inst-goal" style="color:var(--morado-mx)"></strong></p>
+            <hr class="border-2 border-dark my-3">
+            <div class="row text-start fs-6 my-3">
+                <div class="col-6 text-success fw-bold ls-1">✅ INGRESOS</div>
+                <div class="col-6 text-danger fw-bold ls-1">❌ GASTOS</div>
+            </div>
+            <button class="btn btn-lucha w-100 py-2 fs-4 fw-bold" style="background:var(--verde-mx); color:white;" onclick="startGame()">¡A LUCHAR!</button>
+        </div>
+    </div>
+
+    <div id="modal-lose" class="modal-overlay">
+        <div class="modal-box" style="border-color: red;">
+            <div class="display-1 mb-2">🔔</div>
+            <h2 class="lucha-font text-danger display-4">¡RINDIERON!</h2>
+            <p id="lose-msg" class="h5 fw-bold mb-3">...</p>
+            <button class="btn btn-lucha btn-dark w-100 py-2" onclick="exitToMenu()">INTENTAR DE NUEVO</button>
+        </div>
+    </div>
+
+    <div id="modal-win" class="modal-overlay">
+        <div class="modal-box" style="border-color: gold;">
+            <div class="display-1 mb-2">🏆</div>
+            <h2 class="lucha-font text-success display-4">¡CAMPEÓN!</h2>
+            <p id="win-msg" class="h5 fw-bold mb-3">...</p>
+            <button class="btn btn-lucha w-100 py-2" style="background:var(--amarillo-mx)" onclick="exitToMenu()">GENIAL</button>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const levels = {
+            1: { name: "TANDA (Corto Plazo)", size: 8, badRate: 0.25 },
+            2: { name: "BICI (Mediano Plazo)", size: 10, badRate: 0.30 },
+            3: { name: "VIAJE MUNDIAL (Largo Plazo)", size: 12, badRate: 0.35 }
+        };
+        
+        const items = {
+            good: [
+                {t:"¡TANDA!", i:"💰"}, {t:"¡AGUINALDO!", i:"🎁"},
+                {t:"¡MESES SIN INTERESES!", i:"🗓️"}, {t:"¡SIN COMISIONES!", i:"🚫"},
+                {t:"¡NO ANUALIDAD!", i:"💳"}, {t:"¡DEDUCIR!", i:"📝"},
+                {t:"¡ANTICIPADO!", i:"⏱️"}, {t:"¡AUTOMÁTICO!", i:"🔄"},
+                {t:"¡PUNTOS!", i:"🌟"}, {t:"¡CUPÓN!", i:"🎟️"},
+                {t:"¡PENSIÓN!", i:"👴"}, {t:"¡CONTADO!", i:"💵"},
+                {t:"¡DESCUENTO!", i:"🏷️"}, {t:"¡VENTA JUSTA!", i:"⚖️"},
+                {t:"¡UTILIDADES!", i:"🚀"}, {t:"¡SUPERÁVIT!", i:"➕"},
+                {t:"¡AHORRO!", i:"🐖"},
+                {t:"¡CETES!", i:"📈"}, {t:"¡AFORE!", i:"👵"},
+                {t:"¡CASHBACK!", i:"💸"}, {t:"¡BUEN BURÓ!", i:"📜"},
+                {t:"¡SEGURO!", i:"🛡️"}
+            ],
+            bad: [
+                {t:"¡MULTA!", i:"👮"}, {t:"¡RECARGO!", i:"😡"},
+                {t:"¡FRAUDE!", i:"👺"}, {t:"¡BANCARROTA!", i:"🏳️"},
+                {t:"¡DÉFICIT!", i:"📉"}, {t:"¡COMISIÓN!", i:"🤏"},
+                {t:"¡SIN REGISTRO!", i:"❓"}, {t:"¡SIN PLAN!", i:"🙈"},
+                {t:"¡LESIÓN!", i:"🤕"}, {t:"¡ENFERMEDAD!", i:"🤒"},
+                {t:"¡DEUDAS!", i:"💣"},
+                {t:"¡INFLACIÓN!", i:"🎈"}, {t:"¡GASTO VAMPIRO!", i:"🧛"},
+                {t:"¡CLONACIÓN!", i:"💳"}, {t:"¡USURA!", i:"🦈"},
+                {t:"¡DESEMPLEO!", i:"🚪"}
+            ]
+        };
+
+        let state = { lvl: 1, lives: 3, time: 60, active: false, canMove: true, collectedGood: 0, collectedBad: 0 };
+        let player = {x:0, y:0};
+        let grid = [];
+        let timerInt;
+        let musicOn = true; 
+        let audioContextUnlocked = false;
+
+        const sounds = {
+            bgm: new Audio('https://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/theme_01.mp3'), 
+            coin: new Audio('https://codeskulptor-demos.commondatastorage.googleapis.com/assets/sound/pickup.ogg'),
+            hurt: new Audio('https://codeskulptor-demos.commondatastorage.googleapis.com/assets/sound/explosion_01.ogg'),
+            win: new Audio('https://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/bonus.wav'),
+            lose: new Audio('https://codeskulptor-demos.commondatastorage.googleapis.com/assets/sound/explosion_02.ogg')
+        };
+        sounds.bgm.loop = true; sounds.bgm.volume = 0.6;
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function unlockAudio() {
+            if(audioContextUnlocked) return;
+            Object.values(sounds).forEach(s => {
+                s.play().then(() => { s.pause(); if(s !== sounds.bgm) s.currentTime = 0; }).catch(()=>{});
+            });
+            audioContextUnlocked = true;
+            if(musicOn && state.active) sounds.bgm.play();
+            document.removeEventListener('click', unlockAudio); document.removeEventListener('touchstart', unlockAudio); document.removeEventListener('keydown', unlockAudio);
+        }
+        document.addEventListener('click', unlockAudio); document.addEventListener('touchstart', unlockAudio); document.addEventListener('keydown', unlockAudio);
+
+        function toggleMusic() {
+            const btn = document.getElementById('music-btn');
+            musicOn = !musicOn;
+            if(musicOn) {
+                btn.innerHTML = '<i class="fas fa-volume-up"></i>'; btn.classList.remove('btn-danger'); btn.classList.add('btn-warning');
+                if(state.active && audioContextUnlocked) sounds.bgm.play().catch(()=>{});
+            } else {
+                btn.innerHTML = '<i class="fas fa-volume-mute"></i>'; btn.classList.remove('btn-warning'); btn.classList.add('btn-danger');
+                sounds.bgm.pause();
+            }
+        }
+
+        function playSfx(key) { if(musicOn && audioContextUnlocked) { try { const s = sounds[key].cloneNode(); s.volume = 0.6; s.play().catch(()=>{}); } catch(e) {} } }
+        function goToEconMaster() { if(confirm("¿Ir a EconMaster?")) window.location.href = "https://econ-master-8w1z.vercel.app/"; }
+
+        // --- FUNCIÓN PARA ABRIR BIO ---
+        function showBio() {
+            showModal('modal-bio');
+        }
+
+        function showScreen(id) {
+            document.getElementById('screen-menu').classList.remove('d-flex');
+            document.getElementById('screen-menu').style.display = 'none';
+            document.getElementById('screen-game').classList.remove('d-flex');
+            document.getElementById('screen-game').classList.add('d-none');
+            
+            if(id === 'screen-menu') {
+                document.getElementById('screen-menu').style.display = 'flex';
+                document.getElementById('screen-menu').classList.add('d-flex');
+            }
+            if(id === 'screen-game') {
+                document.getElementById('screen-game').classList.remove('d-none');
+                document.getElementById('screen-game').classList.add('d-flex');
+            }
+        }
+        
+        function showModal(id) {
+            document.querySelectorAll('.modal-overlay').forEach(el => el.style.display = 'none');
+            if(id) document.getElementById(id).style.display = 'flex';
+        }
+
+        function initLevel(lvl) {
+            unlockAudio();
+            state.lvl = lvl;
+            document.getElementById('inst-goal').innerText = levels[lvl].name;
+            showModal('modal-inst');
+        }
+
+        function exitToMenu() {
+            state.active = false; clearInterval(timerInt);
+            sounds.bgm.pause(); sounds.bgm.currentTime = 0;
+            showModal(null); showScreen('screen-menu');
+        }
+
+        function startGame() {
+            showModal(null); showScreen('screen-game');
+            state.lives = 3; state.time = 60; state.collectedGood = 0; state.collectedBad = 0;
+            state.active = true; state.canMove = true;
+            updateUI();
+            generateGrid(levels[state.lvl].size);
+            renderGrid();
+            clearInterval(timerInt);
+            timerInt = setInterval(() => { state.time--; updateUI(); if(state.time <= 0) gameOver("time"); }, 1000);
+            if(musicOn && audioContextUnlocked) sounds.bgm.play().catch(()=>{});
+            window.onkeydown = (e) => {
+                if(e.key === 'ArrowUp') move(0,-1); if(e.key === 'ArrowDown') move(0,1);
+                if(e.key === 'ArrowLeft') move(-1,0); if(e.key === 'ArrowRight') move(1,0);
+            };
+        }
+
+        function generateGrid(size) {
+            grid = []; 
+            const badRate = levels[state.lvl].badRate;
+            let goodPool = shuffleArray([...items.good]);
+            let badPool = shuffleArray([...items.bad]);
+
+            for(let y=0; y<size; y++) {
+                let row = [];
+                for(let x=0; x<size; x++) {
+                    let isWall = Math.random() < 0.3;
+                    if((x<2 && y<2) || (x>size-3 && y>size-3)) isWall = false;
+                    let item = null;
+                    if(!isWall && Math.random() < 0.3 && !(x===0 && y===0)) {
+                        const isBad = Math.random() < badRate;
+                        if(isBad) {
+                            if(badPool.length === 0) badPool = shuffleArray([...items.bad]);
+                            item = { ...badPool.pop(), type: 'bad' };
+                        } else {
+                            if(goodPool.length === 0) goodPool = shuffleArray([...items.good]);
+                            item = { ...goodPool.pop(), type: 'good' };
+                        }
+                    }
+                    row.push({ wall: isWall, item: item });
+                }
+                grid.push(row);
+            }
+            let cx=0, cy=0;
+            while(cx < size-1 || cy < size-1) {
+                grid[cy][cx].wall = false; if(grid[cy][cx].item?.type === 'bad') grid[cy][cx].item = null;
+                if(cx < size-1 && (Math.random()>0.5 || cy === size-1)) cx++; else cy++;
+            }
+            grid[size-1][size-1].wall = false; player = {x:0, y:0};
+        }
+
+        function renderGrid() {
+            const div = document.getElementById('maze-grid');
+            div.innerHTML = ''; const size = levels[state.lvl].size;
+            div.style.gridTemplateColumns = `repeat(${size}, 1fr)`; 
+            div.style.gridTemplateRows = `repeat(${size}, 1fr)`; 
+            for(let y=0; y<size; y++) {
+                for(let x=0; x<size; x++) {
+                    const cell = document.createElement('div'); cell.className = 'cell';
+                    const data = grid[y][x];
+                    if(data.wall) cell.classList.add('wall'); else if(data.item) cell.innerText = data.item.i;
+                    if(x===player.x && y===player.y) { cell.innerHTML = '🤼‍♂️'; cell.style.zIndex = 10; }
+                    if(x===size-1 && y===size-1) cell.innerHTML = '🏆';
+                    div.appendChild(cell);
+                }
+            }
+        }
+
+        function move(dx, dy, e) {
+            if(e && e.cancelable) e.preventDefault();
+            if(!state.active || !state.canMove) return;
+            if(musicOn && sounds.bgm.paused && audioContextUnlocked) sounds.bgm.play();
+            state.canMove = false; setTimeout(() => state.canMove = true, 120); 
+            const size = levels[state.lvl].size; let nx = player.x + dx; let ny = player.y + dy;
+            if(nx>=0 && nx<size && ny>=0 && ny<size && !grid[ny][nx].wall) {
+                player = {x:nx, y:ny};
+                const cell = grid[ny][nx];
+                const cellIndex = ny * size + nx;
+                const targetCell = document.getElementById('maze-grid').children[cellIndex];
+
+                if(cell.item) {
+                    floatText(cell.item.t, cell.item.type==='good'?'#00b894':'#d63031', targetCell);
+                    if(cell.item.type === 'good') { playSfx('coin'); state.collectedGood++; } 
+                    else { playSfx('hurt'); state.collectedBad++; state.lives--; updateUI(); 
+                        const wrap = document.getElementById('maze-wrapper'); wrap.style.borderColor = "white"; 
+                        setTimeout(()=>wrap.style.borderColor = "#E4007C", 100);
+                        if(state.lives <= 0) gameOver('lives'); 
+                    }
+                    cell.item = null; 
+                }
+                renderGrid();
+                if(nx === size-1 && ny === size-1) gameWin();
+            }
+        }
+
+        function updateUI() {
+            document.getElementById('ui-timer').innerHTML = `<i class="fas fa-clock"></i> ${state.time}`;
+            document.getElementById('ui-timer').className = state.time < 10 ? "fw-bold text-danger" : "fw-bold text-white";
+            let h = ""; for(let i=0;i<state.lives;i++) h+="❤️";
+            document.getElementById('ui-lives').innerText = h;
+        }
+
+        function gameOver(reason) {
+            state.active = false; playSfx('lose');
+            document.getElementById('lose-msg').innerText = reason === 'time' ? "¡TIEMPO AGOTADO!" : "¡SIN VIDA!";
+            showModal('modal-lose');
+        }
+
+        function gameWin() {
+            state.active = false; playSfx('win');
+            document.getElementById('win-msg').innerText = "¡GANASTE EN " + levels[state.lvl].name + "!";
+            showModal('modal-win');
+        }
+
+        function floatText(txt, col, target) {
+            const el = document.createElement('div');
+            el.innerText = txt;
+            el.className = 'float-msg';
+            el.style.color = col;
+            if(target) {
+                const rect = target.getBoundingClientRect();
+                el.style.left = (rect.left + rect.width / 2) + 'px';
+                el.style.top = (rect.top) + 'px';
+            } else {
+                el.style.left = '50%'; el.style.top = '50%';
+            }
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 2500);
+        }
+    </script>
 </body>
+
