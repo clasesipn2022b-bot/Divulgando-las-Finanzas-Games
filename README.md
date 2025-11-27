@@ -1,4 +1,3 @@
-<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -277,7 +276,7 @@
                 </div>
 
                 <div class="social-links">
-                    <p>Perfil escolar:</p>
+                    <p class="mb-1"><strong>Dr. Ambrosio Ortiz Ramírez</strong></p>
                     <a href="https://www.researchgate.net/profile/A-Ortiz-Ramirez" target="_blank"><i class="fas fa-graduation-cap"></i> ResearchGate</a> | 
                     <a href="https://orcid.org/0000-0002-3698-2873" target="_blank"><i class="fab fa-orcid"></i> ORCID</a>
                 </div>
@@ -290,13 +289,13 @@
 
                 <div class="d-grid gap-2 mb-2 px-md-4">
                     <button class="btn btn-lucha btn-nivel-1 d-flex justify-content-between px-3 align-items-center" onclick="initLevel(1)">
-                        <span class="fw-bold">🪙 TANDA</span> <small>Corto</small>
+                        <span class="fw-bold">🪙 TANDA</span> <small>Corto Plazo</small>
                     </button>
                     <button class="btn btn-lucha btn-nivel-2 d-flex justify-content-between px-3 align-items-center" onclick="initLevel(2)">
-                        <span class="fw-bold">🚲 BICI</span> <small>Medio</small>
+                        <span class="fw-bold">🚲 BICI</span> <small>Mediano Plazo</small>
                     </button>
                     <button class="btn btn-lucha btn-nivel-3 d-flex justify-content-between px-3 align-items-center" onclick="initLevel(3)">
-                        <span class="fw-bold">✈️ VIAJE</span> <small>Largo</small>
+                        <span class="fw-bold">✈️ VIAJE</span> <small>Largo Plazo</small>
                     </button>
                 </div>
 
@@ -320,8 +319,8 @@
             <div class="controls-panel">
                 <div class="hud-bar">
                     <span id="ui-lives" class="text-danger">❤️❤️❤️</span>
-                    <span class="text-success fw-bold"><i class="fas fa-check-circle"></i> <span id="ui-good">0</span></span>
-                    <span class="text-danger fw-bold"><i class="fas fa-times-circle"></i> <span id="ui-bad">0</span></span>
+                    <span class="text-success fw-bold" title="Aciertos"><i class="fas fa-check-circle"></i> <span id="ui-good">0</span></span>
+                    <span class="text-danger fw-bold" title="Errores"><i class="fas fa-times-circle"></i> <span id="ui-bad">0</span></span>
                     <span id="ui-timer" class="fw-bold text-white"><i class="fas fa-clock"></i> 60</span>
                 </div>
 
@@ -359,7 +358,7 @@
     <div id="modal-confirm" class="modal-overlay">
         <div class="modal-box">
             <h2 class="lucha-font text-success">¿Ir a EconMaster?</h2>
-            <p>Saldrás de este juego para ir a otro sitio.</p>
+            <p>Saldrás de este juego para ir a otro sitio educativo.</p>
             <div class="d-flex gap-2">
                 <button class="btn btn-secondary w-50" onclick="showModal(null)">Cancelar</button>
                 <button class="btn btn-success w-50 fw-bold" onclick="goToEconMasterReal()">¡VAMOS!</button>
@@ -370,10 +369,13 @@
     <div id="modal-inst" class="modal-overlay">
         <div class="modal-box">
             <h2 class="lucha-font text-danger">¡EL RETO!</h2>
-            <p class="mb-2">Cuadrilátero: <strong id="inst-goal" style="color:var(--morado-mx)"></strong></p>
+            <p class="mb-2">Nivel: <strong id="inst-goal" style="color:var(--morado-mx)"></strong></p>
+            <div class="alert alert-info py-2 small">
+                Recolecta <strong>Activos</strong> y evita los <strong>Pasivos</strong> para llegar al trofeo.
+            </div>
             <div class="row text-start small my-3">
-                <div class="col-6 text-success fw-bold">✅ INGRESOS</div>
-                <div class="col-6 text-danger fw-bold">❌ GASTOS</div>
+                <div class="col-6 text-success fw-bold">✅ BUENO<br><span style="font-weight:normal; font-size:0.8rem">Inversión, Ahorro, Cetes, Seguro.</span></div>
+                <div class="col-6 text-danger fw-bold">❌ MALO<br><span style="font-weight:normal; font-size:0.8rem">Inflación, Deuda, Fraudes, Gasto Vampiro.</span></div>
             </div>
             <button class="btn btn-lucha w-100 py-2 fs-4 fw-bold" style="background:var(--verde-mx); color:white;" onclick="startGame()">¡A LUCHAR!</button>
         </div>
@@ -382,10 +384,11 @@
     <div id="modal-lose" class="modal-overlay">
         <div class="modal-box" style="border-color: red;">
             <div class="display-1 mb-2">🔔</div>
-            <h2 class="lucha-font text-danger">¡RINDIERON!</h2>
+            <h2 class="lucha-font text-danger">¡TE RINDIERON!</h2>
             <p id="lose-msg" class="fw-bold">...</p>
-            <div class="alert alert-light border border-dark p-2 small mt-2">
-                <strong>💡 Tip Financiero:</strong> <span id="lose-tip">Evita los gastos hormiga para mejorar tu ahorro.</span>
+            <div class="alert alert-light border border-dark p-2 small mt-2 text-start">
+                <strong>💡 El Experto dice:</strong><br>
+                <span id="lose-tip" class="fst-italic">...</span>
             </div>
             <button class="btn btn-lucha btn-dark w-100 mt-2" onclick="exitToMenu()">REINTENTAR</button>
         </div>
@@ -396,8 +399,9 @@
             <div class="display-1 mb-2">🏆</div>
             <h2 class="lucha-font text-success">¡CAMPEÓN!</h2>
             <p id="win-msg" class="fw-bold">...</p>
-            <div class="alert alert-success border border-dark p-2 small mt-2">
-                <strong>💡 Sabías que:</strong> <span id="win-tip">Invertir a largo plazo reduce el riesgo.</span>
+            <div class="alert alert-success border border-dark p-2 small mt-2 text-start">
+                <strong>💡 Consejo de Oro:</strong><br>
+                <span id="win-tip" class="fst-italic">...</span>
             </div>
             <button class="btn btn-lucha w-100 mt-2" style="background:var(--amarillo-mx)" onclick="exitToMenu()">GENIAL</button>
         </div>
@@ -418,37 +422,42 @@
             3: { name: "VIAJE MUNDIAL (Largo Plazo)", size: 12, badRate: 0.35 }
         };
         
+        // Items actualizados con más términos financieros relevantes
         const items = {
             good: [
-                {t:"¡TANDA!", i:"💰"}, {t:"¡AGUINALDO!", i:"🎁"},
-                {t:"¡MESES SIN INTERESES!", i:"🗓️"}, {t:"¡SIN COMISIONES!", i:"🚫"},
-                {t:"¡NO ANUALIDAD!", i:"💳"}, {t:"¡DEDUCIR!", i:"📝"},
-                {t:"¡ANTICIPADO!", i:"⏱️"}, {t:"¡AUTOMÁTICO!", i:"🔄"},
-                {t:"¡PUNTOS!", i:"🌟"}, {t:"¡CUPÓN!", i:"🎟️"},
-                {t:"¡PENSIÓN!", i:"👴"}, {t:"¡CONTADO!", i:"💵"},
-                {t:"¡DESCUENTO!", i:"🏷️"}, {t:"¡VENTA JUSTA!", i:"⚖️"},
-                {t:"¡UTILIDADES!", i:"🚀"}, {t:"¡SUPERÁVIT!", i:"➕"},
-                {t:"¡AHORRO!", i:"🐖"}, {t:"¡CETES!", i:"📈"}, {t:"¡AFORE!", i:"👵"},
-                {t:"¡CASHBACK!", i:"💸"}, {t:"¡BUEN BURÓ!", i:"📜"}, {t:"¡SEGURO!", i:"🛡️"}
+                {t:"¡CETES DIRECTO!", i:"📈"}, {t:"¡FONDO EMERGENCIA!", i:"💰"},
+                {t:"¡INTERÉS COMPUESTO!", i:"🚀"}, {t:"¡DIVERSIFICACIÓN!", i:"📊"},
+                {t:"¡SEGURO GASTOS MÉDICOS!", i:"🛡️"}, {t:"¡APORTACIÓN AFORE!", i:"👵"},
+                {t:"¡PRESUPUESTO!", i:"📝"}, {t:"¡CASHBACK!", i:"💸"},
+                {t:"¡INGRESOS PASIVOS!", i:"🛌"}, {t:"¡EDUCACIÓN FINANCIERA!", i:"🎓"},
+                {t:"¡PAGAR TOTAL TARJETA!", i:"💳"}, {t:"¡DESCUENTO PRONTO PAGO!", i:"🏷️"},
+                {t:"¡BONO PRODUCTIVIDAD!", i:"🏆"}, {t:"¡DIVIDENDOS!", i:"💵"}
             ],
             bad: [
-                {t:"¡MULTA!", i:"👮"}, {t:"¡RECARGO!", i:"😡"},
-                {t:"¡FRAUDE!", i:"👺"}, {t:"¡BANCARROTA!", i:"🏳️"},
-                {t:"¡DÉFICIT!", i:"📉"}, {t:"¡COMISIÓN!", i:"🤏"},
-                {t:"¡SIN REGISTRO!", i:"❓"}, {t:"¡SIN PLAN!", i:"🙈"},
-                {t:"¡LESIÓN!", i:"🤕"}, {t:"¡ENFERMEDAD!", i:"🤒"},
-                {t:"¡DEUDAS!", i:"💣"}, {t:"¡INFLACIÓN!", i:"🎈"}, 
-                {t:"¡GASTO VAMPIRO!", i:"🧛"}, {t:"¡CLONACIÓN!", i:"💳"}, 
-                {t:"¡USURA!", i:"🦈"}, {t:"¡DESEMPLEO!", i:"🚪"}
+                {t:"¡INFLACIÓN!", i:"🎈"}, {t:"¡GASTO HORMIGA!", i:"☕"},
+                {t:"¡GASTO VAMPIRO!", i:"🧛"}, {t:"¡ESTAFA PIRAMIDAL!", i:"🔺"},
+                {t:"¡INTERESES MORATORIOS!", i:"🤬"}, {t:"¡TARJETAZO!", i:"💳"},
+                {t:"¡SIN SEGURO!", i:"🤕"}, {t:"¡DEVALUACIÓN!", i:"📉"},
+                {t:"¡COMPRA IMPULSIVA!", i:"🛍️"}, {t:"¡USURA!", i:"🦈"},
+                {t:"¡ROBO IDENTIDAD!", i:"🎭"}, {t:"¡CLONACIÓN!", i:"📵"},
+                {t:"¡SIN CONTRATO!", i:"🚫"}, {t:"¡MULTA SAT!", i:"👮"}
             ]
         };
 
+        // TIPS MEJORADOS Y AMPLIADOS (Basados en investigación financiera)
         const tips = [
-            "Los CETES son instrumentos de inversión seguros del gobierno.",
-            "Evita los gastos hormiga (café diario, chicles) para ahorrar más.",
-            "Pagar el total de tu tarjeta evita intereses.",
-            "El interés compuesto hace crecer tu dinero con el tiempo.",
-            "Diversificar tus inversiones reduce el riesgo de perder dinero."
+            "La Tanda no le gana a la inflación. ¡Mejor abre tu cuenta en CETES Directo desde $100 pesos!",
+            "Evita los 'Gastos Vampiro': Esas suscripciones que pagas mensualmente y nunca usas.",
+            "Paga el total de tu tarjeta de crédito (Totalero) para no regalar dinero en intereses.",
+            "El Interés Compuesto es tu mejor aliado: reinvierte tus ganancias para crecer exponencialmente.",
+            "Diversificar es la clave: 'No pongas todos los huevos en la misma canasta'.",
+            "Tu AFORE es vital. Hacer aportaciones voluntarias hoy, te salvará mañana.",
+            "El Fondo de Emergencia debe cubrir al menos 3 meses de tus gastos fijos.",
+            "La tarjeta de crédito no es dinero extra, es deuda que debes pagar.",
+            "Diferencia entre Deseo y Necesidad antes de comprar algo caro.",
+            "La inflación hace que tu dinero guardado bajo el colchón valga menos cada año.",
+            "Un seguro no es un gasto, es una inversión que protege tu patrimonio ante desgracias.",
+            "Invierte a largo plazo en instrumentos regulados para reducir el riesgo."
         ];
 
         let state = { lvl: 1, lives: 3, time: 60, active: false, canMove: true, collectedGood: 0, collectedBad: 0 };
@@ -465,7 +474,7 @@
             win: new Audio('https://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/bonus.wav'),
             lose: new Audio('https://codeskulptor-demos.commondatastorage.googleapis.com/assets/sound/explosion_02.ogg')
         };
-        sounds.bgm.loop = true; sounds.bgm.volume = 0.6;
+        sounds.bgm.loop = true; sounds.bgm.volume = 0.5;
 
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
@@ -512,10 +521,9 @@
 
         function playSfx(key) { if(musicOn && audioContextUnlocked) { try { const s = sounds[key].cloneNode(); s.volume = 0.6; s.play().catch(()=>{}); } catch(e) {} } }
         
-        // --- CONFIRMACIÓN PERSONALIZADA ---
         function confirmEconMaster() { showModal('modal-confirm'); }
         function goToEconMasterReal() { window.location.href = "https://econ-master-8w1z.vercel.app/"; }
-        function goToEconMaster() { confirmEconMaster(); } // Alias por compatibilidad
+        function goToEconMaster() { confirmEconMaster(); } 
 
         function showBio() { showModal('modal-bio'); }
 
@@ -556,7 +564,10 @@
 
         function startGame() {
             showModal(null); showScreen('screen-game');
-            state.lives = 3; state.time = 60; state.collectedGood = 0; state.collectedBad = 0;
+            state.lives = 3; 
+            // Tiempo dinámico según dificultad
+            state.time = state.lvl === 1 ? 45 : (state.lvl === 2 ? 60 : 80); 
+            state.collectedGood = 0; state.collectedBad = 0;
             state.active = true; state.canMove = true;
             updateUI();
             generateGrid(levels[state.lvl].size);
@@ -564,7 +575,10 @@
             clearInterval(timerInt);
             timerInt = setInterval(() => { state.time--; updateUI(); if(state.time <= 0) gameOver("time"); }, 1000);
             if(musicOn && audioContextUnlocked) sounds.bgm.play().catch(()=>{});
+            
             window.onkeydown = (e) => {
+                if(!state.active) return;
+                if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key)) e.preventDefault();
                 if(e.key === 'ArrowUp') move(0,-1); if(e.key === 'ArrowDown') move(0,1);
                 if(e.key === 'ArrowLeft') move(-1,0); if(e.key === 'ArrowRight') move(1,0);
             };
@@ -582,7 +596,7 @@
                     let isWall = Math.random() < 0.3;
                     if((x<2 && y<2) || (x>size-3 && y>size-3)) isWall = false;
                     let item = null;
-                    if(!isWall && Math.random() < 0.3 && !(x===0 && y===0)) {
+                    if(!isWall && Math.random() < 0.35 && !(x===0 && y===0)) {
                         const isBad = Math.random() < badRate;
                         if(isBad) {
                             if(badPool.length === 0) badPool = shuffleArray([...items.bad]);
@@ -596,12 +610,15 @@
                 }
                 grid.push(row);
             }
+            // Asegurar camino (camino aleatorio simple para garantizar jugabilidad mínima)
             let cx=0, cy=0;
             while(cx < size-1 || cy < size-1) {
                 grid[cy][cx].wall = false; if(grid[cy][cx].item?.type === 'bad') grid[cy][cx].item = null;
                 if(cx < size-1 && (Math.random()>0.5 || cy === size-1)) cx++; else cy++;
             }
-            grid[size-1][size-1].wall = false; player = {x:0, y:0};
+            grid[size-1][size-1].wall = false; 
+            if(grid[size-1][size-1].item) grid[size-1][size-1].item = null;
+            player = {x:0, y:0};
         }
 
         function renderGrid() {
@@ -624,9 +641,12 @@
         function move(dx, dy, e) {
             if(e && e.cancelable) e.preventDefault();
             if(!state.active || !state.canMove) return;
-            if(musicOn && sounds.bgm.paused && audioContextUnlocked) sounds.bgm.play();
-            state.canMove = false; setTimeout(() => state.canMove = true, 120); 
+            
+            if(musicOn && sounds.bgm.paused && audioContextUnlocked) sounds.bgm.play().catch(()=>{});
+            
+            state.canMove = false; setTimeout(() => state.canMove = true, 100); 
             const size = levels[state.lvl].size; let nx = player.x + dx; let ny = player.y + dy;
+            
             if(nx>=0 && nx<size && ny>=0 && ny<size && !grid[ny][nx].wall) {
                 player = {x:nx, y:ny};
                 const cell = grid[ny][nx];
@@ -635,8 +655,10 @@
 
                 if(cell.item) {
                     floatText(cell.item.t, cell.item.type==='good'?'#00b894':'#d63031', targetCell);
-                    if(cell.item.type === 'good') { playSfx('coin'); state.collectedGood++; } 
-                    else { playSfx('hurt'); state.collectedBad++; state.lives--; updateUI(); 
+                    if(cell.item.type === 'good') { 
+                        playSfx('coin'); state.collectedGood++; 
+                    } else { 
+                        playSfx('hurt'); state.collectedBad++; state.lives--; updateUI(); 
                         const wrap = document.getElementById('maze-wrapper'); wrap.style.borderColor = "white"; 
                         setTimeout(()=>wrap.style.borderColor = "#E4007C", 100);
                         if(state.lives <= 0) gameOver('lives'); 
@@ -662,7 +684,7 @@
             state.active = false; playSfx('lose');
             saveHighScore(state.collectedGood);
             const tip = tips[Math.floor(Math.random() * tips.length)];
-            document.getElementById('lose-msg').innerText = reason === 'time' ? "¡TIEMPO AGOTADO!" : "¡SIN VIDA!";
+            document.getElementById('lose-msg').innerText = reason === 'time' ? "¡SE ACABÓ EL TIEMPO!" : "¡TE QUEDASTE SIN VIDA!";
             document.getElementById('lose-tip').innerText = tip;
             showModal('modal-lose');
         }
