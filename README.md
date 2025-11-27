@@ -11,7 +11,7 @@
     <style>
         /* --- PALETA DE COLORES --- */
         :root {
-            --azul-titulo: #0d47a1; /* Azul fuerte para el título */
+            --azul-titulo: #0d47a1; 
             --rosa-mexicano: #E4007C;
             --amarillo-mx: #FFD700;
             --verde-mx: #009c3b;
@@ -75,16 +75,19 @@
             width: 100%;
             box-shadow: 10px 10px 0 var(--morado-mx);
             margin: auto;
+            position: relative; /* Para posicionar la máscara */
         }
 
         /* Header con Avatar y Título */
         .title-container {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: center; /* Centrado */
             gap: 15px;
             margin-bottom: 15px;
-            flex-wrap: wrap; /* Para que se ajuste en pantallas muy pequeñas */
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
         }
 
         /* Avatar al lado del título */
@@ -98,24 +101,25 @@
             object-fit: cover;
         }
 
+        /* Máscara Decorativa */
+        .wrestling-mask {
+            width: 50px;
+            height: auto;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            filter: drop-shadow(2px 2px 0 #000);
+            z-index: 1;
+        }
+
         /* Título en Azul */
         .main-title {
-            color: var(--azul-titulo); /* Color Azul solicitado */
+            color: var(--azul-titulo);
             text-shadow: 2px 2px 0 #fff, 4px 4px 0 #000;
             font-size: clamp(1.8rem, 5vw, 3rem);
             margin: 0;
             line-height: 1;
             text-align: left;
-        }
-
-        /* Máscara decorativa (pequeña) */
-        .wrestling-mask {
-            width: 40px;
-            height: auto;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            opacity: 0.8;
         }
 
         /* Enlaces Escolares */
@@ -283,8 +287,10 @@
     <div id="app-container">
         
         <div id="screen-menu">
-            <div class="menu-card animate__animated animate__fadeIn position-relative">
+            <div class="menu-card animate__animated animate__fadeIn">
                 
+                <img src="wrestling_6769709.png" alt="Lucha" class="wrestling-mask">
+
                 <div class="title-container">
                     <img src="ambro ortiz avatar.png" alt="Avatar" class="avatar-img">
                     <h1 class="main-title lucha-font">DIVULGANDO LAS<br>FINANZAS GAMES</h1>
