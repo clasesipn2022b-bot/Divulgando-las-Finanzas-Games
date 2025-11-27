@@ -407,8 +407,8 @@
             good: [
                 {t:"¡TANDA!", i:"💰"}, {t:"¡AGUINALDO!", i:"🎁"},
                 {t:"¡MESES SIN INTERESES!", i:"🗓️"}, {t:"¡SIN COMISIONES!", i:"🚫"},
-                {t:"¡NO ANUALIDAD!", i:"💳"}, {t:"¡DEDUCIR!", i:"📝"},
-                {t:"¡ANTICIPADO!", i:"⏱️"}, {t:"¡AUTOMÁTICO!", i:"🔄"},
+                {t:"¡NO ANUALIDAD!", i:"💳"}, {t:"¡DEDUCIR IMPUESTOS!", i:"📝"},
+                {t:"¡ANTICIPADO!", i:"⏱️"}, {t:"¡PAGO AUTOMÁTICO!", i:"🔄"},
                 {t:"¡PUNTOS!", i:"🌟"}, {t:"¡CUPÓN!", i:"🎟️"},
                 {t:"¡PENSIÓN!", i:"👴"}, {t:"¡CONTADO!", i:"💵"},
                 {t:"¡DESCUENTO!", i:"🏷️"}, {t:"¡VENTA JUSTA!", i:"⚖️"},
@@ -624,7 +624,7 @@
 
         function gameWin() {
             state.active = false; playSfx('win');
-            document.getElementById('win-msg').innerText = "¡GANASTE EN " + levels[state.lvl].name + "!";
+            document.getElementById('win-msg').innerText = "¡ERES NUESTRO CAMPEÓN, GANASTE EN " + levels[state.lvl].name + "!";
             showModal('modal-win');
         }
 
