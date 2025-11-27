@@ -2,7 +2,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
     <title>Luchas por las Finanzas de México</title>
+    <meta name="description" content="Juego educativo financiero del Dr. Ambrosio Ortiz. Aprende sobre ingresos, gastos y riesgos en el ring de la economía.">
+    <meta property="og:title" content="Luchas por las Finanzas de México">
+    <meta property="og:description" content="¡Súbete al ring y defiende tu dinero! Un juego educativo del IPN.">
+    <meta property="og:image" content="wrestling_6769709.png">
+    <meta property="og:url" content="https://ambrosioortizramirez.link">
+    <meta name="theme-color" content="#E4007C">
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
@@ -25,7 +32,7 @@
             background-image: radial-gradient(#333 1px, transparent 1px);
             background-size: 20px 20px;
             color: #333;
-            height: 100dvh; /* Altura dinámica para móviles */
+            height: 100dvh; 
             width: 100vw;
             overflow: hidden; 
             user-select: none;
@@ -43,6 +50,27 @@
             text-transform: uppercase;
         }
 
+        /* --- PANTALLA DE CARGA (Preloader) --- */
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--fondo-oscuro); z-index: 9999;
+            display: flex; justify-content: center; align-items: center;
+            color: var(--rosa-mexicano); font-size: 2rem;
+            transition: opacity 0.5s;
+        }
+
+        /* --- AVISO DE ROTACIÓN (Mejora UX) --- */
+        #rotation-warning {
+            display: none;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); z-index: 9998;
+            color: white; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+        }
+        @media screen and (orientation: landscape) and (max-height: 500px) {
+            #rotation-warning { display: flex !important; }
+        }
+
         /* --- WRAPPER GENERAL --- */
         #app-container {
             width: 100%;
@@ -55,12 +83,9 @@
 
         /* --- PANTALLA MENÚ --- */
         #screen-menu {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            width: 100%; height: 100%;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
             padding: 10px;
         }
 
@@ -75,115 +100,69 @@
             box-shadow: 8px 8px 0 var(--morado-mx);
             margin: auto;
             position: relative;
-            
-            /* PROPIEDADES CLAVE PARA QUE QUEPAN LOS BOTONES EN MÓVIL */
-            max-height: 98vh; /* Nunca más alto que la pantalla */
-            overflow-y: auto; /* Scroll interno si es necesario */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            max-height: 98vh;
+            overflow-y: auto;
+            display: flex; flex-direction: column; justify-content: center;
         }
 
         /* Header Compacto */
         .title-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 5px;
-            flex-wrap: nowrap;
-            position: relative;
-            z-index: 2;
+            display: flex; align-items: center; justify-content: center;
+            gap: 10px; margin-bottom: 5px; position: relative; z-index: 2;
         }
 
-        /* Avatar Ajustable */
         .avatar-img {
-            width: 60px; /* Más pequeño en móvil */
-            height: 60px;
-            border: 2px solid #000;
-            border-radius: 50%;
+            width: 60px; height: 60px;
+            border: 2px solid #000; border-radius: 50%;
             box-shadow: 2px 2px 0 var(--amarillo-mx);
-            background: white;
-            object-fit: cover;
-            flex-shrink: 0;
+            background: white; object-fit: cover; flex-shrink: 0;
+            cursor: pointer; transition: transform 0.2s;
         }
+        .avatar-img:hover { transform: scale(1.1); }
 
-        /* Máscara Ajustable */
         .wrestling-mask {
-            width: 40px; /* Más pequeña */
-            height: auto;
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            filter: drop-shadow(1px 1px 0 #000);
-            z-index: 1;
-            opacity: 0.9;
+            width: 40px; height: auto; position: absolute;
+            top: 5px; right: 5px; filter: drop-shadow(1px 1px 0 #000);
+            z-index: 1; opacity: 0.9;
         }
 
-        /* Título CORREGIDO y AJUSTADO */
         .main-title {
             color: var(--azul-titulo);
             text-shadow: 1px 1px 0 #fff, 3px 3px 0 #000;
-            /* Fuente más pequeña por defecto para móvil */
-            font-size: 1.6rem; 
-            margin: 0;
-            line-height: 1.1;
-            text-align: left;
+            font-size: 1.6rem; margin: 0; line-height: 1.1; text-align: left;
         }
 
-        /* Enlaces Escolares Compactos */
         .social-links {
-            font-size: 0.8rem;
-            color: #444;
-            background: #f8f9fa;
-            padding: 5px;
-            border-radius: 8px;
-            border: 1px solid #eee;
-            margin-bottom: 10px;
+            font-size: 0.8rem; color: #444; background: #f8f9fa;
+            padding: 5px; border-radius: 8px; border: 1px solid #eee; margin-bottom: 10px;
         }
-        .social-links p { margin-bottom: 2px; font-weight: bold; display: none; } /* Ocultar texto largo en móvil muy pequeño */
-        .social-links a { color: var(--morado-mx); text-decoration: none; font-weight: bold; margin: 0 5px; font-size: 0.9rem; }
+        .social-links a { color: var(--morado-mx); text-decoration: none; font-weight: bold; margin: 0 5px; }
 
-        /* Botones Optimizados */
         .btn-lucha {
-            font-family: 'Bangers', cursive;
-            font-size: 1.1rem; /* Fuente legible pero compacta */
-            border: 2px solid #000;
-            border-radius: 8px;
-            box-shadow: 3px 3px 0 #000;
-            transition: transform 0.1s;
-            background: white;
-            color: black;
-            padding: 8px 10px; /* Menos relleno vertical */
-            margin-bottom: 0; /* Controlado por el grid gap */
+            font-family: 'Bangers', cursive; font-size: 1.1rem;
+            border: 2px solid #000; border-radius: 8px;
+            box-shadow: 3px 3px 0 #000; transition: transform 0.1s;
+            background: white; color: black; padding: 8px 10px;
         }
         .btn-lucha:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #000; }
 
-        /* Colores Niveles */
         .btn-nivel-1 { background: #81ecec; }
         .btn-nivel-2 { background: var(--amarillo-mx); }
         .btn-nivel-3 { background: var(--rosa-mexicano); color: white; }
 
-        /* Media Query para Pantallas Grandes (Laptop/PC) */
+        /* Media Query PC */
         @media (min-width: 768px) {
             .menu-card { padding: 30px; overflow-y: visible; max-height: none; }
-            .avatar-img { width: 90px; height: 90px; border-width: 3px; box-shadow: 4px 4px 0 var(--amarillo-mx); }
+            .avatar-img { width: 90px; height: 90px; border-width: 3px; }
             .wrestling-mask { width: 60px; top: 15px; right: 15px; }
             .main-title { font-size: 3rem; text-shadow: 2px 2px 0 #fff, 4px 4px 0 #000; }
-            .social-links p { display: block; font-size: 0.9rem; }
-            .social-links { padding: 10px; margin-bottom: 20px; }
-            .btn-lucha { font-size: 1.4rem; padding: 12px 20px; border-width: 3px; border-radius: 12px; }
-            .title-container { margin-bottom: 20px; gap: 20px; }
+            .btn-lucha { font-size: 1.4rem; padding: 12px 20px; border-width: 3px; }
         }
 
         /* --- PANTALLA JUEGO --- */
         #screen-game {
-            width: 100%;
-            height: 100%;
-            display: none;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
+            width: 100%; height: 100%; display: none;
+            flex-direction: column; justify-content: space-between; align-items: center;
             padding: 10px 10px 20px 10px;
         }
 
@@ -196,32 +175,21 @@
         }
 
         #maze-container {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            max-height: 45vh;
-            aspect-ratio: 1 / 1;
-            position: relative;
+            flex-grow: 1; display: flex; justify-content: center; align-items: center;
+            width: 100%; max-height: 45vh; aspect-ratio: 1 / 1; position: relative;
         }
 
         #maze-wrapper {
-            background: #eee;
-            padding: 5px;
-            border: 5px solid var(--rosa-mexicano);
-            border-radius: 10px;
-            box-shadow: 0 0 0 4px #000, 5px 5px 20px rgba(0,0,0,0.8);
-            width: 100%;
-            height: 100%;
+            background: #eee; padding: 5px; border: 5px solid var(--rosa-mexicano);
+            border-radius: 10px; box-shadow: 0 0 0 4px #000, 5px 5px 20px rgba(0,0,0,0.8);
+            width: 100%; height: 100%;
         }
 
         #maze-grid { display: grid; width: 100%; height: 100%; border: 2px solid #000; }
 
         .cell {
             display: flex; align-items: center; justify-content: center;
-            background: #fff;
-            border: 1px solid rgba(0,0,0,0.1);
+            background: #fff; border: 1px solid rgba(0,0,0,0.1);
             font-size: clamp(14px, 4vw, 30px);
         }
         .wall { 
@@ -230,55 +198,47 @@
         }
 
         .controls-panel {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            flex-shrink: 0;
+            width: 100%; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; gap: 8px; flex-shrink: 0;
         }
 
         .hud-bar {
-            background: #000;
-            color: var(--amarillo-mx);
-            padding: 5px 20px;
-            border-radius: 20px;
-            border: 2px solid #fff;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-            box-shadow: 0 4px 0 rgba(255,255,255,0.2);
+            background: #000; color: white; padding: 5px 15px;
+            border-radius: 15px; border: 2px solid var(--amarillo-mx);
+            display: flex; justify-content: space-between; align-items: center;
+            width: 100%; max-width: 400px; font-size: 1rem; margin-bottom: 5px;
         }
 
         .control-pad {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 5px;
-            width: 150px;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; width: 150px;
         }
 
         .c-btn {
-            width: 100%; aspect-ratio: 1/1;
-            border-radius: 12px;
-            background: var(--rosa-mexicano);
-            border: 2px solid #000;
-            box-shadow: 0 4px 0 #000;
-            color: white;
-            font-size: 1.5rem;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer;
+            width: 100%; aspect-ratio: 1/1; border-radius: 10px;
+            background: var(--rosa-mexicano); border: 2px solid #000;
+            box-shadow: 0 3px 0 #000; color: white; font-size: 1.4rem;
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
         }
-        .c-btn:active { transform: translateY(3px); box-shadow: 0 0 0 #000; background: #c20066; }
+        .c-btn:active { transform: translateY(2px); box-shadow: 0 0 0 #000; background: #c20066; }
 
         .btn-salir {
             background: #d63031; color: white; border: 2px solid #000;
-            padding: 5px 20px; border-radius: 20px; font-weight: bold; font-size: 1rem;
-            box-shadow: 0 3px 0 #000;
+            padding: 4px 15px; border-radius: 15px; font-weight: bold; font-size: 0.9rem;
         }
 
+        /* --- MODALES --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 9000; display: none;
+            align-items: center; justify-content: center; backdrop-filter: blur(5px);
+        }
+        .modal-box {
+            background: #fff; border: 5px solid #000; padding: 20px;
+            text-align: center; width: 90%; max-width: 400px; border-radius: 20px;
+            box-shadow: 0 0 30px var(--amarillo-mx);
+        }
+
+        /* Texto flotante */
         .float-msg {
             position: absolute; font-family: 'Bangers'; font-size: 1.5rem; 
             pointer-events: none; animation: floatUp 2.5s forwards; z-index: 5000; 
@@ -290,21 +250,19 @@
             80% { transform: translate(-50%, -100px) scale(1); opacity: 1; }
             100% { transform: translate(-50%, -120px) scale(0.8); opacity: 0; }
         }
-
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); z-index: 9000; display: none;
-            align-items: center; justify-content: center; backdrop-filter: blur(5px);
-        }
-        .modal-box {
-            background: #fff; border: 5px solid #000; padding: 25px;
-            text-align: center; width: 90%; max-width: 450px; border-radius: 20px;
-            box-shadow: 0 0 30px var(--amarillo-mx);
-            position: relative;
-        }
     </style>
 </head>
 <body>
+
+    <div id="preloader">
+        <div class="spinner-border text-warning" role="status"></div>
+    </div>
+
+    <div id="rotation-warning">
+        <i class="fas fa-mobile-alt fa-3x mb-3" style="transform: rotate(90deg);"></i>
+        <h3>Por favor, gira tu dispositivo</h3>
+        <p>Este juego está optimizado para modo vertical en móviles.</p>
+    </div>
 
     <div id="app-container">
         
@@ -314,50 +272,45 @@
                 <img src="wrestling_6769709.png" alt="Lucha" class="wrestling-mask">
 
                 <div class="title-container">
-                    <div class="avatar-container" onclick="showBio()" title="Ver Biografía">
-                        <img src="ambro ortiz avatar.png" alt="Avatar" class="avatar-img">
-                    </div>
+                    <img src="ambro ortiz avatar.png" alt="Avatar" class="avatar-img" onclick="showBio()" title="Clic para Biografía">
                     <h1 class="main-title lucha-font">LUCHAS POR LAS<br>FINANZAS DE MÉXICO</h1>
                 </div>
 
                 <div class="social-links">
                     <p>Perfil escolar:</p>
-                    <a href="https://www.researchgate.net/profile/A-Ortiz-Ramirez" target="_blank">
-                        <i class="fas fa-graduation-cap"></i> ResearchGate
-                    </a> | 
-                    <a href="https://orcid.org/0000-0002-3698-2873" target="_blank">
-                        <i class="fab fa-orcid"></i> ORCID
-                    </a>
+                    <a href="https://www.researchgate.net/profile/A-Ortiz-Ramirez" target="_blank"><i class="fas fa-graduation-cap"></i> ResearchGate</a> | 
+                    <a href="https://orcid.org/0000-0002-3698-2873" target="_blank"><i class="fab fa-orcid"></i> ORCID</a>
+                </div>
+
+                <div id="highscore-display" class="alert alert-warning py-1 small fw-bold mb-2">
+                    🏆 Tu Récord: <span id="menu-highscore">0</span>
                 </div>
 
                 <p class="h6 mb-2 lucha-font text-muted">elige tu cuadrilátero:</p>
 
                 <div class="d-grid gap-2 mb-2 px-md-4">
                     <button class="btn btn-lucha btn-nivel-1 d-flex justify-content-between px-3 align-items-center" onclick="initLevel(1)">
-                        <span class="fw-bold">🪙 TANDA</span> <small>Corto Plazo</small>
+                        <span class="fw-bold">🪙 TANDA</span> <small>Corto</small>
                     </button>
                     <button class="btn btn-lucha btn-nivel-2 d-flex justify-content-between px-3 align-items-center" onclick="initLevel(2)">
-                        <span class="fw-bold">🚲 BICI</span> <small>Mediano Plazo</small>
+                        <span class="fw-bold">🚲 BICI</span> <small>Medio</small>
                     </button>
                     <button class="btn btn-lucha btn-nivel-3 d-flex justify-content-between px-3 align-items-center" onclick="initLevel(3)">
-                        <span class="fw-bold">✈️ VIAJE</span> <small>Largo Plazo</small>
+                        <span class="fw-bold">✈️ VIAJE</span> <small>Largo</small>
                     </button>
                 </div>
 
-                <div class="d-grid gap-2">
-                    <a href="https://econ-master-8w1z.vercel.app/" target="_blank" class="btn btn-lucha text-white fw-bold text-decoration-none" style="background: var(--morado-mx); border-color: black;">
-                        <span class="me-2">🪅</span> PIÑATAS DE LA ECONOMÍA
-                    </a>
+                <a href="https://econ-master-8w1z.vercel.app/" target="_blank" class="btn btn-lucha w-100 py-2 text-white fw-bold text-decoration-none d-block mb-2" style="background: var(--morado-mx); border-color: black;">
+                    <span class="me-2">🪅</span> JUGAR PIÑATAS DE LA ECONOMÍA
+                </a>
 
-                    <button class="btn btn-lucha btn-success text-white fw-bold" style="background: var(--verde-mx); border-color: black;" onclick="goToEconMaster()">
-                        <i class="fas fa-gamepad me-2"></i> JUGAR ECONMASTER
-                    </button>
-                </div>
+                <button class="btn btn-lucha w-100 py-2 btn-success text-white fw-bold" style="background: var(--verde-mx); border-color: black;" onclick="confirmEconMaster()">
+                    <i class="fas fa-gamepad me-2"></i> JUGAR ECONMASTER
+                </button>
             </div>
         </div>
 
         <div id="screen-game">
-            
             <div id="maze-container">
                 <div id="maze-wrapper">
                     <div id="maze-grid"></div>
@@ -367,6 +320,8 @@
             <div class="controls-panel">
                 <div class="hud-bar">
                     <span id="ui-lives" class="text-danger">❤️❤️❤️</span>
+                    <span class="text-success fw-bold"><i class="fas fa-check-circle"></i> <span id="ui-good">0</span></span>
+                    <span class="text-danger fw-bold"><i class="fas fa-times-circle"></i> <span id="ui-bad">0</span></span>
                     <span id="ui-timer" class="fw-bold text-white"><i class="fas fa-clock"></i> 60</span>
                 </div>
 
@@ -374,16 +329,13 @@
                     <div></div> 
                     <div class="c-btn" onmousedown="move(0,-1)" ontouchstart="move(0,-1, event)"><i class="fas fa-chevron-up"></i></div>
                     <div></div> 
-                    
                     <div class="c-btn" onmousedown="move(-1,0)" ontouchstart="move(-1,0, event)"><i class="fas fa-chevron-left"></i></div>
                     <div class="c-btn" onmousedown="move(0,1)" ontouchstart="move(0,1, event)"><i class="fas fa-chevron-down"></i></div>
                     <div class="c-btn" onmousedown="move(1,0)" ontouchstart="move(1,0, event)"><i class="fas fa-chevron-right"></i></div>
                 </div>
 
                 <div class="d-flex gap-3 mt-3">
-                    <button class="btn btn-warning rounded-circle border-2 border-dark shadow-sm" style="width:45px; height:45px" onclick="toggleMusic()" id="music-btn">
-                        <i class="fas fa-volume-up"></i>
-                    </button>
+                    <button class="btn btn-warning rounded-circle border-2 border-dark shadow-sm" style="width:45px; height:45px" onclick="toggleMusic()" id="music-btn"><i class="fas fa-volume-up"></i></button>
                     <button class="btn-salir" onclick="exitToMenu()">SALIR</button>
                 </div>
             </div>
@@ -392,29 +344,36 @@
 
     <div id="modal-bio" class="modal-overlay">
         <div class="modal-box text-start">
-            <div class="d-flex justify-content-end">
-                <button class="btn btn-sm btn-danger fw-bold" onclick="showModal(null)">X</button>
-            </div>
             <div class="text-center mb-3">
                 <img src="ambro ortiz avatar.png" class="avatar-img mb-2" style="width: 100px; height: 100px;">
                 <h3 class="lucha-font" style="color: var(--azul-titulo);">Ambrosio Ortiz Ramírez</h3>
             </div>
-            <div class="px-2" style="font-size: 1rem; line-height: 1.4;">
+            <div class="px-2 small" style="line-height: 1.4;">
                 <p><strong>Ambrosio Ortiz Ramírez</strong> es Profesor Investigador en el <strong>IPN</strong> y miembro del <strong>SNI Nivel 1</strong>.</p>
-                <p>Especialista en <strong>Econometría Financiera y Riesgos</strong>, combina la investigación académica rigurosa con la divulgación accesible a través de su proyecto <em>"Divulgando las Finanzas"</em>, enfocándose en modelos estocásticos y derivados.</p>
+                <p>Especialista en <strong>Econometría Financiera y Riesgos</strong>, combina la investigación académica rigurosa con la divulgación accesible a través de su proyecto <em>"Divulgando las Finanzas"</em>.</p>
             </div>
             <button class="btn btn-lucha w-100 mt-3 btn-success text-white" onclick="showModal(null)">CERRAR</button>
         </div>
     </div>
 
+    <div id="modal-confirm" class="modal-overlay">
+        <div class="modal-box">
+            <h2 class="lucha-font text-success">¿Ir a EconMaster?</h2>
+            <p>Saldrás de este juego para ir a otro sitio.</p>
+            <div class="d-flex gap-2">
+                <button class="btn btn-secondary w-50" onclick="showModal(null)">Cancelar</button>
+                <button class="btn btn-success w-50 fw-bold" onclick="goToEconMasterReal()">¡VAMOS!</button>
+            </div>
+        </div>
+    </div>
+
     <div id="modal-inst" class="modal-overlay">
         <div class="modal-box">
-            <h2 class="lucha-font text-danger display-5">¡EL RETO!</h2>
-            <p class="fs-5 mb-2">Cuadrilátero: <strong id="inst-goal" style="color:var(--morado-mx)"></strong></p>
-            <hr class="border-2 border-dark my-3">
-            <div class="row text-start fs-6 my-3">
-                <div class="col-6 text-success fw-bold ls-1">✅ INGRESOS</div>
-                <div class="col-6 text-danger fw-bold ls-1">❌ GASTOS</div>
+            <h2 class="lucha-font text-danger">¡EL RETO!</h2>
+            <p class="mb-2">Cuadrilátero: <strong id="inst-goal" style="color:var(--morado-mx)"></strong></p>
+            <div class="row text-start small my-3">
+                <div class="col-6 text-success fw-bold">✅ INGRESOS</div>
+                <div class="col-6 text-danger fw-bold">❌ GASTOS</div>
             </div>
             <button class="btn btn-lucha w-100 py-2 fs-4 fw-bold" style="background:var(--verde-mx); color:white;" onclick="startGame()">¡A LUCHAR!</button>
         </div>
@@ -423,23 +382,36 @@
     <div id="modal-lose" class="modal-overlay">
         <div class="modal-box" style="border-color: red;">
             <div class="display-1 mb-2">🔔</div>
-            <h2 class="lucha-font text-danger display-4">¡RINDIERON!</h2>
-            <p id="lose-msg" class="h5 fw-bold mb-3">...</p>
-            <button class="btn btn-lucha btn-dark w-100 py-2" onclick="exitToMenu()">INTENTAR DE NUEVO</button>
+            <h2 class="lucha-font text-danger">¡RINDIERON!</h2>
+            <p id="lose-msg" class="fw-bold">...</p>
+            <div class="alert alert-light border border-dark p-2 small mt-2">
+                <strong>💡 Tip Financiero:</strong> <span id="lose-tip">Evita los gastos hormiga para mejorar tu ahorro.</span>
+            </div>
+            <button class="btn btn-lucha btn-dark w-100 mt-2" onclick="exitToMenu()">REINTENTAR</button>
         </div>
     </div>
 
     <div id="modal-win" class="modal-overlay">
         <div class="modal-box" style="border-color: gold;">
             <div class="display-1 mb-2">🏆</div>
-            <h2 class="lucha-font text-success display-4">¡CAMPEÓN!</h2>
-            <p id="win-msg" class="h5 fw-bold mb-3">...</p>
-            <button class="btn btn-lucha w-100 py-2" style="background:var(--amarillo-mx)" onclick="exitToMenu()">GENIAL</button>
+            <h2 class="lucha-font text-success">¡CAMPEÓN!</h2>
+            <p id="win-msg" class="fw-bold">...</p>
+            <div class="alert alert-success border border-dark p-2 small mt-2">
+                <strong>💡 Sabías que:</strong> <span id="win-tip">Invertir a largo plazo reduce el riesgo.</span>
+            </div>
+            <button class="btn btn-lucha w-100 mt-2" style="background:var(--amarillo-mx)" onclick="exitToMenu()">GENIAL</button>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // --- PRELOADER ---
+        window.onload = function() {
+            document.getElementById('preloader').style.opacity = '0';
+            setTimeout(() => document.getElementById('preloader').style.display = 'none', 500);
+            updateHighScoreDisplay();
+        };
+
         const levels = {
             1: { name: "TANDA (Corto Plazo)", size: 8, badRate: 0.25 },
             2: { name: "BICI (Mediano Plazo)", size: 10, badRate: 0.30 },
@@ -451,15 +423,13 @@
                 {t:"¡TANDA!", i:"💰"}, {t:"¡AGUINALDO!", i:"🎁"},
                 {t:"¡MESES SIN INTERESES!", i:"🗓️"}, {t:"¡SIN COMISIONES!", i:"🚫"},
                 {t:"¡NO ANUALIDAD!", i:"💳"}, {t:"¡DEDUCIR!", i:"📝"},
-                {t:"¡ANTICIPADO!", i:"⏱️"}, {t:"¡PAGO AUTOMÁTICO!", i:"🔄"},
+                {t:"¡ANTICIPADO!", i:"⏱️"}, {t:"¡AUTOMÁTICO!", i:"🔄"},
                 {t:"¡PUNTOS!", i:"🌟"}, {t:"¡CUPÓN!", i:"🎟️"},
                 {t:"¡PENSIÓN!", i:"👴"}, {t:"¡CONTADO!", i:"💵"},
                 {t:"¡DESCUENTO!", i:"🏷️"}, {t:"¡VENTA JUSTA!", i:"⚖️"},
                 {t:"¡UTILIDADES!", i:"🚀"}, {t:"¡SUPERÁVIT!", i:"➕"},
-                {t:"¡AHORRO!", i:"🐖"},
-                {t:"¡CETES!", i:"📈"}, {t:"¡AFORE!", i:"👵"},
-                {t:"¡CASHBACK!", i:"💸"}, {t:"¡BUEN BURÓ!", i:"📜"},
-                {t:"¡SEGURO!", i:"🛡️"}
+                {t:"¡AHORRO!", i:"🐖"}, {t:"¡CETES!", i:"📈"}, {t:"¡AFORE!", i:"👵"},
+                {t:"¡CASHBACK!", i:"💸"}, {t:"¡BUEN BURÓ!", i:"📜"}, {t:"¡SEGURO!", i:"🛡️"}
             ],
             bad: [
                 {t:"¡MULTA!", i:"👮"}, {t:"¡RECARGO!", i:"😡"},
@@ -467,12 +437,19 @@
                 {t:"¡DÉFICIT!", i:"📉"}, {t:"¡COMISIÓN!", i:"🤏"},
                 {t:"¡SIN REGISTRO!", i:"❓"}, {t:"¡SIN PLAN!", i:"🙈"},
                 {t:"¡LESIÓN!", i:"🤕"}, {t:"¡ENFERMEDAD!", i:"🤒"},
-                {t:"¡DEUDAS!", i:"💣"},
-                {t:"¡INFLACIÓN!", i:"🎈"}, {t:"¡GASTO VAMPIRO!", i:"🧛"},
-                {t:"¡CLONACIÓN!", i:"💳"}, {t:"¡USURA!", i:"🦈"},
-                {t:"¡DESEMPLEO!", i:"🚪"}
+                {t:"¡DEUDAS!", i:"💣"}, {t:"¡INFLACIÓN!", i:"🎈"}, 
+                {t:"¡GASTO VAMPIRO!", i:"🧛"}, {t:"¡CLONACIÓN!", i:"💳"}, 
+                {t:"¡USURA!", i:"🦈"}, {t:"¡DESEMPLEO!", i:"🚪"}
             ]
         };
+
+        const tips = [
+            "Los CETES son instrumentos de inversión seguros del gobierno.",
+            "Evita los gastos hormiga (café diario, chicles) para ahorrar más.",
+            "Pagar el total de tu tarjeta evita intereses.",
+            "El interés compuesto hace crecer tu dinero con el tiempo.",
+            "Diversificar tus inversiones reduce el riesgo de perder dinero."
+        ];
 
         let state = { lvl: 1, lives: 3, time: 60, active: false, canMove: true, collectedGood: 0, collectedBad: 0 };
         let player = {x:0, y:0};
@@ -496,6 +473,18 @@
                 [array[i], array[j]] = [array[j], array[i]];
             }
             return array;
+        }
+
+        // --- MANEJO DE RÉCORDS ---
+        function saveHighScore(score) {
+            const currentHigh = localStorage.getItem('lucha_highscore') || 0;
+            if (score > currentHigh) {
+                localStorage.setItem('lucha_highscore', score);
+            }
+        }
+        function updateHighScoreDisplay() {
+            const high = localStorage.getItem('lucha_highscore') || 0;
+            document.getElementById('menu-highscore').innerText = high;
         }
 
         function unlockAudio() {
@@ -522,12 +511,13 @@
         }
 
         function playSfx(key) { if(musicOn && audioContextUnlocked) { try { const s = sounds[key].cloneNode(); s.volume = 0.6; s.play().catch(()=>{}); } catch(e) {} } }
-        function goToEconMaster() { if(confirm("¿Ir a EconMaster?")) window.location.href = "https://econ-master-8w1z.vercel.app/"; }
+        
+        // --- CONFIRMACIÓN PERSONALIZADA ---
+        function confirmEconMaster() { showModal('modal-confirm'); }
+        function goToEconMasterReal() { window.location.href = "https://econ-master-8w1z.vercel.app/"; }
+        function goToEconMaster() { confirmEconMaster(); } // Alias por compatibilidad
 
-        // --- FUNCIÓN PARA ABRIR BIO ---
-        function showBio() {
-            showModal('modal-bio');
-        }
+        function showBio() { showModal('modal-bio'); }
 
         function showScreen(id) {
             document.getElementById('screen-menu').classList.remove('d-flex');
@@ -538,6 +528,7 @@
             if(id === 'screen-menu') {
                 document.getElementById('screen-menu').style.display = 'flex';
                 document.getElementById('screen-menu').classList.add('d-flex');
+                updateHighScoreDisplay();
             }
             if(id === 'screen-game') {
                 document.getElementById('screen-game').classList.remove('d-none');
@@ -662,17 +653,26 @@
             document.getElementById('ui-timer').className = state.time < 10 ? "fw-bold text-danger" : "fw-bold text-white";
             let h = ""; for(let i=0;i<state.lives;i++) h+="❤️";
             document.getElementById('ui-lives').innerText = h;
+            
+            document.getElementById('ui-good').innerText = state.collectedGood;
+            document.getElementById('ui-bad').innerText = state.collectedBad;
         }
 
         function gameOver(reason) {
             state.active = false; playSfx('lose');
+            saveHighScore(state.collectedGood);
+            const tip = tips[Math.floor(Math.random() * tips.length)];
             document.getElementById('lose-msg').innerText = reason === 'time' ? "¡TIEMPO AGOTADO!" : "¡SIN VIDA!";
+            document.getElementById('lose-tip').innerText = tip;
             showModal('modal-lose');
         }
 
         function gameWin() {
             state.active = false; playSfx('win');
-            document.getElementById('win-msg').innerText = "¡ERES NUESTRO CAMPEÓN GANASTE EN " + levels[state.lvl].name + "!";
+            saveHighScore(state.collectedGood);
+            const tip = tips[Math.floor(Math.random() * tips.length)];
+            document.getElementById('win-msg').innerText = "¡GANASTE EN " + levels[state.lvl].name + "!";
+            document.getElementById('win-tip').innerText = tip;
             showModal('modal-win');
         }
 
@@ -693,4 +693,3 @@
         }
     </script>
 </body>
-</html>
