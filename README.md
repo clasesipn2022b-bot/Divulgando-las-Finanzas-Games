@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Divulgando las Finanzas Games</title>
+    <title>Luchas por las Finanzas de México</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
@@ -25,7 +25,7 @@
             background-image: radial-gradient(#333 1px, transparent 1px);
             background-size: 20px 20px;
             color: #333;
-            height: 100dvh; 
+            height: 100dvh; /* Altura dinámica para móviles */
             width: 100vw;
             overflow: hidden; 
             user-select: none;
@@ -39,7 +39,7 @@
 
         h1, h2, h3, .lucha-font {
             font-family: 'Bangers', cursive;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             text-transform: uppercase;
         }
 
@@ -61,121 +61,120 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            overflow-y: auto;
             padding: 10px;
         }
 
         .menu-card {
             background: #fff;
-            border: 5px solid #000;
-            border-radius: 20px;
-            padding: 20px;
+            border: 4px solid #000;
+            border-radius: 15px;
+            padding: 15px;
             text-align: center;
             max-width: 650px;
             width: 100%;
-            box-shadow: 10px 10px 0 var(--morado-mx);
+            box-shadow: 8px 8px 0 var(--morado-mx);
             margin: auto;
-            position: relative; 
+            position: relative;
+            
+            /* PROPIEDADES CLAVE PARA QUE QUEPAN LOS BOTONES EN MÓVIL */
+            max-height: 98vh; /* Nunca más alto que la pantalla */
+            overflow-y: auto; /* Scroll interno si es necesario */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        /* Header con Avatar y Título */
+        /* Header Compacto */
         .title-container {
             display: flex;
             align-items: center;
-            justify-content: center; 
-            gap: 15px;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 5px;
+            flex-wrap: nowrap;
             position: relative;
             z-index: 2;
         }
 
-        /* Avatar al lado del título (Interactivo) */
-        .avatar-container {
-            position: relative;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        .avatar-container:hover {
-            transform: scale(1.1);
-        }
+        /* Avatar Ajustable */
         .avatar-img {
-            width: 80px;
-            height: 80px;
-            border: 3px solid #000;
+            width: 60px; /* Más pequeño en móvil */
+            height: 60px;
+            border: 2px solid #000;
             border-radius: 50%;
-            box-shadow: 3px 3px 0 var(--amarillo-mx);
+            box-shadow: 2px 2px 0 var(--amarillo-mx);
             background: white;
             object-fit: cover;
-        }
-        .info-badge {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            background: var(--azul-titulo);
-            color: white;
-            border-radius: 50%;
-            width: 25px;
-            height: 25px;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid white;
+            flex-shrink: 0;
         }
 
-        /* Máscara Decorativa */
+        /* Máscara Ajustable */
         .wrestling-mask {
-            width: 50px;
+            width: 40px; /* Más pequeña */
             height: auto;
             position: absolute;
-            top: 10px;
-            right: 10px;
-            filter: drop-shadow(2px 2px 0 #000);
+            top: 5px;
+            right: 5px;
+            filter: drop-shadow(1px 1px 0 #000);
             z-index: 1;
+            opacity: 0.9;
         }
 
-        /* Título en Azul */
+        /* Título CORREGIDO y AJUSTADO */
         .main-title {
             color: var(--azul-titulo);
-            text-shadow: 2px 2px 0 #fff, 4px 4px 0 #000;
-            font-size: clamp(1.8rem, 5vw, 3rem);
+            text-shadow: 1px 1px 0 #fff, 3px 3px 0 #000;
+            /* Fuente más pequeña por defecto para móvil */
+            font-size: 1.6rem; 
             margin: 0;
-            line-height: 1;
+            line-height: 1.1;
             text-align: left;
         }
 
-        /* Enlaces Escolares */
+        /* Enlaces Escolares Compactos */
         .social-links {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: #444;
             background: #f8f9fa;
-            padding: 10px;
-            border-radius: 10px;
-            border: 2px solid #eee;
-            margin-bottom: 20px;
+            padding: 5px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            margin-bottom: 10px;
         }
-        .social-links p { margin-bottom: 5px; font-weight: bold; font-size: 0.85rem;}
-        .social-links a { color: var(--morado-mx); text-decoration: none; font-weight: bold; margin: 0 8px; font-size: 1rem; }
-        .social-links a:hover { color: var(--rosa-mexicano); text-decoration: underline; }
+        .social-links p { margin-bottom: 2px; font-weight: bold; display: none; } /* Ocultar texto largo en móvil muy pequeño */
+        .social-links a { color: var(--morado-mx); text-decoration: none; font-weight: bold; margin: 0 5px; font-size: 0.9rem; }
 
-        /* Botones */
+        /* Botones Optimizados */
         .btn-lucha {
             font-family: 'Bangers', cursive;
-            font-size: 1.2rem;
+            font-size: 1.1rem; /* Fuente legible pero compacta */
             border: 2px solid #000;
-            border-radius: 12px;
+            border-radius: 8px;
             box-shadow: 3px 3px 0 #000;
             transition: transform 0.1s;
             background: white;
             color: black;
-            padding: 10px 15px;
+            padding: 8px 10px; /* Menos relleno vertical */
+            margin-bottom: 0; /* Controlado por el grid gap */
         }
         .btn-lucha:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #000; }
 
+        /* Colores Niveles */
         .btn-nivel-1 { background: #81ecec; }
         .btn-nivel-2 { background: var(--amarillo-mx); }
         .btn-nivel-3 { background: var(--rosa-mexicano); color: white; }
+
+        /* Media Query para Pantallas Grandes (Laptop/PC) */
+        @media (min-width: 768px) {
+            .menu-card { padding: 30px; overflow-y: visible; max-height: none; }
+            .avatar-img { width: 90px; height: 90px; border-width: 3px; box-shadow: 4px 4px 0 var(--amarillo-mx); }
+            .wrestling-mask { width: 60px; top: 15px; right: 15px; }
+            .main-title { font-size: 3rem; text-shadow: 2px 2px 0 #fff, 4px 4px 0 #000; }
+            .social-links p { display: block; font-size: 0.9rem; }
+            .social-links { padding: 10px; margin-bottom: 20px; }
+            .btn-lucha { font-size: 1.4rem; padding: 12px 20px; border-width: 3px; border-radius: 12px; }
+            .title-container { margin-bottom: 20px; gap: 20px; }
+        }
 
         /* --- PANTALLA JUEGO --- */
         #screen-game {
@@ -188,7 +187,6 @@
             padding: 10px 10px 20px 10px;
         }
 
-        /* Layout PC */
         @media (min-width: 992px) {
             #screen-game { flex-direction: row; justify-content: center; gap: 50px; }
             #maze-container { max-height: 80vh !important; max-width: 80vh !important; }
@@ -237,7 +235,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             flex-shrink: 0;
         }
 
@@ -259,7 +257,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 5px;
-            width: 160px;
+            width: 150px;
         }
 
         .c-btn {
@@ -316,16 +314,14 @@
                 <img src="wrestling_6769709.png" alt="Lucha" class="wrestling-mask">
 
                 <div class="title-container">
-                    <div class="avatar-container" onclick="showBio()" title="¡Clic para conocer al Profesor!">
+                    <div class="avatar-container" onclick="showBio()" title="Ver Biografía">
                         <img src="ambro ortiz avatar.png" alt="Avatar" class="avatar-img">
-                        <div class="info-badge"><i class="fas fa-info"></i></div>
                     </div>
-                    
-                    <h1 class="main-title lucha-font">DIVULGANDO LAS<br>FINANZAS GAMES</h1>
+                    <h1 class="main-title lucha-font">LUCHAS POR LAS<br>FINANZAS DE MÉXICO</h1>
                 </div>
 
                 <div class="social-links">
-                    <p>Les dejo mi perfil escolar en la descripción para que validen fuentes, gracias:</p>
+                    <p>Perfil escolar:</p>
                     <a href="https://www.researchgate.net/profile/A-Ortiz-Ramirez" target="_blank">
                         <i class="fas fa-graduation-cap"></i> ResearchGate
                     </a> | 
@@ -334,9 +330,9 @@
                     </a>
                 </div>
 
-                <p class="h5 mb-2 lucha-font text-muted">elige tu cuadrilátero:</p>
+                <p class="h6 mb-2 lucha-font text-muted">elige tu cuadrilátero:</p>
 
-                <div class="d-grid gap-2 mb-3 px-md-4">
+                <div class="d-grid gap-2 mb-2 px-md-4">
                     <button class="btn btn-lucha btn-nivel-1 d-flex justify-content-between px-3 align-items-center" onclick="initLevel(1)">
                         <span class="fw-bold">🪙 TANDA</span> <small>Corto Plazo</small>
                     </button>
@@ -344,17 +340,19 @@
                         <span class="fw-bold">🚲 BICI</span> <small>Mediano Plazo</small>
                     </button>
                     <button class="btn btn-lucha btn-nivel-3 d-flex justify-content-between px-3 align-items-center" onclick="initLevel(3)">
-                        <span class="fw-bold">✈️ VIAJE MUNDIAL</span> <small>Largo Plazo</small>
+                        <span class="fw-bold">✈️ VIAJE</span> <small>Largo Plazo</small>
                     </button>
                 </div>
 
-                <a href="https://econ-master-8w1z.vercel.app/" target="_blank" class="btn btn-lucha w-100 py-2 text-white fw-bold text-decoration-none d-block mb-2" style="background: var(--morado-mx); border-color: black;">
-                    <span class="me-2">🪅</span> JUGAR PIÑATAS DE LA ECONOMÍA
-                </a>
+                <div class="d-grid gap-2">
+                    <a href="https://econ-master-8w1z.vercel.app/" target="_blank" class="btn btn-lucha text-white fw-bold text-decoration-none" style="background: var(--morado-mx); border-color: black;">
+                        <span class="me-2">🪅</span> PIÑATAS DE LA ECONOMÍA
+                    </a>
 
-                <button class="btn btn-lucha w-100 py-2 btn-success text-white fw-bold" style="background: var(--verde-mx); border-color: black;" onclick="goToEconMaster()">
-                    <i class="fas fa-gamepad me-2"></i> JUGAR ECONMASTER
-                </button>
+                    <button class="btn btn-lucha btn-success text-white fw-bold" style="background: var(--verde-mx); border-color: black;" onclick="goToEconMaster()">
+                        <i class="fas fa-gamepad me-2"></i> JUGAR ECONMASTER
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -401,7 +399,7 @@
                 <img src="ambro ortiz avatar.png" class="avatar-img mb-2" style="width: 100px; height: 100px;">
                 <h3 class="lucha-font" style="color: var(--azul-titulo);">Ambrosio Ortiz Ramírez</h3>
             </div>
-            <div class="px-2" style="font-size: 1.1rem; line-height: 1.5;">
+            <div class="px-2" style="font-size: 1rem; line-height: 1.4;">
                 <p><strong>Ambrosio Ortiz Ramírez</strong> es Profesor Investigador en el <strong>IPN</strong> y miembro del <strong>SNI Nivel 1</strong>.</p>
                 <p>Especialista en <strong>Econometría Financiera y Riesgos</strong>, combina la investigación académica rigurosa con la divulgación accesible a través de su proyecto <em>"Divulgando las Finanzas"</em>, enfocándose en modelos estocásticos y derivados.</p>
             </div>
@@ -453,7 +451,7 @@
                 {t:"¡TANDA!", i:"💰"}, {t:"¡AGUINALDO!", i:"🎁"},
                 {t:"¡MESES SIN INTERESES!", i:"🗓️"}, {t:"¡SIN COMISIONES!", i:"🚫"},
                 {t:"¡NO ANUALIDAD!", i:"💳"}, {t:"¡DEDUCIR!", i:"📝"},
-                {t:"¡ANTICIPADO!", i:"⏱️"}, {t:"¡AUTOMÁTICO!", i:"🔄"},
+                {t:"¡ANTICIPADO!", i:"⏱️"}, {t:"¡PAGO AUTOMÁTICO!", i:"🔄"},
                 {t:"¡PUNTOS!", i:"🌟"}, {t:"¡CUPÓN!", i:"🎟️"},
                 {t:"¡PENSIÓN!", i:"👴"}, {t:"¡CONTADO!", i:"💵"},
                 {t:"¡DESCUENTO!", i:"🏷️"}, {t:"¡VENTA JUSTA!", i:"⚖️"},
@@ -674,7 +672,7 @@
 
         function gameWin() {
             state.active = false; playSfx('win');
-            document.getElementById('win-msg').innerText = "¡GANASTE EN " + levels[state.lvl].name + "!";
+            document.getElementById('win-msg').innerText = "¡ERES NUESTRO CAMPEÓN GANASTE EN " + levels[state.lvl].name + "!";
             showModal('modal-win');
         }
 
@@ -695,4 +693,4 @@
         }
     </script>
 </body>
-
+</html>
