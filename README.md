@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Lucha Financiera Kids</title>
+    <title>Divulgando las Finanzas Games</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
@@ -24,12 +24,17 @@
             background-image: radial-gradient(#333 1px, transparent 1px);
             background-size: 20px 20px;
             color: #333;
-            height: 100vh;
+            /* Usamos 100dvh para mejor compatibilidad con móviles */
+            height: 100dvh; 
+            width: 100vw;
             overflow: hidden; 
             user-select: none;
             touch-action: manipulation;
+            margin: 0;
+            padding: 0;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         h1, h2, h3, .lucha-font {
@@ -38,57 +43,98 @@
             text-transform: uppercase;
         }
 
-        /* --- CONTENEDOR PRINCIPAL --- */
-        .main-wrapper {
-            flex-grow: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* --- WRAPPER GENERAL CENTRADO --- */
+        #app-container {
             width: 100%;
             height: 100%;
-            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
 
-        /* --- MENÚ --- */
+        /* --- PANTALLA MENÚ --- */
         #screen-menu {
             width: 100%;
             height: 100%;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            overflow-y: auto; 
+            overflow-y: auto; /* Scroll seguro si la pantalla es muy pequeña */
+            padding: 10px;
         }
 
         .menu-card {
             background: #fff;
-            border: 4px solid #000;
-            border-radius: 15px;
-            padding: 15px;
+            border: 5px solid #000;
+            border-radius: 20px;
+            padding: 20px;
             text-align: center;
-            max-width: 600px;
+            max-width: 650px;
             width: 100%;
-            box-shadow: 8px 8px 0 var(--morado-mx);
-            margin: auto;
+            box-shadow: 10px 10px 0 var(--morado-mx);
+            margin: auto; /* Centrado automático */
+        }
+
+        /* Header con Imagen y Título */
+        .title-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .wrestling-mask {
+            width: 60px;
+            height: auto;
+            filter: drop-shadow(2px 2px 0 #000);
         }
 
         .main-title {
             color: var(--rosa-mexicano);
-            text-shadow: 2px 2px 0 var(--amarillo-mx), 3px 3px 0 #000;
-            font-size: 2.2rem;
-            margin-bottom: 10px;
+            text-shadow: 2px 2px 0 var(--amarillo-mx), 4px 4px 0 #000;
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin: 0;
             line-height: 1;
         }
 
+        /* Avatar del Profesor */
+        .avatar-img {
+            width: 90px;
+            height: 90px;
+            border: 3px solid #000;
+            border-radius: 50%;
+            box-shadow: 4px 4px 0 var(--amarillo-mx);
+            margin-bottom: 10px;
+            background: white;
+        }
+
+        .social-links {
+            font-size: 0.85rem;
+            color: #444;
+            background: #f0f0f0;
+            padding: 8px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+        }
+        .social-links a { color: var(--morado-mx); text-decoration: none; font-weight: bold; margin: 0 5px; }
+        .social-links a:hover { color: var(--rosa-mexicano); text-decoration: underline; }
+
+        /* Botones */
         .btn-lucha {
             font-family: 'Bangers', cursive;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             border: 2px solid #000;
-            border-radius: 10px;
+            border-radius: 12px;
             box-shadow: 3px 3px 0 #000;
             transition: transform 0.1s;
             background: white;
             color: black;
-            padding: 8px 15px;
+            padding: 10px 15px;
         }
         .btn-lucha:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #000; }
 
@@ -96,127 +142,117 @@
         .btn-nivel-2 { background: var(--amarillo-mx); }
         .btn-nivel-3 { background: var(--rosa-mexicano); color: white; }
 
-        .btn-academic {
-            background: var(--amarillo-mx);
-            color: #000;
-            font-weight: bold;
-            font-size: 0.9rem;
-            border: 2px solid #000;
-            box-shadow: 3px 3px 0 var(--rosa-mexicano);
-            text-transform: uppercase;
-            white-space: normal;
-            line-height: 1.2;
-        }
-
         /* --- PANTALLA JUEGO --- */
-        .game-layout {
-            display: flex;
-            flex-direction: column; 
-            align-items: center;
-            justify-content: space-between;
+        #screen-game {
             width: 100%;
             height: 100%;
-            padding-bottom: 10px;
+            display: none; /* Se activa con JS */
+            flex-direction: column;
+            justify-content: space-between; /* Distribución clave */
+            align-items: center;
+            padding: 10px 10px 20px 10px; /* Padding bottom extra para móviles */
         }
 
+        /* Layout PC: Lado a Lado */
+        @media (min-width: 992px) {
+            #screen-game {
+                flex-direction: row;
+                justify-content: center;
+                gap: 50px;
+            }
+            /* Ring más grande en PC */
+            #maze-container { max-height: 80vh !important; max-width: 80vh !important; }
+            .controls-panel { width: auto !important; }
+            .control-pad { width: 180px !important; gap: 10px !important; }
+            .c-btn { height: 70px !important; width: 70px !important; font-size: 2rem !important; }
+        }
+
+        /* Contenedor del Ring */
         #maze-container {
             flex-grow: 1;
             display: flex;
             justify-content: center;
             align-items: center;
             width: 100%;
-            max-height: 50vh; 
+            max-height: 45vh; /* CLAVE EN MÓVIL: Evita que el ring empuje los controles fuera */
             aspect-ratio: 1 / 1;
+            position: relative;
         }
 
         #maze-wrapper {
             background: #eee;
             padding: 5px;
-            border: 4px solid var(--rosa-mexicano);
-            border-radius: 8px;
-            box-shadow: 0 0 0 3px #000, 5px 5px 15px rgba(0,0,0,0.7);
+            border: 5px solid var(--rosa-mexicano);
+            border-radius: 10px;
+            box-shadow: 0 0 0 4px #000, 5px 5px 20px rgba(0,0,0,0.8);
             width: 100%;
             height: 100%;
         }
 
-        #maze-grid {
-            display: grid;
-            width: 100%;
-            height: 100%;
-            border: 2px solid #000;
-        }
+        #maze-grid { display: grid; width: 100%; height: 100%; border: 2px solid #000; }
 
         .cell {
             display: flex; align-items: center; justify-content: center;
             background: #fff;
             border: 1px solid rgba(0,0,0,0.1);
-            font-size: clamp(12px, 4vw, 28px);
+            font-size: clamp(14px, 4vw, 30px);
         }
         .wall { 
             background: #2d3436; 
             background-image: repeating-linear-gradient(45deg, #000 0, #000 2px, #2d3436 2px, #2d3436 6px);
         }
 
-        /* --- CONTROLES --- */
+        /* Panel de Controles */
         .controls-panel {
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            flex-shrink: 0;
+            gap: 10px;
+            flex-shrink: 0; /* Evita que se aplaste */
         }
 
         .hud-bar {
             background: #000;
             color: var(--amarillo-mx);
-            padding: 5px 15px;
-            border-radius: 15px;
+            padding: 5px 20px;
+            border-radius: 20px;
             border: 2px solid #fff;
             display: flex;
-            gap: 15px;
-            font-size: 1rem;
+            align-items: center;
+            gap: 20px;
+            font-size: 1.2rem;
             margin-bottom: 5px;
+            box-shadow: 0 4px 0 rgba(255,255,255,0.2);
         }
 
         .control-pad {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 5px;
-            width: 150px;
+            width: 160px;
         }
 
         .c-btn {
             width: 100%; aspect-ratio: 1/1;
-            border-radius: 10px;
+            border-radius: 12px;
             background: var(--rosa-mexicano);
             border: 2px solid #000;
-            box-shadow: 0 3px 0 #000;
+            box-shadow: 0 4px 0 #000;
             color: white;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             display: flex; align-items: center; justify-content: center;
             cursor: pointer;
         }
-        .c-btn:active { transform: translateY(2px); box-shadow: 0 0 0 #000; background: #c20066; }
+        .c-btn:active { transform: translateY(3px); box-shadow: 0 0 0 #000; background: #c20066; }
 
         .btn-salir {
             background: #d63031; color: white; border: 2px solid #000;
-            padding: 4px 15px; border-radius: 15px; font-weight: bold; font-size: 0.9rem;
+            padding: 5px 20px; border-radius: 20px; font-weight: bold; font-size: 1rem;
+            box-shadow: 0 3px 0 #000;
         }
-
-        /* --- MEDIA QUERIES --- */
-        @media (min-width: 768px) and (min-height: 600px) {
-            .menu-card { padding: 40px; border-width: 6px; }
-            .main-title { font-size: 3.5rem; margin-bottom: 20px; }
-            .btn-lucha { font-size: 1.4rem; padding: 12px 20px; }
-            .btn-academic { font-size: 1.2rem; padding: 15px; }
-            
-            .game-layout { flex-direction: row; justify-content: center; gap: 50px; }
-            #maze-container { max-height: 80vh; max-width: 80vh; }
-            .control-pad { width: 180px; gap: 10px; }
-            .c-btn { border-width: 3px; box-shadow: 0 5px 0 #000; font-size: 1.8rem; }
-        }
+        .btn-salir:active { transform: translateY(2px); box-shadow: none; }
 
         /* --- MODALES & TEXTO --- */
         .float-msg {
@@ -237,26 +273,34 @@
             align-items: center; justify-content: center; backdrop-filter: blur(5px);
         }
         .modal-box {
-            background: #fff; border: 5px solid #000; padding: 20px;
-            text-align: center; width: 90%; max-width: 400px; border-radius: 20px;
+            background: #fff; border: 5px solid #000; padding: 25px;
+            text-align: center; width: 90%; max-width: 450px; border-radius: 20px;
             box-shadow: 0 0 30px var(--amarillo-mx);
         }
     </style>
 </head>
 <body>
 
-    <div class="main-wrapper">
+    <div id="app-container">
         
         <div id="screen-menu">
             <div class="menu-card animate__animated animate__fadeIn">
                 
-                <a href="https://www.researchgate.net/profile/A-Ortiz-Ramirez" target="_blank" class="btn btn-lucha btn-academic w-100 mb-3 text-decoration-none py-2">
-                    <i class="fas fa-graduation-cap me-1"></i> Conoce nuestro trabajo académico
-                </a>
+                <div class="title-container">
+                    <h1 class="main-title lucha-font">DIVULGANDO LAS FINANZAS GAMES</h1>
+                    <img src="wrestling_6769709.png" alt="Máscara" class="wrestling-mask">
+                </div>
 
-                <h1 class="main-title lucha-font">DIVULGANDO LAS FINANZAS GAMES</h1>
+                <div>
+                    <img src="ambro ortiz avatar.png" alt="Avatar Profesor" class="avatar-img">
+                    <div class="social-links">
+                        <p class="mb-1 fw-bold">Les dejo mi perfil escolar en la descripción para que validen fuentes, gracias:</p>
+                        <a href="https://ambrosioortizramirez.link" target="_blank"><i class="fas fa-link"></i> Mi Perfil</a> | 
+                        <a href="https://orcid.org/0000-0002-3698-2873" target="_blank"><i class="fab fa-orcid"></i> ORCID</a>
+                    </div>
+                </div>
 
-                <p class="h6 mb-2 lucha-font text-muted">elige tu cuadrilátero:</p>
+                <p class="h5 mb-2 lucha-font text-muted">elige tu cuadrilátero:</p>
 
                 <div class="d-grid gap-2 mb-3 px-md-4">
                     <button class="btn btn-lucha btn-nivel-1 d-flex justify-content-between px-3 align-items-center" onclick="initLevel(1)">
@@ -280,7 +324,7 @@
             </div>
         </div>
 
-        <div id="screen-game" class="game-layout d-none">
+        <div id="screen-game">
             
             <div id="maze-container">
                 <div id="maze-wrapper">
@@ -289,6 +333,7 @@
             </div>
 
             <div class="controls-panel">
+                
                 <div class="hud-bar">
                     <span id="ui-lives" class="text-danger">❤️❤️❤️</span>
                     <span id="ui-timer" class="fw-bold text-white"><i class="fas fa-clock"></i> 60</span>
@@ -304,13 +349,14 @@
                     <div class="c-btn" onmousedown="move(1,0)" ontouchstart="move(1,0, event)"><i class="fas fa-chevron-right"></i></div>
                 </div>
 
-                <div class="d-flex gap-3 mt-2">
-                    <button class="btn btn-warning rounded-circle border-2 border-dark shadow-sm" style="width:40px; height:40px" onclick="toggleMusic()" id="music-btn">
+                <div class="d-flex gap-3 mt-3">
+                    <button class="btn btn-warning rounded-circle border-2 border-dark shadow-sm" style="width:45px; height:45px" onclick="toggleMusic()" id="music-btn">
                         <i class="fas fa-volume-up"></i>
                     </button>
-                    <button class="btn-salir shadow-sm" onclick="exitToMenu()">SALIR</button>
+                    <button class="btn-salir" onclick="exitToMenu()">SALIR</button>
                 </div>
             </div>
+
         </div>
     </div>
 
@@ -319,7 +365,7 @@
             <h2 class="lucha-font text-danger display-5">¡EL RETO!</h2>
             <p class="fs-5 mb-2">Cuadrilátero: <strong id="inst-goal" style="color:var(--morado-mx)"></strong></p>
             <hr class="border-2 border-dark my-3">
-            <div class="row text-start fs-6 my-3">
+            <div class="row text-start fs-5 my-3">
                 <div class="col-6 text-success fw-bold ls-1">✅ INGRESOS</div>
                 <div class="col-6 text-danger fw-bold ls-1">❌ GASTOS</div>
             </div>
@@ -432,19 +478,11 @@
         function goToEconMaster() { if(confirm("¿Ir a EconMaster?")) window.location.href = "https://econ-master-8w1z.vercel.app/"; }
 
         function showScreen(id) {
-            document.getElementById('screen-menu').classList.remove('d-flex');
             document.getElementById('screen-menu').style.display = 'none';
-            document.getElementById('screen-game').classList.remove('d-flex');
-            document.getElementById('screen-game').classList.add('d-none');
+            document.getElementById('screen-game').style.display = 'none';
             
-            if(id === 'screen-menu') {
-                document.getElementById('screen-menu').style.display = 'flex';
-                document.getElementById('screen-menu').classList.add('d-flex');
-            }
-            if(id === 'screen-game') {
-                document.getElementById('screen-game').classList.remove('d-none');
-                document.getElementById('screen-game').classList.add('d-flex');
-            }
+            if(id === 'screen-menu') document.getElementById('screen-menu').style.display = 'flex';
+            if(id === 'screen-game') document.getElementById('screen-game').style.display = 'flex';
         }
         
         function showModal(id) {
