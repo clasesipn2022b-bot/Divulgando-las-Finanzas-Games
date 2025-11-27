@@ -9,8 +9,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- PALETA DE COLORES MEXICANA --- */
+        /* --- PALETA DE COLORES --- */
         :root {
+            --azul-titulo: #0d47a1; /* Azul fuerte para el título */
             --rosa-mexicano: #E4007C;
             --amarillo-mx: #FFD700;
             --verde-mx: #009c3b;
@@ -24,7 +25,6 @@
             background-image: radial-gradient(#333 1px, transparent 1px);
             background-size: 20px 20px;
             color: #333;
-            /* Usamos 100dvh para mejor compatibilidad con móviles */
             height: 100dvh; 
             width: 100vw;
             overflow: hidden; 
@@ -43,7 +43,7 @@
             text-transform: uppercase;
         }
 
-        /* --- WRAPPER GENERAL CENTRADO --- */
+        /* --- WRAPPER GENERAL --- */
         #app-container {
             width: 100%;
             height: 100%;
@@ -61,7 +61,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            overflow-y: auto; /* Scroll seguro si la pantalla es muy pequeña */
+            overflow-y: auto;
             padding: 10px;
         }
 
@@ -74,54 +74,62 @@
             max-width: 650px;
             width: 100%;
             box-shadow: 10px 10px 0 var(--morado-mx);
-            margin: auto; /* Centrado automático */
+            margin: auto;
         }
 
-        /* Header con Imagen y Título */
+        /* Header con Avatar y Título */
         .title-container {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 15px;
-            margin-bottom: 10px;
-            flex-wrap: wrap;
+            margin-bottom: 15px;
+            flex-wrap: wrap; /* Para que se ajuste en pantallas muy pequeñas */
         }
 
-        .wrestling-mask {
-            width: 60px;
-            height: auto;
-            filter: drop-shadow(2px 2px 0 #000);
-        }
-
-        .main-title {
-            color: var(--rosa-mexicano);
-            text-shadow: 2px 2px 0 var(--amarillo-mx), 4px 4px 0 #000;
-            font-size: clamp(2rem, 5vw, 3rem);
-            margin: 0;
-            line-height: 1;
-        }
-
-        /* Avatar del Profesor */
+        /* Avatar al lado del título */
         .avatar-img {
-            width: 90px;
-            height: 90px;
+            width: 70px;
+            height: 70px;
             border: 3px solid #000;
             border-radius: 50%;
-            box-shadow: 4px 4px 0 var(--amarillo-mx);
-            margin-bottom: 10px;
+            box-shadow: 3px 3px 0 var(--amarillo-mx);
             background: white;
+            object-fit: cover;
         }
 
-        .social-links {
-            font-size: 0.85rem;
-            color: #444;
-            background: #f0f0f0;
-            padding: 8px;
-            border-radius: 10px;
-            border: 1px solid #ccc;
-            margin-bottom: 15px;
+        /* Título en Azul */
+        .main-title {
+            color: var(--azul-titulo); /* Color Azul solicitado */
+            text-shadow: 2px 2px 0 #fff, 4px 4px 0 #000;
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            margin: 0;
+            line-height: 1;
+            text-align: left;
         }
-        .social-links a { color: var(--morado-mx); text-decoration: none; font-weight: bold; margin: 0 5px; }
+
+        /* Máscara decorativa (pequeña) */
+        .wrestling-mask {
+            width: 40px;
+            height: auto;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            opacity: 0.8;
+        }
+
+        /* Enlaces Escolares */
+        .social-links {
+            font-size: 0.9rem;
+            color: #444;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px solid #eee;
+            margin-bottom: 20px;
+        }
+        .social-links p { margin-bottom: 5px; font-weight: bold; font-size: 0.85rem;}
+        .social-links a { color: var(--morado-mx); text-decoration: none; font-weight: bold; margin: 0 8px; font-size: 1rem; }
         .social-links a:hover { color: var(--rosa-mexicano); text-decoration: underline; }
 
         /* Botones */
@@ -146,35 +154,29 @@
         #screen-game {
             width: 100%;
             height: 100%;
-            display: none; /* Se activa con JS */
+            display: none;
             flex-direction: column;
-            justify-content: space-between; /* Distribución clave */
+            justify-content: space-between;
             align-items: center;
-            padding: 10px 10px 20px 10px; /* Padding bottom extra para móviles */
+            padding: 10px 10px 20px 10px;
         }
 
-        /* Layout PC: Lado a Lado */
+        /* Layout PC */
         @media (min-width: 992px) {
-            #screen-game {
-                flex-direction: row;
-                justify-content: center;
-                gap: 50px;
-            }
-            /* Ring más grande en PC */
+            #screen-game { flex-direction: row; justify-content: center; gap: 50px; }
             #maze-container { max-height: 80vh !important; max-width: 80vh !important; }
             .controls-panel { width: auto !important; }
             .control-pad { width: 180px !important; gap: 10px !important; }
             .c-btn { height: 70px !important; width: 70px !important; font-size: 2rem !important; }
         }
 
-        /* Contenedor del Ring */
         #maze-container {
             flex-grow: 1;
             display: flex;
             justify-content: center;
             align-items: center;
             width: 100%;
-            max-height: 45vh; /* CLAVE EN MÓVIL: Evita que el ring empuje los controles fuera */
+            max-height: 45vh;
             aspect-ratio: 1 / 1;
             position: relative;
         }
@@ -202,7 +204,6 @@
             background-image: repeating-linear-gradient(45deg, #000 0, #000 2px, #2d3436 2px, #2d3436 6px);
         }
 
-        /* Panel de Controles */
         .controls-panel {
             width: 100%;
             display: flex;
@@ -210,7 +211,7 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            flex-shrink: 0; /* Evita que se aplaste */
+            flex-shrink: 0;
         }
 
         .hud-bar {
@@ -252,9 +253,7 @@
             padding: 5px 20px; border-radius: 20px; font-weight: bold; font-size: 1rem;
             box-shadow: 0 3px 0 #000;
         }
-        .btn-salir:active { transform: translateY(2px); box-shadow: none; }
 
-        /* --- MODALES & TEXTO --- */
         .float-msg {
             position: absolute; font-family: 'Bangers'; font-size: 1.5rem; 
             pointer-events: none; animation: floatUp 2.5s forwards; z-index: 5000; 
@@ -284,20 +283,21 @@
     <div id="app-container">
         
         <div id="screen-menu">
-            <div class="menu-card animate__animated animate__fadeIn">
+            <div class="menu-card animate__animated animate__fadeIn position-relative">
                 
                 <div class="title-container">
-                    <h1 class="main-title lucha-font">DIVULGANDO LAS FINANZAS GAMES</h1>
-                    <img src="wrestling_6769709.png" alt="Máscara" class="wrestling-mask">
+                    <img src="ambro ortiz avatar.png" alt="Avatar" class="avatar-img">
+                    <h1 class="main-title lucha-font">DIVULGANDO LAS<br>FINANZAS GAMES</h1>
                 </div>
 
-                <div>
-                    <img src="ambro ortiz avatar.png" alt="Avatar Profesor" class="avatar-img">
-                    <div class="social-links">
-                        <p class="mb-1 fw-bold">Les dejo mi perfil escolar en la descripción para que validen fuentes, gracias:</p>
-                        <a href="https://ambrosioortizramirez.link" target="_blank"><i class="fas fa-link"></i> Mi Perfil</a> | 
-                        <a href="https://orcid.org/0000-0002-3698-2873" target="_blank"><i class="fab fa-orcid"></i> ORCID</a>
-                    </div>
+                <div class="social-links">
+                    <p>Les dejo mi perfil escolar en la descripción para que validen fuentes, gracias:</p>
+                    <a href="https://www.researchgate.net/profile/A-Ortiz-Ramirez" target="_blank">
+                        <i class="fas fa-graduation-cap"></i> ResearchGate
+                    </a> | 
+                    <a href="https://orcid.org/0000-0002-3698-2873" target="_blank">
+                        <i class="fab fa-orcid"></i> ORCID
+                    </a>
                 </div>
 
                 <p class="h5 mb-2 lucha-font text-muted">elige tu cuadrilátero:</p>
@@ -333,7 +333,6 @@
             </div>
 
             <div class="controls-panel">
-                
                 <div class="hud-bar">
                     <span id="ui-lives" class="text-danger">❤️❤️❤️</span>
                     <span id="ui-timer" class="fw-bold text-white"><i class="fas fa-clock"></i> 60</span>
@@ -356,7 +355,6 @@
                     <button class="btn-salir" onclick="exitToMenu()">SALIR</button>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -365,7 +363,7 @@
             <h2 class="lucha-font text-danger display-5">¡EL RETO!</h2>
             <p class="fs-5 mb-2">Cuadrilátero: <strong id="inst-goal" style="color:var(--morado-mx)"></strong></p>
             <hr class="border-2 border-dark my-3">
-            <div class="row text-start fs-5 my-3">
+            <div class="row text-start fs-6 my-3">
                 <div class="col-6 text-success fw-bold ls-1">✅ INGRESOS</div>
                 <div class="col-6 text-danger fw-bold ls-1">❌ GASTOS</div>
             </div>
@@ -478,11 +476,19 @@
         function goToEconMaster() { if(confirm("¿Ir a EconMaster?")) window.location.href = "https://econ-master-8w1z.vercel.app/"; }
 
         function showScreen(id) {
+            document.getElementById('screen-menu').classList.remove('d-flex');
             document.getElementById('screen-menu').style.display = 'none';
-            document.getElementById('screen-game').style.display = 'none';
+            document.getElementById('screen-game').classList.remove('d-flex');
+            document.getElementById('screen-game').classList.add('d-none');
             
-            if(id === 'screen-menu') document.getElementById('screen-menu').style.display = 'flex';
-            if(id === 'screen-game') document.getElementById('screen-game').style.display = 'flex';
+            if(id === 'screen-menu') {
+                document.getElementById('screen-menu').style.display = 'flex';
+                document.getElementById('screen-menu').classList.add('d-flex');
+            }
+            if(id === 'screen-game') {
+                document.getElementById('screen-game').classList.remove('d-none');
+                document.getElementById('screen-game').classList.add('d-flex');
+            }
         }
         
         function showModal(id) {
