@@ -317,7 +317,7 @@
     <div id="modal-lose" class="modal-overlay">
         <div class="modal-box" style="border-color: red;">
             <div class="display-1 mb-2">🔔</div>
-            <h2 class="lucha-font text-danger display-4">¡RINDIERON!</h2>
+            <h2 class="lucha-font text-danger display-4">¡TE RINDIERON CON UNA LLAVE!</h2>
             <p id="lose-msg" class="h4 fw-bold mb-4">...</p>
             <button class="btn btn-lucha btn-dark w-100 py-3 fs-4" onclick="exitToMenu()">INTENTAR DE NUEVO</button>
         </div>
@@ -347,7 +347,7 @@
                 {t:"¡MESES SIN INTERESES!", i:"🗓️"}, {t:"¡SIN COMISIONES!", i:"🚫"},
                 {t:"¡NO ANUALIDAD!", i:"💳"}, {t:"¡DEDUCIR IMPUESTOS!", i:"📝"},
                 {t:"¡PAGO ANTICIPADO!", i:"⏱️"}, {t:"¡PAGO AUTOMÁTICO!", i:"🔄"},
-                {t:"¡PUNTOS!", i:"🌟"}, {t:"¡CUPÓN!", i:"🎟️"},
+                {t:"¡PAGO CON PUNTOS!", i:"🌟"}, {t:"¡CUPÓN!", i:"🎟️"},
                 {t:"¡PENSIÓN!", i:"👴"}, {t:"¡PAGO DE CONTADO!", i:"💵"},
                 {t:"¡DESCUENTO!", i:"🏷️"}, {t:"¡VENTA JUSTA!", i:"⚖️"},
                 {t:"¡UTILIDADES!", i:"🚀"}, {t:"¡SUPERÁVIT!", i:"➕"},
@@ -355,7 +355,7 @@
                 // NUEVOS (Estilo un solo emoji)
                 {t:"¡CETES!", i:"📈"}, {t:"¡AFORE!", i:"👵"},
                 {t:"¡CASHBACK!", i:"💸"}, {t:"¡BUEN BURÓ!", i:"📜"},
-                {t:"¡SEGURO!", i:"🛡️"}
+                {t:"¡SEGURO DE DESEMPLEO O ROBO!", i:"🛡️"}
             ],
             bad: [
                 {t:"¡MULTAS!", i:"👮"}, {t:"¡RECARGOS!", i:"😡"},
