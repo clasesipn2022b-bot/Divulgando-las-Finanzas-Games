@@ -21,7 +21,7 @@
             --azul-titulo: #0d47a1; 
             --rosa-mexicano: #E4007C;
             --amarillo-mx: #FFD700; /* Amarillo intenso para botones/títulos */
-            --amarillo-tenue: #fff59d; /* Nuevo amarillo suave para el jugador */
+            --amarillo-tenue: #fff9c4; /* Amarillo MUY suave para el jugador (casi pastel) */
             --verde-mx: #009c3b;
             --morado-mx: #6A1B9A;
             --fondo-oscuro: #121212;
@@ -193,7 +193,7 @@
             background: #fff; border: 1px solid rgba(0,0,0,0.1);
             font-size: clamp(14px, 4vw, 30px);
             transition: background-color 0.1s;
-            overflow: hidden; /* Para que la imagen no se salga */
+            overflow: hidden; 
         }
         .wall { 
             background: #2d3436; 
@@ -203,7 +203,7 @@
         /* CLASE NUEVA: LUZ DEL LUCHADOR (Color Tenue) */
         .player-active {
             background-color: var(--amarillo-tenue) !important; /* Uso del amarillo suave */
-            box-shadow: inset 0 0 10px #fdd835;
+            box-shadow: inset 0 0 15px #fff59d; /* Brillo interno más suave */
             animation: pulsePlayer 1s infinite alternate;
             border: 2px solid #000 !important;
         }
@@ -319,7 +319,7 @@
                     </button>
                 </div>
 
-                <a href="https://econ-master-8w1z.vercel.app/" target="_blank" class="btn btn-lucha w-100 py-2 text-white fw-bold text-decoration-none d-block mb-2" style="background: var(--morado-mx); border-color: black;">
+                <a href="https://econ-master-8w1z.vercel.app/" target="_blank" class="btn btn-lucha w-100 py-2 text-white fw-bold text-decoration-none d-block mb-2" style="background: var(--morado-mx); border-color: black; display: none;">
                     <span class="me-2">🪅</span> JUGAR PIÑATAS DE LA ECONOMÍA
                 </a>
 
@@ -650,10 +650,10 @@
                     const data = grid[y][x];
                     if(data.wall) cell.classList.add('wall'); else if(data.item) cell.innerText = data.item.i;
                     
-                    // --- JUGADOR CON IMAGEN Y LUZ TENUE ---
+                    // --- JUGADOR CON IMAGEN Y LUZ TENUE (CORREGIDO) ---
                     if(x===player.x && y===player.y) { 
-                        // Reemplazo del emoji por la imagen adjunta
-                        cell.innerHTML = '<img src="image_0.png" alt="Luchador" style="width: 80%; height: auto; object-fit: contain;">'; 
+                        // Usamos display:block y dimensiones relativas al padre flex para asegurar visualización
+                        cell.innerHTML = '<img src="image_0.png" alt="Luchador" style="display: block; width: 85%; height: 85%; object-fit: contain;">'; 
                         cell.style.zIndex = 10; 
                         cell.classList.add('player-active'); // Clase CSS brillante tenue
                     }
@@ -741,4 +741,4 @@
         }
     </script>
 </body>
-
+</html>
