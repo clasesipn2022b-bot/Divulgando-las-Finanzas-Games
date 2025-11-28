@@ -1,3 +1,4 @@
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -19,7 +20,8 @@
         :root {
             --azul-titulo: #0d47a1; 
             --rosa-mexicano: #E4007C;
-            --amarillo-mx: #FFD700;
+            --amarillo-mx: #FFD700; /* Amarillo intenso para botones/títulos */
+            --amarillo-tenue: #fff59d; /* Nuevo amarillo suave para el jugador */
             --verde-mx: #009c3b;
             --morado-mx: #6A1B9A;
             --fondo-oscuro: #121212;
@@ -133,7 +135,7 @@
 
         .social-links {
             font-size: 0.8rem; color: #444; background: #f8f9fa;
-            padding: 5px; border-radius: 8px; border: 1px solid #eee; margin-bottom: 10px;
+            padding: 5px; border-radius: 8px; border: 1px solid #eee; margin-bottom: 5px;
         }
         .social-links a { color: var(--morado-mx); text-decoration: none; font-weight: bold; margin: 0 5px; }
 
@@ -191,22 +193,23 @@
             background: #fff; border: 1px solid rgba(0,0,0,0.1);
             font-size: clamp(14px, 4vw, 30px);
             transition: background-color 0.1s;
+            overflow: hidden; /* Para que la imagen no se salga */
         }
         .wall { 
             background: #2d3436; 
             background-image: repeating-linear-gradient(45deg, #000 0, #000 2px, #2d3436 2px, #2d3436 6px);
         }
 
-        /* CLASE NUEVA: LUZ DEL LUCHADOR */
+        /* CLASE NUEVA: LUZ DEL LUCHADOR (Color Tenue) */
         .player-active {
-            background-color: var(--amarillo-mx) !important;
-            box-shadow: inset 0 0 10px #ff9f43;
+            background-color: var(--amarillo-tenue) !important; /* Uso del amarillo suave */
+            box-shadow: inset 0 0 10px #fdd835;
             animation: pulsePlayer 1s infinite alternate;
             border: 2px solid #000 !important;
         }
         @keyframes pulsePlayer {
-            0% { background-color: var(--amarillo-mx); transform: scale(0.95); }
-            100% { background-color: #ffeba7; transform: scale(1); }
+            0% { background-color: var(--amarillo-tenue); transform: scale(0.95); }
+            100% { background-color: #ffffff; transform: scale(1); }
         }
 
         .controls-panel {
@@ -292,6 +295,10 @@
                     <p class="mb-1"><strong>Dr. Ambrosio Ortiz Ramírez</strong></p>
                     <a href="https://www.researchgate.net/profile/A-Ortiz-Ramirez" target="_blank"><i class="fas fa-graduation-cap"></i> ResearchGate</a> | 
                     <a href="https://orcid.org/0000-0002-3698-2873" target="_blank"><i class="fab fa-orcid"></i> ORCID</a>
+                </div>
+                
+                <div style="font-size: 0.6rem; color: #777; margin-bottom: 10px;">
+                    <a href="https://www.flaticon.es/iconos-gratis/luchador" title="luchador iconos" target="_blank" style="color: #777; text-decoration: none;">Luchador iconos creados por Freepik - Flaticon</a>
                 </div>
 
                 <div id="highscore-display" class="alert alert-warning py-1 small fw-bold mb-2">
@@ -643,11 +650,12 @@
                     const data = grid[y][x];
                     if(data.wall) cell.classList.add('wall'); else if(data.item) cell.innerText = data.item.i;
                     
-                    // --- NUEVA LÓGICA DE ILUMINACIÓN DEL JUGADOR ---
+                    // --- JUGADOR CON IMAGEN Y LUZ TENUE ---
                     if(x===player.x && y===player.y) { 
-                        cell.innerHTML = '🤼‍♂️'; 
+                        // Reemplazo del emoji por la imagen adjunta
+                        cell.innerHTML = '<img src="image_0.png" alt="Luchador" style="width: 80%; height: auto; object-fit: contain;">'; 
                         cell.style.zIndex = 10; 
-                        cell.classList.add('player-active'); // Se añade la clase CSS brillante
+                        cell.classList.add('player-active'); // Clase CSS brillante tenue
                     }
                     
                     if(x===size-1 && y===size-1) cell.innerHTML = '🏆';
@@ -733,3 +741,4 @@
         }
     </script>
 </body>
+
