@@ -190,10 +190,23 @@
             display: flex; align-items: center; justify-content: center;
             background: #fff; border: 1px solid rgba(0,0,0,0.1);
             font-size: clamp(14px, 4vw, 30px);
+            transition: background-color 0.1s;
         }
         .wall { 
             background: #2d3436; 
             background-image: repeating-linear-gradient(45deg, #000 0, #000 2px, #2d3436 2px, #2d3436 6px);
+        }
+
+        /* CLASE NUEVA: LUZ DEL LUCHADOR */
+        .player-active {
+            background-color: var(--amarillo-mx) !important;
+            box-shadow: inset 0 0 10px #ff9f43;
+            animation: pulsePlayer 1s infinite alternate;
+            border: 2px solid #000 !important;
+        }
+        @keyframes pulsePlayer {
+            0% { background-color: var(--amarillo-mx); transform: scale(0.95); }
+            100% { background-color: #ffeba7; transform: scale(1); }
         }
 
         .controls-panel {
@@ -444,7 +457,7 @@
             ]
         };
 
-        // TIPS MEJORADOS Y AMPLIADOS (Basados en investigación financiera)
+        // TIPS MEJORADOS Y AMPLIADOS
         const tips = [
             "La Tanda no le gana a la inflación. ¡Mejor abre tu cuenta en CETES Directo desde $100 pesos!",
             "Evita los 'Gastos Vampiro': Esas suscripciones que pagas mensualmente y nunca usas.",
@@ -565,7 +578,6 @@
         function startGame() {
             showModal(null); showScreen('screen-game');
             state.lives = 3; 
-            // Tiempo dinámico según dificultad
             state.time = state.lvl === 1 ? 45 : (state.lvl === 2 ? 60 : 80); 
             state.collectedGood = 0; state.collectedBad = 0;
             state.active = true; state.canMove = true;
@@ -610,7 +622,6 @@
                 }
                 grid.push(row);
             }
-            // Asegurar camino (camino aleatorio simple para garantizar jugabilidad mínima)
             let cx=0, cy=0;
             while(cx < size-1 || cy < size-1) {
                 grid[cy][cx].wall = false; if(grid[cy][cx].item?.type === 'bad') grid[cy][cx].item = null;
@@ -631,7 +642,14 @@
                     const cell = document.createElement('div'); cell.className = 'cell';
                     const data = grid[y][x];
                     if(data.wall) cell.classList.add('wall'); else if(data.item) cell.innerText = data.item.i;
-                    if(x===player.x && y===player.y) { cell.innerHTML = '🤼‍♂️'; cell.style.zIndex = 10; }
+                    
+                    // --- NUEVA LÓGICA DE ILUMINACIÓN DEL JUGADOR ---
+                    if(x===player.x && y===player.y) { 
+                        cell.innerHTML = '🤼‍♂️'; 
+                        cell.style.zIndex = 10; 
+                        cell.classList.add('player-active'); // Se añade la clase CSS brillante
+                    }
+                    
                     if(x===size-1 && y===size-1) cell.innerHTML = '🏆';
                     div.appendChild(cell);
                 }
