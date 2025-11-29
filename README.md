@@ -319,7 +319,7 @@
                     </button>
                 </div>
 
-                <a href="https://econ-master-8w1z.vercel.app/" target="_blank" class="btn btn-lucha w-100 py-2 text-white fw-bold text-decoration-none d-block mb-2" style="background: var(--morado-mx); border-color: black; display: none;">
+                <a href="https://econ-master-8w1z.vercel.app/" target="_blank" class="btn btn-lucha w-100 py-2 text-white fw-bold text-decoration-none d-none mb-2" style="background: var(--morado-mx); border-color: black;">
                     <span class="me-2">🪅</span> JUGAR PIÑATAS DE LA ECONOMÍA
                 </a>
 
@@ -741,4 +741,3 @@
         }
     </script>
 </body>
-</html>
